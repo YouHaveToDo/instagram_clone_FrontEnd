@@ -10,14 +10,12 @@ const Grid = (props) => {
     bg,
     children,
     flex,
-    right,
-    marginTop,
-    space,
-    center,
-    wrap,
-    between,
+    justify,
     _onClick,
-    relative,
+    position,
+    height,
+    border,
+    background,
   } = props;
 
   const styles = {
@@ -27,13 +25,11 @@ const Grid = (props) => {
     padding: padding,
     bg: bg,
     flex: flex,
-    right: right,
-    marginTop: marginTop,
-    space: space,
-    center: center,
-    wrap: wrap,
-    between: between,
-    relative: relative,
+    justify: justify,
+    position: position,
+    height: height,
+    border: border,
+    background: background,
   };
   return (
     <React.Fragment>
@@ -52,28 +48,27 @@ Grid.defaultProps = {
   margin: false,
   bg: false,
   flex: false,
-  right: false,
-  marginTop: false,
-  space: false,
-  center: false,
+  justify: false,
   wrap: false,
-  between: false,
+  position: false,
+  height: false,
+  border: false,
+  background: false,
 };
 
 const GridBox = styled.div`
   width: ${(props) => props.width};
   box-sizing: border-box;
-  ${(props) => (props.relative ? `position: ${props.relative};` : "")}
+  ${(props) => (props.background ? `background: ${props.background};` : "")}
+  ${(props) => (props.border ? `border: ${props.border};` : "")}
+  ${(props) => (props.height ? `height: ${props.height};` : "")}
+  ${(props) => (props.position ? `position: ${props.position};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.wrap ? `flex-wrap: wrap;` : "")}
-  ${(props) => (props.between ? `justify-content: space-between;` : "")}
-  ${(props) => (props.space ? `justify-content: space-evenly;` : "")}
-  ${(props) => (props.center ? `justify-content: center;` : "")}
+  ${(props) => (props.justify ? `justify-content: ${props.justify};` : "")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.bg ? `background-color: ${props.bg};` : "")}
   ${(props) => (props.flex ? `display: flex;` : "")}
-  ${(props) => (props.right ? `justify-content: flex-end;` : "")}
-  ${(props) => (props.marginTop ? `margin-top: ${props.marginTop};` : "")}
   ${(props) =>
     props.is_flex
       ? `display: flex; align-items: center; justify-content: space-between; `
