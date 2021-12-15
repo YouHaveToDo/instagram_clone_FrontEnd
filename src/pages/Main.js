@@ -7,6 +7,8 @@ import { Grid } from "../elements/Index";
 
 import { useSelector, useDispatch } from "react-redux";
 
+
+
 const Main = (props) => {
   console.log(props);
   const post_list = useSelector((state) => state.post.posts);
@@ -33,7 +35,7 @@ const Main = (props) => {
   );
 };
 const MainBox = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
   height: 100%;
   background-color: #fafafa;
   /* background-color: red; */

@@ -17,7 +17,6 @@ const Upload = (props) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    //-------------------------------------------
 
     const reader = new FileReader();
     reader.readAsDataURL(file);

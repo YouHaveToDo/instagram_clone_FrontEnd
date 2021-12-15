@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../redux/configureStore";
 // import { useState } from "react";
 import { Grid, Text, Image, TextArea } from "../elements/Index";
 import { useDispatch, useSelector } from "react-redux";
 
 import { actionCreators as postAction } from "../redux/module/post";
+import CloseIcon from "@mui/icons-material/Close";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const CreateDetails = (props) => {
   const dispatch = useDispatch();
@@ -26,12 +29,26 @@ const CreateDetails = (props) => {
         width="100%"
         height="100vh"
         margin="0 auto"
-        background="rgba(0, 0, 0, 0.3)"
+        background="rgba(0, 0, 0, 0.8)"
         position="absolute"
         top="0"
         left="0"
         zIndex="11"
       >
+        <CloseIcon
+          style={{
+            position: "absolute",
+            top: "40px",
+            right: "10px",
+            color: "#fff",
+            height: "50",
+            fontSize: "100px",
+          }}
+          onClick={() => {
+            history.push(`/main`);
+          }}
+        />
+
         {/* 박스(흰색)  */}
         <Grid
           width="1035px"
@@ -44,6 +61,18 @@ const CreateDetails = (props) => {
         >
           {/* 제목 */}
           <Grid borderB="1px solid #dbdbdb">
+            <ArrowBackIcon
+              style={{
+                position: "absolute",
+                top: "2px",
+                left: "16px",
+                color: "#333",
+                height: "50",
+              }}
+              onClick={() => {
+                history.push(`/main/create/select`);
+              }}
+            />
             <Text
               padding="20px 0"
               align="center"

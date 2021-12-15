@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Button, Grid, Image, Text, Input } from "../elements/Index";
 import { useRef } from "react";
 import PostModal from "./PostModal";
-//-- icon -- 
+import { history } from "../redux/configureStore";
+//-- icon --
 import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";
 import icon06 from "../images/icons/icon_06.png";
@@ -63,11 +64,7 @@ const Post = (props) => {
           {props.nickname}
         </Text>
         <Ellipsis ref={contentRef}>{props.content}</Ellipsis>
-        <EButton
-          onClick={moreClick}
-        >
-          더보기
-        </EButton>
+        <EButton onClick={moreClick}>더보기</EButton>
       </Grid>
       {/* 6번 */}
       <Grid padding=" 8px 16px">
@@ -93,6 +90,9 @@ const Post = (props) => {
             background="none"
             text="댓글달기..."
             color="#8e8e8e"
+            _onClick={() => {
+              history.push(`/main/Detail`);
+            }}
           />
           <Button
             text="게시"
@@ -156,7 +156,7 @@ const Ellipsis = styled.div`
   line-height: 2rem;
   width: 200px;
   /* display: -webkit-box;  */
-  -webkit-line-clamp: 1; 
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
