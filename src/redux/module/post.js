@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import axios from "axios";
+import apis from "../../shared/apis";
 import moment from "moment";
 
 // import { actionCreators as imageActions } from "./image";
@@ -8,6 +9,7 @@ import moment from "moment";
 // ---- actions type ----
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
+const GET_POST = "GET_POST";
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
@@ -17,6 +19,9 @@ const setPost = createAction(SET_POST, (post_list, paging) => ({
 const addPost = createAction(ADD_POST, (contents, formData) => ({
   contents,
   formData,
+}));
+const getPost = createAction(GET_POST, (post_info) => ({
+  post_info,
 }));
 
 // ---- initialState ----
@@ -77,16 +82,41 @@ export const addPostDB =
     }
   };
 
+//  -- getPost (메인페이지 전체 게시글 불러오기) --
+const getPostDB = () => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log("start getPostDB");
+      const response = await apis.getPost();
+      console.log(response);
+
+      const post_info = response.data;
+      console.log(post_info);
+
+      dispatch(getPost(post_info));
+    } catch (error) {
+      console.log(error);
+
+      //checkCodeStatus(error.response.status, 403);
+    }
+  };
+};
+
 //---- reducer ----
 export default handleActions(
   {
     [SET_POST]: (state, action) => produce(state, (draft) => {}),
+    [GET_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.posts = action.payload.post_info;
+      }),
   },
   initalState
 );
 
 // ---- action creator export ----
 const actionCreators = {
+  getPostDB,
   setPost,
   addPostDB,
 };

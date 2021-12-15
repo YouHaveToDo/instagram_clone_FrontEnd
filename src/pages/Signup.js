@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { Grid, Text, Input, Button } from "../elements/Index";
 import { useDispatch } from "react-redux";
 import { userActions } from "../redux/module/user";
+import { history } from "../redux/configureStore";
 import Insta from "../images/instagram.png";
 import Applestore from "../images/applestore.png";
 import Playstore from "../images/playstore.png";
@@ -175,7 +176,14 @@ const Signup = () => {
           margin="10px 0 0 0"
         >
           <Text size="14px" align="center" weight="500">
-            계정이 있으신가요?<Span>로그인</Span>
+            계정이 있으신가요?
+            <Span
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              로그인
+            </Span>
           </Text>
         </Grid>
         <Text align="center" padding="25px">

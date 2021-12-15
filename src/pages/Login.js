@@ -154,7 +154,14 @@ const Login = (props) => {
             margin="10px 0 0 0"
           >
             <Text size="14px" align="center" weight="500">
-              계정이 없으신가요?<Span>가입하기</Span>
+              계정이 없으신가요?
+              <Span
+                onClick={() => {
+                  history.push("/signup");
+                }}
+              >
+                가입하기
+              </Span>
             </Text>
           </Grid>
           <Text align="center" padding="25px">
