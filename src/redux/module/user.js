@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { setToken } from "../../shared/token";
-import apis from "../../shared/apis";
+import { apis } from "../../shared/apis";
 
 // actions
 const SET_USER = "SET_USER";

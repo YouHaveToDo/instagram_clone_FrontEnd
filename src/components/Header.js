@@ -8,6 +8,8 @@ import icon03 from "../images/icons/icon_03.png";
 import icon04 from "../images/icons/icon_04.png";
 import icon05 from "../images/icons/icon_05.png";
 
+import { history } from "../redux/configureStore";
+
 const Header = (props) => {
   return (
     <Nav>
@@ -20,7 +22,12 @@ const Header = (props) => {
           <Grid flex justify="end">
             <Icon src={icon01}></Icon>
             <Icon src={icon02}></Icon>
-            <Icon src={icon03}></Icon>
+            <Icon
+              src={icon03}
+              onClick={() => {
+                history.push(`/main/create/select`);
+              }}
+            ></Icon>
             <Icon src={icon04}></Icon>
             <Icon src={icon05}></Icon>
             <Image shape="circle" size="24" paddingLeft="20px"></Image>
@@ -46,5 +53,6 @@ const Icon = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 20px;
+  cursor: pointer;
 `;
 export default Header;
