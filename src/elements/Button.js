@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-  const { text, _onClick, borderBottom } = props;
+  // const { text, _onClick, borderBottom } = props;
   return (
     <ElButton
       onClick={props._onClick}
@@ -16,9 +16,15 @@ const Button = (props) => {
       color={props.color}
       bold={props.bold}
       text={props.text}
+      radius={props.radius}
+      line={props.line}
+      display={props.display}
+      items={props.items}
+      justify={props.justify}
       borderBottom={props.borderBottom}
     >
-      {text}
+      {props.children}
+      {props.text}
     </ElButton>
   );
 };
@@ -29,6 +35,7 @@ Button.defaultProps = {
   height: null,
   text: "텍스트",
   boderBottom: null,
+  children: null,
 };
 
 const ElButton = styled.button`
@@ -41,8 +48,13 @@ const ElButton = styled.button`
   ${(props) => (props.height ? `height: ${props.height};` : "null")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.position ? `position: ${props.position};` : "")}
+  ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
+  ${(props) => (props.line ? `line-height: ${props.line};` : "")}
+  ${(props) => (props.display ? `display: ${props.display};` : "")}
+  ${(props) => (props.items ? `align-items: ${props.items};` : "")}
+  ${(props) => (props.justify ? `justify-content: ${props.justify};` : "")}
   ${(props) =>
-    props.borderBottom ? `border-bottom: ${props.borderBottom};` : ""}
+    props.borderBottom ? `border-bottom: ${props.borderBottom};` : ""} /*  */
 `;
 
 export default Button;
