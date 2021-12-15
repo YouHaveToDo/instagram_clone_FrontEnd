@@ -2,8 +2,7 @@ import axios from "axios";
 import { getToken } from "./token";
 
 const instance = axios.create({
-  baseURL:
-    "http://13.125.188.103" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
+  baseURL: "" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
 
   //withCredentials: true,//자격요건: 쿠키
 });

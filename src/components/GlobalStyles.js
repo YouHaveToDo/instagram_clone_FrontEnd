@@ -4,7 +4,7 @@ import reset from "styled-reset";
 const GlobalStyles = createGlobalStyle`
     ${reset}
     @font-face {
-      font-family: 'BMDOHYEON';
+      font-family: '';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
       font-weight: normal;
       font-style: normal;
