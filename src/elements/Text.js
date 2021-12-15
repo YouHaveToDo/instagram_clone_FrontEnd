@@ -13,6 +13,7 @@ const Text = (props) => {
     border,
     lineH,
     align,
+    width,
     fontWeight,
     float,
   } = props;
@@ -26,6 +27,7 @@ const Text = (props) => {
     border,
     lineH,
     align,
+    width,
     fontWeight,
     float,
   };
@@ -60,6 +62,7 @@ const P = styled.p`
   ${(props) => (props.align ? `text-align: ${props.align};` : "")};
   ${(props) => (props.fontWeight ? `font-weight: ${props.fontWeight};` : "")};
   ${(props) => (props.float ? `float: ${props.float};` : "")};
+  /*  */
 `;
 
 export default Text;

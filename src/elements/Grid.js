@@ -13,14 +13,23 @@ const Grid = (props) => {
     justify,
     _onClick,
     position,
-    // height,
+    height,
     border,
     background,
+    ///
+    direction,
+    items,
+    top,
+    left,
+    transform,
+    radius,
+    borderB,
+    borderT,
+    borderL,
+    ////
     alignItems,
     maxWidth,
     boxSizing,
-    left,
-    radius,
   } = props;
 
   const styles = {
@@ -32,7 +41,7 @@ const Grid = (props) => {
     flex: flex,
     justify: justify,
     position: position,
-    // height: height,
+    height: height,
     border: border,
     background: background,
     alignItems: alignItems,
@@ -40,6 +49,13 @@ const Grid = (props) => {
     boxSizing: boxSizing,
     left: left,
     radius: radius,
+    direction,
+    items,
+    top,
+    transform,
+    borderB,
+    borderT,
+    borderL,
   };
   return (
     <React.Fragment>
@@ -73,18 +89,26 @@ Grid.defaultProps = {
 
 const GridBox = styled.div`
   width: ${(props) => props.width};
+  ${(props) => (props.background ? `background: ${props.background};` : "")}
   max-width: ${(props) => props.maxWidth};
   ${(props) => (props.left ? `left: ${props.left};` : "")}
+  ${(props) => (props.top ? `top: ${props.top};` : "")}
   ${(props) => (props.boxSizing ? `box-sizing: border-box;` : "")}
-  ${(props) => (props.background ? `background: ${props.background};` : "")}
   ${(props) => (props.border ? `border: ${props.border};` : "")}
   ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
   /* border: 1px solid #888; */
-  /* ${(props) => (props.height ? `height: ${props.height};` : "")} */
+  ${(props) => (props.height ? `height: ${props.height};` : "")}
   ${(props) => (props.position ? `position: ${props.position};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.wrap ? `flex-wrap: wrap;` : "")}
   ${(props) => (props.justify ? `justify-content: ${props.justify};` : "")}
+  ${(props) => (props.direction ? `flex-direction: ${props.direction};` : "")}
+  ${(props) => (props.items ? `align-items: ${props.items};` : "")}
+  ${(props) => (props.transform ? `transform: ${props.transform};` : "")}
+  ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
+  ${(props) => (props.borderB ? `border-bottom: ${props.borderB};` : "")}
+  ${(props) => (props.borderT ? `border-top: ${props.borderT};` : "")}
+  ${(props) => (props.borderL ? `border-left: ${props.borderL};` : "")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.bg ? `background-color: ${props.bg};` : "")}
   ${(props) => (props.flex ? `display: flex;` : "")}
@@ -93,7 +117,8 @@ const GridBox = styled.div`
       ? `display: flex; align-items: center; justify-content: space-between; `
       : ""}
   ${(props) => (props.flex ? `display: flex; ` : "")}
-  ${(props) => (props.alignItems ? `align-items: ${props.alignItems};` : "")}
+  ${(props) =>
+    props.alignItems ? `align-items: ${props.alignItems};` : ""} /*  */
 `;
 
 export default Grid;
