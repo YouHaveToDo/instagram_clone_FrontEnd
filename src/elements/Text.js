@@ -16,6 +16,9 @@ const Text = (props) => {
     width,
     fontWeight,
     float,
+    position,
+    top,
+    right,
   } = props;
   const styles = {
     weight,
@@ -30,6 +33,9 @@ const Text = (props) => {
     width,
     fontWeight,
     float,
+    position,
+    top,
+    right,
   };
   return <P {...styles}>{children}</P>;
 };
@@ -48,6 +54,9 @@ Text.defaultProps = {
   align: false,
   fontWeight: false,
   float: false,
+  position: false,
+  top: false,
+  right: false,
 };
 
 const P = styled.p`
@@ -63,6 +72,10 @@ const P = styled.p`
   ${(props) => (props.fontWeight ? `font-weight: ${props.fontWeight};` : "")};
   ${(props) => (props.float ? `float: ${props.float};` : "")};
   /*  */
+  ${(props) => (props.width ? `width: ${props.width};` : "")};
+  ${(props) => (props.position ? `position: ${props.position};` : "")};
+  ${(props) => (props.top ? `top: ${props.top};` : "")};
+  ${(props) => (props.right ? `right: ${props.right};` : "")};
 `;
 
 export default Text;

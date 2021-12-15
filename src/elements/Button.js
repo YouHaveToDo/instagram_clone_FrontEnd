@@ -22,6 +22,9 @@ const Button = (props) => {
       items={props.items}
       justify={props.justify}
       borderBottom={props.borderBottom}
+      size={props.size}
+      top={props.top}
+      left={props.left}
     >
       {props.children}
       {props.text}
@@ -36,6 +39,9 @@ Button.defaultProps = {
   text: "텍스트",
   boderBottom: null,
   children: null,
+  bold: false,
+  align: false,
+  // position: null,
 };
 
 const ElButton = styled.button`
@@ -47,7 +53,7 @@ const ElButton = styled.button`
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.height ? `height: ${props.height};` : "null")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  ${(props) => (props.position ? `position: ${props.position};` : "")}
+  ${(props) => (props.position ? `position: ${props.position};` : "static")}
   ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
   ${(props) => (props.line ? `line-height: ${props.line};` : "")}
   ${(props) => (props.display ? `display: ${props.display};` : "")}
@@ -55,6 +61,9 @@ const ElButton = styled.button`
   ${(props) => (props.justify ? `justify-content: ${props.justify};` : "")}
   ${(props) =>
     props.borderBottom ? `border-bottom: ${props.borderBottom};` : ""} /*  */
+  ${(props) => (props.size ? `font-size: ${props.size};` : "")}
+  ${(props) => (props.top ? `top: ${props.top};` : "")};
+  ${(props) => (props.right ? `right: ${props.right};` : "")};
 `;
 
 export default Button;

@@ -30,6 +30,8 @@ const Grid = (props) => {
     alignItems,
     maxWidth,
     boxSizing,
+    //
+    zIndex,
   } = props;
 
   const styles = {
@@ -56,6 +58,7 @@ const Grid = (props) => {
     borderB,
     borderT,
     borderL,
+    zIndex,
   };
   return (
     <React.Fragment>
@@ -85,6 +88,7 @@ Grid.defaultProps = {
   boxSizing: false,
   left: false,
   radius: false,
+  zIndex: false,
 };
 
 const GridBox = styled.div`
@@ -117,8 +121,10 @@ const GridBox = styled.div`
       ? `display: flex; align-items: center; justify-content: space-between; `
       : ""}
   ${(props) => (props.flex ? `display: flex; ` : "")}
-  ${(props) =>
-    props.alignItems ? `align-items: ${props.alignItems};` : ""} /*  */
+  ${(props) => (props.alignItems ? `align-items: ${props.alignItems};` : "")} 
+  
+    /*  */
+    ${(props) => (props.zIndex ? `z-index: ${props.zIndex};` : "")}
 `;
 
 export default Grid;

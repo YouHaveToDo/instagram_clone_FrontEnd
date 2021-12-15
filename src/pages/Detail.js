@@ -15,6 +15,7 @@ const Detail = () => {
       position="absolute"
       top="0"
       left="0"
+      zIndex="11"
     >
       <Grid
         className={"modalcont"}
