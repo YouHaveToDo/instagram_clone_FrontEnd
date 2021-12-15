@@ -16,13 +16,15 @@ import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 
 const Login = (props) => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  // const settings = {
+  //   dots: false,
+  //   infinite: true,
+  //   speed: 300,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  // };
+  const emailRef = React.useRef("");
+  const pwRef = React.useRef("");
 
   return (
     <React.Fragment>
@@ -36,7 +38,8 @@ const Login = (props) => {
         <Grid width="454px" height="618px">
           <Iphone src={iphone} />
           <Position>
-            <Slider {...settings}>
+            {/* 슬라이더 일단 안쓰니깐 {...settings} 잠시 생략 */}
+            <Slider>
               <div>
                 <Iphone src={Slider1} />
               </div>
@@ -84,6 +87,7 @@ const Login = (props) => {
                 radius="3px"
                 border="1px solid #DBDBDB"
                 background="#FAFAFA"
+                ref={emailRef}
               />
               <Input
                 width="268px"
@@ -94,6 +98,7 @@ const Login = (props) => {
                 radius="3px"
                 border="1px solid #DBDBDB"
                 background="#FAFAFA"
+                ref={pwRef}
               />
               <Button
                 text="로그인"
@@ -105,6 +110,7 @@ const Login = (props) => {
                 background="rgba(0,149,246,.3)"
                 radius="5px"
                 bold="bold"
+                _onClick={() => {}}
               />
             </Grid>
             <Grid

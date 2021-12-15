@@ -16,11 +16,11 @@ function App() {
       <GlobalStyles />
       <ConnectedRouter history={history}>
         {/* <Route path="/" exact component={} /> */}
-        <Route path="/login" exact component={Login} />
-        <Route path="/" exact component={Signup} />
-        <Route path="/Detail" exact component={Detail} />
+        <Route path="/" exact component={Login} />
+        <Route path="/signup" exact component={Signup} />
+        <Route path="/main/detail" exact component={Detail} />
         {/* 여기서부터 컴포넌트 넣으시면 됩니다.  */}
-        <Route path="/main" exact component={Main} />
+        <Route path="/main" component={Main} />
       </ConnectedRouter>
     </React.Fragment>
   );
