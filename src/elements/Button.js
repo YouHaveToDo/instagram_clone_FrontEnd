@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
+  const { text, _onClick, borderBottom } = props;
   return (
     <ElButton
       onClick={props._onClick}
@@ -14,39 +15,34 @@ const Button = (props) => {
       background={props.background}
       color={props.color}
       bold={props.bold}
-      radius={props.radius}
-      line={props.line}
-      display={props.display}
-      items={props.items}
-      justify={props.justify}
+      text={props.text}
+      borderBottom={props.borderBottom}
     >
-      {props.children}
-      {props.text}
+      {text}
     </ElButton>
   );
 };
 
 Button.defaultProps = {
   _onClick: () => {},
-  width: false,
-  children: null,
+  width: null,
+  height: null,
+  text: "텍스트",
+  boderBottom: null,
 };
 
 const ElButton = styled.button`
-  ${(props) => (props.width ? `width: ${props.width};` : "")}
+  ${(props) => (props.width ? `width: ${props.width};` : "null")}/
   ${(props) => (props.bold ? `font-weight: bold;` : "")};
   ${(props) => (props.color ? `color: ${props.color};` : "")};
   ${(props) => (props.background ? `background: ${props.background};` : "")}
   ${(props) => (props.border ? `border: ${props.border};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
-  ${(props) => (props.height ? `height: ${props.height};` : "")}
+  ${(props) => (props.height ? `height: ${props.height};` : "null")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.position ? `position: ${props.position};` : "")}
-  ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
-  ${(props) => (props.line ? `line-height: ${props.line};` : "")}
-  ${(props) => (props.display ? `display: ${props.display};` : "")}
-  ${(props) => (props.items ? `align-items: ${props.items};` : "")}
-  ${(props) => (props.justify ? `justify-content: ${props.justify};` : "")}
+  ${(props) =>
+    props.borderBottom ? `border-bottom: ${props.borderBottom};` : ""}
 `;
 
 export default Button;

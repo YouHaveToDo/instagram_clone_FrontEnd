@@ -13,7 +13,8 @@ const Text = (props) => {
     border,
     lineH,
     align,
-    width,
+    fontWeight,
+    float,
   } = props;
   const styles = {
     weight,
@@ -25,7 +26,8 @@ const Text = (props) => {
     border,
     lineH,
     align,
-    width,
+    fontWeight,
+    float,
   };
   return <P {...styles}>{children}</P>;
 };
@@ -42,13 +44,13 @@ Text.defaultProps = {
   lineH: false,
   _onClick: () => {},
   align: false,
-  width: "false",
+  fontWeight: false,
+  float: false,
 };
 
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
-  ${(props) => (props.width ? `width: ${props.width};` : "")};
   ${(props) => (props.lineH ? `line-height: ${props.lineH};` : "")};
   ${(props) => (props.border ? `border-bottom: ${props.border};` : "")};
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
@@ -56,6 +58,8 @@ const P = styled.p`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.weight ? `font-weight: ${props.weight};` : "")};
   ${(props) => (props.align ? `text-align: ${props.align};` : "")};
+  ${(props) => (props.fontWeight ? `font-weight: ${props.fontWeight};` : "")};
+  ${(props) => (props.float ? `float: ${props.float};` : "")};
 `;
 
 export default Text;
