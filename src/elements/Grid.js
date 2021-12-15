@@ -13,7 +13,7 @@ const Grid = (props) => {
     justify,
     _onClick,
     position,
-    // height,
+    height,
     border,
     background,
     alignItems,
