@@ -1,12 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
 import { useState } from "react";
 import { Button, Grid, Image, Text, Input } from "../elements";
-import { useRef } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-
-import { useSelector, useDispatch } from "react-redux";
 
 const Aside = (props) => {
   const [name, setName] = useState([
@@ -17,7 +12,6 @@ const Aside = (props) => {
     "정종찬",
     "최수인",
   ]);
-  const member = name.length;
 
   return (
     <React.Fragment>
@@ -96,10 +90,7 @@ const Userinfo = styled.div`
   display: flex;
   align-items: center;
 `;
-const More = styled.div`
-  /* background-color: blue; */
-  padding-right: 16px;
-`;
+
 const Footer = styled.div`
   & ul {
     padding: 20px 16px 10px 16px;

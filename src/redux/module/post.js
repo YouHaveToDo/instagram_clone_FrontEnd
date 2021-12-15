@@ -18,12 +18,6 @@ const setPost = createAction(SET_POST, (post_list, paging) => ({
   paging,
 }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
-const editPost = createAction(EDIT_POST, (post_id, post) => ({
-  post_id,
-  post,
-}));
-const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
-const deletePost = createAction(DELETE_POST, (post_index) => ({ post_index }));
 
 // ---- initialState ----
 const initalState = {
@@ -55,14 +49,7 @@ const initalState = {
 //---- reducer ----
 export default handleActions(
   {
-    [SET_POST]: (state, action) =>
-      //state: 원본값 , ()=>{} 하고 싶은 작업 ,draft:원본값을 복사한 값
-      produce(state, (draft) => {
-        //post_list액션을 list 넣어준다.
-        draft.list.push(...action.payload.post_list);
-        draft.paging = action.payload.paging;
-        draft.is_loading = false;
-      }),
+    [SET_POST]: (state, action) => produce(state, (draft) => {}),
   },
   initalState
 );
@@ -71,11 +58,5 @@ export default handleActions(
 const actionCreators = {
   setPost,
   addPost,
-  editPost,
-  // getPostFB,
-  // addPostFB,
-  // editPostFB,
-  // deletePostFB,
-  // getOnePostFB,
 };
 export { actionCreators };

@@ -1,12 +1,9 @@
 import React from "react";
-// import useState from "react-router-dom";
-
 import styled from "styled-components";
 import { Button, Grid, Image, Text, Input } from "../elements";
 import { useRef } from "react";
-
 import PostModal from "./PostModal";
-
+//-- icon -- 
 import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";
 import icon06 from "../images/icons/icon_06.png";
@@ -127,7 +124,6 @@ const Userinfo = styled.div`
   align-items: center;
 `;
 const More = styled.div`
-  /* background-color: blue; */
   padding-right: 16px;
 `;
 const CommentBox = styled.div`
@@ -167,7 +163,7 @@ const Ellipsis = styled.div`
   line-height: 2rem;
   width: 200px;
   /* display: -webkit-box;  */
-  -webkit-line-clamp: 1; // 생략 부호가 적용되는 라인 수
+  -webkit-line-clamp: 1; 
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
