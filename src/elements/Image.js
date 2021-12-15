@@ -3,7 +3,26 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = (props) => {
-  //---- 게시글 이미지 hover ----
+  const { shape, src, size, paddingLeft } = props;
+
+  const styles = {
+    src: src,
+    size: size,
+    paddingLeft: paddingLeft,
+  };
+
+  //프로필 이미지
+  if (shape === "circle") {
+    return <ImageCircle {...styles}></ImageCircle>;
+  }
+  //게시물 이미지
+  if (shape === "rectangle") {
+    return (
+      <AspectOutter>
+        <AspectInner {...styles}></AspectInner>
+      </AspectOutter>
+    );
+  }
 
   return (
     <AspectOutter>
@@ -13,19 +32,38 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  src: "https://instagram.fhyd1-3.fna.fbcdn.net/v/t51.2885-19/44884218_345707102882519_2446069589734[…]95&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2-ccb7-4",
+  shape: "circle",
+  src: "http://www.goingmary.co.kr/shop/data/images/icons/basic_user.png",
+
   _onClick: () => {},
   width: false,
+  size: 36,
+  paddingLeft: false,
 };
 
 const AspectOutter = styled.div`
   width: 100%;
 `;
 const AspectInner = styled.div`
+  position: relative;
   overflow: hidden;
   background-image: url("${(props) => props.src}");
   background-size: contain;
   ${(props) => (props.width ? `width: ${props.width};` : "")}
+  height: var(--size);
+  /* background-size: cover; */
+  padding-top: 75%; // 이미지가 가로넓이의 4:3비율을 맞추기위해 75% 적용
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-color: red;
+  background-position: center;
+`;
+//프로필 이미지
+const ImageCircle = styled.img`
+  --size: ${(props) => props.size}px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
 `;
 
 export default Image;

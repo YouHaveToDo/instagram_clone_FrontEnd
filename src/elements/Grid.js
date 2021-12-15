@@ -13,9 +13,14 @@ const Grid = (props) => {
     justify,
     _onClick,
     position,
-    height,
+    // height,
     border,
     background,
+    alignItems,
+    maxWidth,
+    boxSizing,
+    left,
+    radius,
   } = props;
 
   const styles = {
@@ -27,9 +32,14 @@ const Grid = (props) => {
     flex: flex,
     justify: justify,
     position: position,
-    height: height,
+    // height: height,
     border: border,
     background: background,
+    alignItems: alignItems,
+    maxWidth: maxWidth,
+    boxSizing: boxSizing,
+    left: left,
+    radius: radius,
   };
   return (
     <React.Fragment>
@@ -54,14 +64,23 @@ Grid.defaultProps = {
   height: false,
   border: false,
   background: false,
+  alignItems: false,
+  maxWidth: false,
+  boxSizing: false,
+  left: false,
+  radius: false,
 };
 
 const GridBox = styled.div`
   width: ${(props) => props.width};
-  box-sizing: border-box;
+  max-width: ${(props) => props.maxWidth};
+  ${(props) => (props.left ? `left: ${props.left};` : "")}
+  ${(props) => (props.boxSizing ? `box-sizing: border-box;` : "")}
   ${(props) => (props.background ? `background: ${props.background};` : "")}
   ${(props) => (props.border ? `border: ${props.border};` : "")}
-  ${(props) => (props.height ? `height: ${props.height};` : "")}
+  ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
+  /* border: 1px solid #888; */
+  /* ${(props) => (props.height ? `height: ${props.height};` : "")} */
   ${(props) => (props.position ? `position: ${props.position};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.wrap ? `flex-wrap: wrap;` : "")}
@@ -73,6 +92,8 @@ const GridBox = styled.div`
     props.is_flex
       ? `display: flex; align-items: center; justify-content: space-between; `
       : ""}
+  ${(props) => (props.flex ? `display: flex; ` : "")}
+  ${(props) => (props.alignItems ? `align-items: ${props.alignItems};` : "")}
 `;
 
 export default Grid;
