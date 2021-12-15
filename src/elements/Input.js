@@ -3,41 +3,65 @@ import styled from "styled-components";
 
 const Input = React.forwardRef(
   (
-    { borderB, placeholder, height, value, _onClick, _onChange, children },
+    {
+      border,
+      placeholder,
+      height,
+      value,
+      _onClick,
+      _onChange,
+      children,
+      width,
+      margin,
+      padding,
+      radius,
+      background,
+    },
     ref
   ) => {
     return (
-      <ElTextarea
-        borderB={borderB}
+      <ElInput
+        border={border}
         placeholder={placeholder}
         height={height}
         ref={ref}
         onClick={_onClick}
         onChange={_onChange}
         value={value}
+        width={width}
+        margin={margin}
+        padding={padding}
+        radius={radius}
+        background={background}
       >
         {children}
-      </ElTextarea>
+      </ElInput>
     );
   }
 );
 
 Input.defaultProps = {
+  margin: "0px",
   border: "none",
   outline: "none",
   value: null,
   children: null,
   _onClick: () => {},
   _onChange: () => {},
+  padding: "0px",
 };
-const ElTextarea = styled.textarea`
+const ElInput = styled.input`
   border: none;
-  width: 100%;
   resize: none;
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.width ? `width: ${props.width};` : "")}
   ${(props) => (props.height ? `height: ${props.height};` : "")}
   ${(props) => (props.border ? `border: ${props.border};` : "")}
   ${(props) => (props.outline ? `outline: ${props.outline};` : "")}
+  ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
+  ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
+  ${(props) =>
+    props.background ? `background-color: ${props.background};` : ""}
 `;
 
 export default Input;

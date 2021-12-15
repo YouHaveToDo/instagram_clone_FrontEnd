@@ -1,10 +1,21 @@
 .App {
   text-align: center;
+  background-color: #fafafa;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.line {
+  height: 1px;
+  background-color: #dbdbdb;
+  width: 104px;
+}
+
+.slick-arrow {
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {

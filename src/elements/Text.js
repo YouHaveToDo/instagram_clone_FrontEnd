@@ -13,6 +13,7 @@ const Text = (props) => {
     border,
     lineH,
     align,
+    width,
   } = props;
   const styles = {
     weight,
@@ -24,6 +25,7 @@ const Text = (props) => {
     border,
     lineH,
     align,
+    width,
   };
   return <P {...styles}>{children}</P>;
 };
@@ -40,11 +42,13 @@ Text.defaultProps = {
   lineH: false,
   _onClick: () => {},
   align: false,
+  width: "false",
 };
 
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
+  ${(props) => (props.width ? `width: ${props.width};` : "")};
   ${(props) => (props.lineH ? `line-height: ${props.lineH};` : "")};
   ${(props) => (props.border ? `border-bottom: ${props.border};` : "")};
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
