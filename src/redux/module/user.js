@@ -7,24 +7,25 @@ import apis from "../../shared/apis";
 const SET_USER = "SET_USER";
 
 // action creators
-const setUser = createAction(SET_USER, (username) => ({ username }));
+const setUser = createAction(SET_USER, (userInfo) => ({ userInfo }));
 
 // initialState
 const initialState = {
   user: null,
   username: "",
   is_login: false,
+  userInfo: null,
 };
 
 // middleware actions
-const loginDB = (username, password) => {
+const loginDB = (email, pw) => {
   return function (dispatch, getState, { history }) {
-    const data = {
-      username: username,
-      password: password,
+    const userInfo = {
+      email,
+      pw,
     };
     apis
-      .login(data)
+      .login(userInfo)
       .then((response) => {
         //console.log(response);
         //console.log(response.headers);
@@ -32,14 +33,14 @@ const loginDB = (username, password) => {
 
         const token = response.headers.authorization;
         console.log(typeof token);
-        setToken(token);
+        setToken("login", token);
         console.log("토큰저장완료!");
         window.alert("로그인 성공 🔥");
 
-        console.log(data.username);
-        dispatch(setUser(data.username));
+        console.log(userInfo.email);
+        dispatch(setUser(userInfo));
 
-        history.push(`/main/${data.username}`);
+        history.push(`/main`);
       })
       .catch((err) => {
         console.log(err);
@@ -49,24 +50,26 @@ const loginDB = (username, password) => {
   };
 };
 
-const signupDB = (username, nickname, password, password2) => {
+const signupDB = (email, nickname, pw) => {
   return function (dispatch, getState, { history }) {
-    const data = {
-      username: username,
-      nickname: nickname,
-      password: password,
-      password2: password2,
+    const userInfo = {
+      email,
+      nickname,
+      pw,
     };
-    apis
-      .signup(data)
-      .then((response) => {
-        window.alert("회원가입 성공 🔥");
-        history.push("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-        console.dir(err.response.data.errorMessage);
-      });
+    console.log(userInfo);
+    // 일시적으로 확인하기 위해 history 추가 api 연결되면 아래줄 지워야함.
+    history.push("/");
+    // apis
+    //   .signup(userInfo)
+    //   .then((response) => {
+    //     window.alert("회원가입 성공 🔥");
+    //     history.push("/login");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     console.dir(err.response.data.errorMessage);
+    //   });
   };
 };
 
@@ -75,8 +78,9 @@ export default handleActions(
   {
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.username);
-        draft.username = action.payload.username;
+        console.log("확인");
+        console.log(action.payload.userInfo);
+        draft.userInfo = action.payload.userInfo;
         draft.is_login = true;
       }),
   },
@@ -84,10 +88,7 @@ export default handleActions(
 );
 
 // action creator export
-const actionCreators = {
-  setUser,
+export const userActions = {
   loginDB,
   signupDB,
 };
-
-export { actionCreators };

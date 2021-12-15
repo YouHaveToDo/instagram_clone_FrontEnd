@@ -1,14 +1,59 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Grid, Text, Input, Button } from "../elements/Index";
+import { useDispatch } from "react-redux";
+import { userActions } from "../redux/module/user";
 import Insta from "../images/instagram.png";
 import Applestore from "../images/applestore.png";
 import Playstore from "../images/playstore.png";
-import Facebook from "../images/facebook.svg";
 import FacebookW from "../images/facebookW.png";
-import iphone from "../images/iphone.png";
+import { emailCheck, nicknameCheck, passwordCheck } from "../shared/check";
 
 const Signup = () => {
+  const emailRef = React.useRef("");
+  const nicknameRef = React.useRef("");
+  const pwRef = React.useRef("");
+  console.log(typeof emailValue);
+  const dispatch = useDispatch();
+
+  const signup = () => {
+    console.log(
+      emailRef.current.value,
+      nicknameRef.current.value,
+      pwRef.current.value
+    );
+    if (
+      emailRef.current.value === "" ||
+      nicknameRef.current.value === "" ||
+      pwRef.current.value === ""
+    ) {
+      window.alert("아이디, 닉네임, 패스워드 모두 입력해주세요 🥸");
+      return;
+    }
+    // 유저 아이디 체크
+    if (!emailCheck(emailRef.current.value)) {
+      window.alert("이메일을 확인해주세요 🥸  공백은 ❎");
+      return;
+    }
+    // 유저 닉네임 체크
+    if (!nicknameCheck(nicknameRef.current.value)) {
+      window.alert("사용자이름을 확인해주세요 🥸");
+      return;
+    }
+    // 유저 비밀번호 체크
+    if (!passwordCheck(pwRef.current.value)) {
+      window.alert("비밀번호를 확인해주세요 🥸");
+      return;
+    }
+    dispatch(
+      userActions.signupDB(
+        emailRef.current.value,
+        nicknameRef.current.value,
+        pwRef.current.value
+      )
+    );
+  };
+
   return (
     <React.Fragment>
       <Grid
@@ -83,6 +128,7 @@ const Signup = () => {
               radius="3px"
               border="1px solid #DBDBDB"
               background="#FAFAFA"
+              ref={emailRef}
             />
             <Input
               width="268px"
@@ -93,6 +139,7 @@ const Signup = () => {
               radius="3px"
               border="1px solid #DBDBDB"
               background="#FAFAFA"
+              ref={nicknameRef}
             />
             <Input
               width="268px"
@@ -103,6 +150,7 @@ const Signup = () => {
               radius="3px"
               border="1px solid #DBDBDB"
               background="#FAFAFA"
+              ref={pwRef}
             />
             <Button
               text="가입"
@@ -114,6 +162,7 @@ const Signup = () => {
               background="rgba(0,149,246,.3)"
               radius="5px"
               bold="bold"
+              _onClick={signup}
             />
           </Grid>
         </Grid>

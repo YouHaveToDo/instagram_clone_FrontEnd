@@ -2,33 +2,32 @@ import axios from "axios";
 import { getToken } from "./token";
 
 const instance = axios.create({
-  baseURL: "",
+
+  baseURL:
+    "" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
+  // headers: { 'content-type': 'multipart/form-data' }, // content-type이 멀티파트/폼데이터 일 때 이렇게 적어서 사용하자
+  //withCredentials: true,//자격요건: 쿠키
+
 });
 
 instance.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json; charset=utf-8";
+  // 기본 content-type이 json이라 뒤에 따로 명시 안해도 되지만, 불안해서 명시함
   config.headers["X-Requested-With"] = "XMLHttpRequest";
-  config.headers["authorization"] = getToken() ? `${getToken()}` : "";
+  config.headers["authorization"] = getToken("login")
+    ? `${getToken("login")}`
+    : "";
   config.headers.Accept = "application/json";
   return config;
 });
+// 토큰을 헤더에 담아드릴지 자동으로 토큰으로 넘겨드릴지 백엔드분들에게 여쭤보기
 
 export const apis = {
   //로그인
-  login: (data) =>
-    instance.post("/user/signin", {
-      username: data.username,
-      password: data.password,
-    }),
+  login: (userInfo) => instance.post("/api/auth/login", userInfo),
 
   // 회원가입
-  signup: (data) =>
-    instance.post("/user/signup", {
-      username: data.username,
-      nickname: data.nickname,
-      password: data.password,
-      password2: data.password2,
-    }),
+  signup: (userInfo) => instance.post("/api/auth/register", userInfo),
 
   //게시물
   getPost: () => instance.get("/home"), //게시글 조회
