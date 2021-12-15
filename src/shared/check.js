@@ -3,7 +3,7 @@
 // 영소문, 숫자 혼합 3~12자
 export const emailCheck = (userEmail) => {
   let userIdRegex =
-    /^[0-9a-zA-Z]([-_.0-9a-zA-Z])*@[0-9a-zA-Z]([-_.0-9a-zA-z])*\.([a-zA-Z]){2,3}/;
+    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
   return userIdRegex.test(userEmail);
 };
@@ -12,7 +12,8 @@ export const emailCheck = (userEmail) => {
 // 중복 확인
 // 길이: 최소 3글자, 10자 제한, 문자 숫자만 가능.
 export const nicknameCheck = (userNick) => {
-  let userNickRegex = /^[a-z0-9_-]{2,10}$/;
+  let userNickRegex = /^[가-힣ㄱ-ㅎa-zA-Z0-9._ -]{2,}$/;
+
   // let userNickRegex = /^[가-힣ㄱ-ㅎa-zA-Z0-9._ -]{2,20}\$/;
 
   return userNickRegex.test(userNick);
@@ -22,8 +23,7 @@ export const nicknameCheck = (userNick) => {
 // 길이: 4~12자 제한
 // 영대소문숫자특수문자 혼합
 export const passwordCheck = (userPwd) => {
-  let userPwdRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{4,12}$/;
+  let userPwdRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,20}$/;
   // let userPwdRegex = /^(?=.[a-zA-Z])(?=.[0-9]).{8,20}$/;
 
   return userPwdRegex.test(userPwd);

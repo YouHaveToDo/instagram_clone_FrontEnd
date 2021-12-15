@@ -2,12 +2,9 @@ import axios from "axios";
 import { getToken } from "./token";
 
 const instance = axios.create({
-
-  baseURL:
-    "" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
+  baseURL: "" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
   // headers: { 'content-type': 'multipart/form-data' }, // content-type이 멀티파트/폼데이터 일 때 이렇게 적어서 사용하자
   //withCredentials: true,//자격요건: 쿠키
-
 });
 
 instance.interceptors.request.use((config) => {
@@ -30,7 +27,7 @@ export const apis = {
   signup: (userInfo) => instance.post("/api/auth/register", userInfo),
 
   //게시물
-  getPost: () => instance.get("/home"), //게시글 조회
+  getPost: () => instance.get("/api/posts"), //게시글 조회
 
   addPost: (article_info) => instance.post(`/api/article`, article_info), //게시글 작성
 
@@ -53,3 +50,5 @@ export const apis = {
   //업로드
   // upload: (data) => instance.post(`api/image`, { file: data }),
 };
+
+export default apis;
