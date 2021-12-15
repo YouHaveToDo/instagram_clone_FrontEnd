@@ -13,18 +13,14 @@ const Grid = (props) => {
     justify,
     _onClick,
     position,
-    height,
+    // height,
     border,
     background,
-    direction,
-    items,
-    top,
+    alignItems,
+    maxWidth,
+    boxSizing,
     left,
-    transform,
     radius,
-    borderB,
-    borderT,
-    borderL,
   } = props;
 
   const styles = {
@@ -36,18 +32,14 @@ const Grid = (props) => {
     flex: flex,
     justify: justify,
     position: position,
-    height: height,
+    // height: height,
     border: border,
     background: background,
-    direction,
-    items,
-    top,
-    left,
-    transform,
-    radius,
-    borderB,
-    borderT,
-    borderL,
+    alignItems: alignItems,
+    maxWidth: maxWidth,
+    boxSizing: boxSizing,
+    left: left,
+    radius: radius,
   };
   return (
     <React.Fragment>
@@ -72,35 +64,36 @@ Grid.defaultProps = {
   height: false,
   border: false,
   background: false,
-  direction: false,
-  items: false,
+  alignItems: false,
+  maxWidth: false,
+  boxSizing: false,
+  left: false,
+  radius: false,
 };
+
 const GridBox = styled.div`
   width: ${(props) => props.width};
-  box-sizing: border-box;
+  max-width: ${(props) => props.maxWidth};
+  ${(props) => (props.left ? `left: ${props.left};` : "")}
+  ${(props) => (props.boxSizing ? `box-sizing: border-box;` : "")}
   ${(props) => (props.background ? `background: ${props.background};` : "")}
   ${(props) => (props.border ? `border: ${props.border};` : "")}
-  ${(props) => (props.height ? `height: ${props.height};` : "")}
+  ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
+  /* border: 1px solid #888; */
+  /* ${(props) => (props.height ? `height: ${props.height};` : "")} */
   ${(props) => (props.position ? `position: ${props.position};` : "")}
-  ${(props) => (props.top ? `top: ${props.top};` : "")}
-  ${(props) => (props.left ? `left: ${props.left};` : "")}
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
   ${(props) => (props.wrap ? `flex-wrap: wrap;` : "")}
   ${(props) => (props.justify ? `justify-content: ${props.justify};` : "")}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.bg ? `background-color: ${props.bg};` : "")}
   ${(props) => (props.flex ? `display: flex;` : "")}
-  ${(props) => (props.direction ? `flex-direction: ${props.direction};` : "")}
-  ${(props) => (props.items ? `align-items: ${props.items};` : "")}
-  ${(props) => (props.transform ? `transform: ${props.transform};` : "")}
-  ${(props) => (props.radius ? `border-radius: ${props.radius};` : "")}
-  ${(props) => (props.borderB ? `border-bottom: ${props.borderB};` : "")}
-  ${(props) => (props.borderT ? `border-top: ${props.borderT};` : "")}
-  ${(props) => (props.borderL ? `border-left: ${props.borderL};` : "")}
   ${(props) =>
     props.is_flex
       ? `display: flex; align-items: center; justify-content: space-between; `
       : ""}
+  ${(props) => (props.flex ? `display: flex; ` : "")}
+  ${(props) => (props.alignItems ? `align-items: ${props.alignItems};` : "")}
 `;
 
 export default Grid;
