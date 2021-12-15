@@ -43,7 +43,7 @@ const initalState = {
   ],
 };
 
-//-- addPostDB (post 추가) --
+//-- addPostDB (post 추가하기) --
 export const addPostDB =
   (contents, formData) =>
   async (dispatch, getState, { history }) => {
@@ -56,7 +56,7 @@ export const addPostDB =
 
       axios({
         method: "post",
-        url: "http://주소/api/posts",
+        url: "http:///api/posts",
         data: body,
         headers: {
           "Content-Type": "multipart/form-data",
