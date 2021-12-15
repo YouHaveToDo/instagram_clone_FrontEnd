@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-
+import axios from "axios";
 import moment from "moment";
 
 // import { actionCreators as imageActions } from "./image";
@@ -8,16 +8,16 @@ import moment from "moment";
 // ---- actions type ----
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
-const DELETE_POST = "DELETE_POST";
-const EDIT_POST = "EDIT_POST";
-const LOADING = "LOADING";
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
   post_list,
   paging,
 }));
-const addPost = createAction(ADD_POST, (post) => ({ post }));
+const addPost = createAction(ADD_POST, (contents, formData) => ({
+  contents,
+  formData,
+}));
 
 // ---- initialState ----
 const initalState = {
@@ -41,11 +41,42 @@ const initalState = {
       createAt: "2020-22-22",
     },
   ],
-  paging: { start: null, next: null, size: 4 },
-  is_loading: false,
 };
-// ---- inistalPost(게시물 정보) ----
-//
+
+//-- addPostDB (post 추가) --
+export const addPostDB =
+  (contents, formData) =>
+  async (dispatch, getState, { history }) => {
+    try {
+      const body = {
+        content: contents,
+        file: formData,
+      };
+      const accessToken = document.cookie.split("=")[1];
+
+      axios({
+        method: "post",
+        url: "http://주소/api/posts",
+        data: body,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: ` ${accessToken}`,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          // dispatch(addPost(res.data));
+          history.replace("/main");
+        })
+        .catch((err) => {
+          window.alert("게시물 업로드 실패");
+          console.log(err);
+        });
+    } catch (err) {
+      console.error("게시물 요청 문제 발생", err);
+    }
+  };
+
 //---- reducer ----
 export default handleActions(
   {
@@ -57,6 +88,6 @@ export default handleActions(
 // ---- action creator export ----
 const actionCreators = {
   setPost,
-  addPost,
+  addPostDB,
 };
 export { actionCreators };

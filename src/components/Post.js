@@ -10,7 +10,7 @@ import icon06 from "../images/icons/icon_06.png";
 import icon07 from "../images/icons/icon_07.png";
 
 const Post = (props) => {
-  //글자수 제한s
+  //글자수 제한
   const contentRef = useRef(null);
   const moreClick = (e) => {
     contentRef.current.classList.add("show");
@@ -64,11 +64,6 @@ const Post = (props) => {
         </Text>
         <Ellipsis ref={contentRef}>{props.content}</Ellipsis>
         <EButton
-          // size="14"
-          // border="none"
-          // background="none"
-          // color="#8f8f8f"
-          // text="더보기"
           onClick={moreClick}
         >
           더보기
@@ -145,9 +140,7 @@ Post.defaultProps = {
     uploadUrl: "",
     type: "",
     createAt: "",
-    updatedAt: "",
     user_profile: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-
     user_name: "mean0",
   },
   image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",

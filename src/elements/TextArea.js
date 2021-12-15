@@ -13,6 +13,9 @@ const Textarea = (props) => {
       size={props.size}
       onClick={props._onClick}
       onChange={props._onChange}
+      placeholder={props.placeholder}
+      height={props.height}
+      outline={props.outline}
     />
   );
 };
@@ -27,6 +30,9 @@ Textarea.defaultProps = {
   size: false,
   _onClick: () => {},
   _onChange: () => {},
+  placeholder: false,
+  height: false,
+  outline: false,
 };
 
 const ElTextarea = styled.textarea`
@@ -37,6 +43,9 @@ const ElTextarea = styled.textarea`
   ${(props) => (props.border ? `border: ${props.border};` : "")}
   ${(props) => (props.color ? `color: ${props.color};` : "")}
   ${(props) => (props.size ? `font-size: ${props.size};` : "")}
+  ${(props) => (props.placeholder ? `placeholder: ${props.placeholder};` : "")}
+  ${(props) => (props.height ? `height: ${props.height};` : "")}
+  ${(props) => (props.outline ? `outline: ${props.outline};` : "")}
 `;
 
 export default Textarea;
