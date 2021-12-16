@@ -5,10 +5,24 @@ import { Grid, Text } from "../elements/Index";
 import file from "../images/icons/icon_file.png";
 import Upload from "../shared/Upload";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector, useDispatch } from "react-redux";
 
 const CreateSelect = (props) => {
+  const reloadState = useSelector((state) => {
+    console.log(state);
+    return state.post.reloadState;
+  });
+
+  window.onbeforeunload = function () {
+    console.log("1");
+    window.location.href = "/main";
+  };
+
   //body 스크롤 멈추기
   React.useEffect(() => {
+    // if (!reloadState) {
+    //   history.push("/main");
+    // }
     document.body.classList.add("overflowHidden");
     window.scrollTo(0, 0);
     return () => {

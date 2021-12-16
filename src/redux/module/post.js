@@ -3,6 +3,7 @@ import { produce } from "immer";
 import axios from "axios";
 import apis from "../../shared/apis";
 import moment from "moment";
+import { history } from "../configureStore";
 
 // import { actionCreators as imageActions } from "./image";
 
@@ -12,6 +13,7 @@ const ADD_POST = "ADD_POST";
 const GET_POST = "GET_POST";
 const DELETE_POST = "DEPETE_POST";
 const DETAIL_GET_POST = "DETAIL_GET_POST";
+const MAIN_TO_DETAIL = "MAIN_TO_DETAIL";
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
@@ -30,6 +32,9 @@ const deletePost = createAction(DELETE_POST, (post_id) => ({
 }));
 const detailGetPost = createAction(DETAIL_GET_POST, (post_info) => ({
   post_info,
+}));
+export const mainToDetail = createAction(MAIN_TO_DETAIL, (reload) => ({
+  reload,
 }));
 
 // ---- initialState ----
@@ -55,6 +60,7 @@ const initalState = {
     },
   ],
   post: {},
+  reloadState: false,
 };
 
 //-- addPostDB (post 추가하기) --
@@ -69,7 +75,6 @@ export const addPostDB =
       const accessToken = document.cookie.split("=")[1];
 
       await axios({
-
         method: "post",
         url: "http:///api/posts",
         data: body,
@@ -158,6 +163,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.post = action.payload.post_info;
       }),
+    [MAIN_TO_DETAIL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.reloadState = action.payload.reload;
+      }),
   },
   initalState
 );
@@ -169,5 +178,6 @@ const actionCreators = {
   addPostDB,
   deletePostDB,
   detailGetPostDB,
+  mainToDetail,
 };
 export { actionCreators };
