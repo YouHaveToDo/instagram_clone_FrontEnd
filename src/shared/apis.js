@@ -34,8 +34,8 @@ export const apis = {
   updatePost: (article_id, article_infos) =>
     instance.put(`/api/article/${article_id}`, article_infos), //게시글 수정
 
-  getPostDetail: (article_id) => instance.get(`api/article/${article_id}`), //게시글 상세페이지 조회
-  deletePost: (article_id) => instance.delete(`/api/article/${article_id}`), //게시글 삭제
+  detailGetPost: (post_id) => instance.get(`api/posts/${post_id}`), //게시글 상세페이지 조회
+  deletePost: (post_id) => instance.delete(`/api/posts/${post_id}`), //게시글 삭제
 
   //댓글
   getComment: (article_id) => instance.get(`/api/${article_id}/comment`), // 댓글 조회

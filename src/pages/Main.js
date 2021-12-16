@@ -9,9 +9,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Main = (props) => {
   const dispatch = useDispatch();
-  React.useEffect(() => {
-    // dispatch();
-  }, []);
+
+  // React.useEffect(() => {
+  //   dispatch();
+  // }, []);
+
   console.log(props);
   const post_list = useSelector((state) => state.post.posts);
   console.log(post_list);
