@@ -1,12 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../redux/configureStore";
 import { Grid, Text } from "../elements/Index";
 import file from "../images/icons/icon_file.png";
 import Upload from "../shared/Upload";
-import { history } from "../redux/configureStore";
 import CloseIcon from "@mui/icons-material/Close";
 
-const CreateSelect = () => {
+const CreateSelect = (props) => {
+  //body 스크롤 멈추기
+  React.useEffect(() => {
+    document.body.classList.add("overflowHidden");
+    window.scrollTo(0, 0);
+    return () => {
+      document.body.classList.remove("overflowHidden");
+    };
+  }, []);
+
   return (
     <div>
       {/* 배경 */}

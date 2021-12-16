@@ -109,6 +109,7 @@ const PostModal = (props) => {
           _onClick={() => setModalIsOpen(false)}
         ></Button>
       </Modal>
+      
       <Modal
         style={{
           overlay: {
@@ -168,7 +169,7 @@ const PostModal = (props) => {
           background="none"
           border="none"
           borderBottom="1px solid #ddd"
-          text="공유 댜ㅐ상..."
+          text="공유 대상..."
         ></Button>
         <Button
           size="14px"

@@ -7,34 +7,64 @@ import { actionCreators as imageActions } from "../redux/module/image";
 import { history } from "../redux/configureStore";
 
 const Upload = (props) => {
-  const [file, setFile] = useState(null);
-  const fileInput = React.useRef();
   const dispatch = useDispatch();
+  const fileInput = React.useRef();
 
+  const [fileVideos, setFileVideo] = React.useState("");
+
+  //fileVideos 값이 있을때 실행하기
+  React.useEffect(() => {
+    if (!fileVideos) {
+      return;
+    }
+    console.log("aaa");
+    console.log(fileVideos);
+    dispatch(imageActions.setPreviewVideo(fileVideos));
+  }, [fileVideos]);
+
+  //파일 선택
   const selectFile = (e) => {
+    //선택된 파일
     const file = fileInput.current.files[0];
+    console.log(file);
 
+    //파일타입
+    const fileType = file.type;
+    console.log(fileType);
+
+    //FormData 객체 생성
     const formData = new FormData();
     formData.append("file", file);
 
-
+    //FileReader 객체 생성
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
-    reader.onloadend = () => {
-      // console.log(reader.result);
+    //createObjectURL 비오 url
+    const videourl = URL.createObjectURL(file);
+    setFileVideo(videourl);
+
+    if (fileType.includes("video/")) {
+      console.log(typeof videourl);
+    }
+
+    //파일 로드 완료시
+    reader.onloadend = (e) => {
+      const preview = reader.result;
+      //리덕스 저장
+      dispatch(imageActions.setPreview(fileType, preview, formData));
       history.push(`/main/create/details`);
-      //프리뷰 리덕스 저장
-      dispatch(imageActions.setPreview(reader.result, formData));
     };
   };
   return (
     <div>
       <Grid justify="center" flex margin="24px 0">
         <Label for="file">컴퓨터에서 선택</Label>
+
         <File
           type="file"
           id="file"
+          accept="video/* ,image/*"
           onChange={selectFile}
           ref={fileInput}
           // disabled={is_uploading}

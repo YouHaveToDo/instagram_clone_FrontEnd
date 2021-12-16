@@ -11,11 +11,27 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const CreateDetails = (props) => {
   const dispatch = useDispatch();
+
+  //upload 데이터 가져오기
+  const fileType = useSelector((state) => state.image.fileType);
+  console.log(fileType);
   const preview = useSelector((state) => state.image.preview);
+  console.log(preview);
+  const videourl = useSelector((state) => state.image.fileVideo);
+  console.log(videourl);
   const formData = useSelector((state) => state.image.formData);
   // console.log(formData);
-
   const [contents, setContents] = React.useState();
+
+  //body 스크롤 멈추기
+  React.useEffect(() => {
+    document.body.classList.add("overflowHidden");
+    window.scrollTo(0, 0);
+    return () => {
+      document.body.classList.remove("overflowHidden");
+    };
+  }, []);
+
   //---- 게시글 추가 ----
   const addPost = () => {
     console.log(contents, formData);
@@ -85,15 +101,22 @@ const CreateDetails = (props) => {
             <Button onClick={addPost}>공유하기</Button>
           </Grid>
           <Grid flex>
-            {/* 왼쪽 이미지 */}
+            {/* 왼쪽 - 이미지 */}
             <Grid width="695px" height="695px">
-              <Image
-                shape="rectangle"
-                src={preview ? preview : "http://via.placeholder.com/400x300"}
-              />
+              {fileType.includes("image/") ? (
+                <Image shape="rectangle" src={preview} />
+              ) : (
+                <video
+                  width="100%"
+                  controls
+                  autautoplay="autoplay"
+                  src={videourl}
+                  type="video/*"
+                ></video>
+              )}
             </Grid>
 
-            {/* 오른쪽 텍스트 */}
+            {/* 오른쪽 - 텍스트 입력창 */}
             <Grid width="340px" height="695px">
               <Grid flex alignItems="center " padding="25px 16px">
                 <Image
