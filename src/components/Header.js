@@ -27,16 +27,14 @@ const Header = (props) => {
   //   };
   // }, []);
   const dispatch = useDispatch();
-  // const [reload, setReload] = React.useState(false);
-  // const goSelect = () => {
-  //   history.push(`/main/create/select`);
-  // };
-  // const mainToDetail = () => {
-  //   setReload(!reload);
-  //   console.log(reload);
-  //   dispatch(postActions.mainToDetail(reload));
-  //   history.push(`/main/create/select`);
-  // };
+  const [reload, setReload] = React.useState(false);
+
+  const mainToDetail = () => {
+    setReload(!reload);
+    console.log(reload);
+    dispatch(postActions.mainToDetail(reload));
+    history.push(`/main/create/select`);
+  };
 
   return (
     <Nav>
@@ -49,12 +47,7 @@ const Header = (props) => {
           <Grid flex justify="end">
             <Icon src={icon01}></Icon>
             <Icon src={icon02}></Icon>
-            <Icon
-              src={icon03}
-              onClick={() => {
-                history.push("/main/create/select");
-              }}
-            ></Icon>
+            <Icon src={icon03} onClick={mainToDetail}></Icon>
             <Icon src={icon04}></Icon>
             <Icon src={icon05}></Icon>
             <Image shape="circle" size="24" paddingLeft="20px"></Image>
