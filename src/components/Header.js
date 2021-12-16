@@ -10,7 +10,22 @@ import icon05 from "../images/icons/icon_05.png";
 
 import { history } from "../redux/configureStore";
 
+// overflow-y: hidden;
+// overflow-y: scroll;
+//
+
 const Header = (props) => {
+  // const [overflow, setOverflow] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   // if (overflow) {
+  //   document.body.classList.add("overflowScroll");
+  //   // }
+  //   return () => {
+  //     document.body.classList.remove("overflowScroll");
+  //   };
+  // }, []);
+
   return (
     <Nav>
       <Grid width="935px">
@@ -25,6 +40,7 @@ const Header = (props) => {
             <Icon
               src={icon03}
               onClick={() => {
+                // setOverflow(true);
                 history.push(`/main/create/select`);
               }}
             ></Icon>

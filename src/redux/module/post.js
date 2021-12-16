@@ -58,7 +58,7 @@ export const addPostDB =
         file: formData,
       };
       const accessToken = document.cookie.split("=")[1];
-
+      
       axios({
         method: "post",
         url: "http:///api/posts",
