@@ -11,6 +11,7 @@ import Slider2 from "../images/slider2.jpeg";
 import Slider3 from "../images/slider3.jpeg";
 import Slider4 from "../images/slider4.jpeg";
 import { Grid, Text, Input, Button } from "../elements/Index";
+import { userActions } from "../redux/module/user";
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import Slider from "react-slick";
@@ -23,8 +24,13 @@ const Login = (props) => {
   //   slidesToShow: 1,
   //   slidesToScroll: 1,
   // };
+  const dispatch = useDispatch();
   const emailRef = React.useRef("");
   const pwRef = React.useRef("");
+
+  const login = () => {
+    dispatch(userActions.loginDB(emailRef.current.value, pwRef.current.value));
+  };
 
   return (
     <React.Fragment>
@@ -110,7 +116,7 @@ const Login = (props) => {
                 background="rgba(0,149,246,.3)"
                 radius="5px"
                 bold="bold"
-                _onClick={() => {}}
+                _onClick={login}
               />
             </Grid>
             <Grid

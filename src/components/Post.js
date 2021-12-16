@@ -12,6 +12,7 @@ import icon07 from "../images/icons/icon_07.png";
 
 const Post = (props) => {
   //글자수 제한
+
   const contentRef = useRef(null);
   const moreClick = (e) => {
     contentRef.current.classList.add("show");
@@ -91,7 +92,7 @@ const Post = (props) => {
             text="댓글달기..."
             color="#8e8e8e"
             _onClick={() => {
-              history.push(`/main/Detail`);
+              history.push(`/main/Detail/${props.Id}`);
             }}
           />
           <Button

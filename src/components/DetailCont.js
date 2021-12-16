@@ -1,8 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, Text, Input, Button } from "../elements/Index";
-
+import { actionCreators as postActions } from "../redux/module/post";
 const DetailCont = (props) => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const post_id = params.post_id;
+  // delete 버튼 만들어서 onclick으로 넣으면 됨 12/16 *종찬
+  const DeletePost = () => {
+    dispatch(postActions.deletePostDB(post_id));
+  };
+  // 게시글 상세 조회
+  React.useEffect(() => {
+    dispatch();
+  }, []);
+
   return (
     <Grid width="40%" borderL="1px solid #d9d9d9">
       <Grid flex direction="column">
