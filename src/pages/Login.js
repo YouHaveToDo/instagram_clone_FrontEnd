@@ -32,8 +32,7 @@ const Login = (props) => {
     dispatch(userActions.loginDB(emailRef.current.value, pwRef.current.value));
     // 서버 연결되면 미들웨어쪽으로 이동하기
 
-    dispatch(userActions.checkUserDB());
-
+    // dispatch(userActions.checkUserDB());
     // localStorage.setItem("MY_LOCAL", "here");
   };
 
