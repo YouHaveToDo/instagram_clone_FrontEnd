@@ -13,8 +13,8 @@ const ADD_POST = "ADD_POST";
 const GET_POST = "GET_POST";
 const DELETE_POST = "DEPETE_POST";
 const DETAIL_GET_POST = "DETAIL_GET_POST";
-
 const MAIN_TO_DETAIL = "MAIN_TO_DETAIL";
+const DELETE_COMMENT = "DELETE_COMMENT";
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
@@ -36,6 +36,11 @@ const detailGetPost = createAction(DETAIL_GET_POST, (post_info) => ({
 }));
 export const mainToDetail = createAction(MAIN_TO_DETAIL, (reload) => ({
   reload,
+}));
+// 댓글 정보가 posts랑 같이 넘어오기 때문에 comment.js가 아니라 post.js에서 작성
+const deleteComment = createAction(DELETE_COMMENT, (post_id, comment_id) => ({
+  post_id,
+  comment_id,
 }));
 
 // ---- initialState ----
@@ -160,6 +165,21 @@ const detailGetPostDB = (post_id) => {
     }
   };
 };
+
+const deleteCommentDB = (post_id, comment_id) => {
+  return async (dispatch, getstate, { history }) => {
+    try {
+      console.log("start deleteComment");
+      const reponse = await apis.deleteComment(post_id, comment_id);
+      const comment_info = reponse.data;
+      console.log(comment_info);
+
+      dispatch(deleteComment(post_id, comment_id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 //---- reducer ----
 export default handleActions(
   {
@@ -183,6 +203,14 @@ export default handleActions(
       produce(state, (draft) => {
         draft.reloadState = action.payload.reload;
       }),
+    [DELETE_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.posts[action.payload.post_id].comments = state.posts[
+          action.payload.post_id
+        ].comments.filter((l, idx) => {
+          return parseInt(action.payload.comment_id) !== idx;
+        });
+      }),
   },
   initalState
 );
@@ -196,5 +224,6 @@ const actionCreators = {
   detailGetPostDB,
   mainToDetail,
   addPost,
+  deleteCommentDB,
 };
 export { actionCreators };
