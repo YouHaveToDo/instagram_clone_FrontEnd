@@ -25,16 +25,19 @@ const Post = (props) => {
   console.log(props.nickname);
   console.log(props.upload);
   console.log(props.upload[0].mimetype);
+  const fileType = props.upload[0].mimetype;
+
   console.log(props.upload[0].path);
   console.log(props.upload.mimetype);
   console.log(props.comments.length);
 
   // console.log(props.createdAt);
+  //-- 시간 --
   const createdAt = props.createdAt;
   const date = returnGapDate(new Date(), createdAt);
   console.log(date);
-  //글자수 제한
 
+  //글자수 제한
   const contentRef = useRef(null);
   const moreClick = (e) => {
     contentRef.current.classList.add("show");
@@ -59,20 +62,31 @@ const Post = (props) => {
 
         <More>
           {props.nickname === localData ? (
-            <PostModal is_me={true} />
+            <PostModal is_me={true} post_id={props._id} />
           ) : (
-            <PostModal is_me={false} />
+            <PostModal is_me={false} post_id={props._id} />
           )}
         </More>
       </UserBox>
       {/* 2번  */}
       <Grid>
-        <Image
-          shape="rectangle"
-          src={props.upload[0].path}
-          size="100%"
-          width="100%"
-        />
+        {fileType.includes("image/") ? (
+          <Image
+            shape="rectangle"
+            src={props.upload[0].path}
+            size="100%"
+            width="100%"
+          />
+        ) : (
+          <video
+            width="100%"
+            controls
+            autautoplay="autoplay"
+            src={props.upload[0].path}
+            type="video/*"
+            muted
+          ></video>
+        )}
       </Grid>
       {/* <DetailImg backgroundImg={props.upload[0].path} /> */}
 
@@ -118,7 +132,7 @@ const Post = (props) => {
       {/* 7번 */}
       <Grid padding="5px 16px 16px 16px">
         <Text color="#8e8e8e" size="10px">
-          {date}
+          {date} 전
         </Text>
       </Grid>
       {/* 8번 - 댓글 작성*/}
@@ -134,7 +148,7 @@ const Post = (props) => {
             text="댓글달기..."
             color="#8e8e8e"
             _onClick={() => {
-              history.push(`/main/Detail/${props.Id}`);
+              history.push(`/main/Detail/${props._id}`);
             }}
           />
           <Button

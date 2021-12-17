@@ -5,10 +5,10 @@ import { apis } from "../../shared/apis";
 const SET_PREVIEW = "SET_PREVIEW";
 const SET_PREVIEW_VIDEO = "SET_PREVIEW_VIDEO";
 
-const setPreview = createAction(SET_PREVIEW, (fileType, preview, formData) => ({
+const setPreview = createAction(SET_PREVIEW, (fileType, preview, file) => ({
   fileType,
   preview,
-  formData,
+  file,
 }));
 const setPreviewVideo = createAction(SET_PREVIEW_VIDEO, (fileVideo) => ({
   fileVideo,
@@ -19,7 +19,8 @@ const initialState = {
   preview: null,
   fileType: "",
   fileVideo: "",
-  formData: null,
+  // formData: null,
+  file: "",
   videourl: "",
 };
 
@@ -29,7 +30,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.fileType = action.payload.fileType;
         draft.preview = action.payload.preview;
-        draft.formData = action.payload.formData;
+        draft.file = action.payload.file;
       }),
     [SET_PREVIEW_VIDEO]: (state, action) =>
       produce(state, (draft) => {

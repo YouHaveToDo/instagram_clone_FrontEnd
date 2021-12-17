@@ -19,8 +19,8 @@ const CreateDetails = (props) => {
   console.log(preview);
   const videourl = useSelector((state) => state.image.fileVideo);
   console.log(videourl);
-  const formData = useSelector((state) => state.image.formData);
-  console.log(formData);
+  const file = useSelector((state) => state.image.file);
+  console.log(file);
   const [contents, setContents] = React.useState();
 
   //body 스크롤 멈추기
@@ -34,8 +34,8 @@ const CreateDetails = (props) => {
 
   //---- 게시글 추가 ----
   const addPost = () => {
-    console.log(contents, formData);
-    dispatch(postAction.addPostDB(contents, formData));
+    console.log(contents, file);
+    dispatch(postAction.addPostDB(contents, file));
     // console.log(setContents);
   };
   return (
