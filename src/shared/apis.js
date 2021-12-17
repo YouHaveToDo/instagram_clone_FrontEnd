@@ -2,7 +2,8 @@ import axios from "axios";
 import { getToken } from "./token";
 
 const instance = axios.create({
-  baseURL: "" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
+  baseURL:
+    "http://3.36.74.204" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
   // headers: { 'content-type': 'multipart/form-data' }, // content-type이 멀티파트/폼데이터 일 때 이렇게 적어서 사용하자
   //withCredentials: true,//자격요건: 쿠키
 });
