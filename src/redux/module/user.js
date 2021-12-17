@@ -22,20 +22,20 @@ const initialState = {
 // middleware actions
 //-- 로그인 --
 const loginDB = (email, pw) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     const userInfo = {
       email,
       pw,
     };
-    apis
+    await apis
       .login(userInfo)
       .then((response) => {
         console.log(response);
         //console.log(response.headers);
-        console.log(response.headers.authorization);
-
-        const token = response.headers.authorization;
-        
+        // console.log(response.headers.authorization);
+        dispatch(checkUserDB());
+        const token = response.data.token;
+        // dispatch(checkUserDB());
         console.log(typeof token);
         setToken("login", token);
         console.log("토큰저장완료!");
@@ -43,8 +43,6 @@ const loginDB = (email, pw) => {
 
         console.log(userInfo.email);
         dispatch(setUser(userInfo));
-
-        history.push(`/main`);
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +53,7 @@ const loginDB = (email, pw) => {
 
 // -- 회원가입 --
 const signupDB = (email, nickname, pw) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     const userInfo = {
       email,
       nickname,
@@ -64,7 +62,7 @@ const signupDB = (email, nickname, pw) => {
     console.log(userInfo);
     // 일시적으로 확인하기 위해 history 추가 api 연결되면 아래줄 지워야함.
     // history.push("/");
-    apis
+    await apis
       .signup(userInfo)
       .then((response) => {
         console.log(response);
@@ -79,12 +77,16 @@ const signupDB = (email, nickname, pw) => {
 
 // 유저확인
 const checkUserDB = () => {
-  return function (dispatch, getState, { history }) {
-    apis
+  return async function (dispatch, getState, { history }) {
+    await apis
       .checkUser()
       .then((response) => {
-        const user = response.data;
-        localStorage.setItem("MY_LOCAL", `${user}`);
+        console.log(response);
+        const user = response.data.nickname;
+        // localStorage.setItem("MY_LOCAL", `${user}`);
+        localStorage.setItem("MY_LOCAL", response.data.nickname);
+
+        history.push(`/main`);
       })
       .catch((err) => {
         console.log(err);
