@@ -89,7 +89,6 @@ const initalState = {
   // likes: [false, false],
   likes: [],
   post: {},
-
   reloadState: false,
 };
 

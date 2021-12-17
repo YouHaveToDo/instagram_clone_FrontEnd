@@ -24,14 +24,10 @@ export const apis = {
   //---- 유저  ----
   login: (userInfo) => instance.post("/api/auth/login", userInfo), //로그인
   signup: (userInfo) => instance.post("/api/auth/register", userInfo), //회원가입
+  checkUser: () => instance.get(`/api/auth/me`),
 
   //---- 게시글 ----
   getPost: () => instance.get("/api/posts"), //게시글 조회
-  // addPost: (article_info) => instance.post(`/api/article`, article_info), //게시글 작성
-  //  // --
-  //   updatePost: (article_id, article_infos) =>
-  //     instance.put(`/api/article/${article_id}`, article_infos), //게시글 수정
-
   detailGetPost: (post_id) => instance.get(`api/posts/${post_id}`), //상세페이지 조회
   deletePost: (post_id) => instance.delete(`/api/posts/${post_id}`), // 게시글 삭제
 
@@ -43,7 +39,7 @@ export const apis = {
     instance.post(`/api/posts/${post_id}/comments/${comment_id}/`), // 댓글 삭제
 
   //---- 좋아요 ----
-  lickPost: (post_id) => instance.post(`/api/${post_id}/like`),
+  likePost: (post_id) => instance.post(`/api/${post_id}/like`),
 };
 
 export default apis;

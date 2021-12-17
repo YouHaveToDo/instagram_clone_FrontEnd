@@ -77,6 +77,21 @@ const signupDB = (email, nickname, pw) => {
   };
 };
 
+// 유저확인
+const checkUserDB = () => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .checkUser()
+      .then((response) => {
+        const user = response.data;
+        localStorage.setItem("MY_LOCAL", `${user}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 // reducer
 export default handleActions(
   {
@@ -95,4 +110,5 @@ export default handleActions(
 export const userActions = {
   loginDB,
   signupDB,
+  checkUserDB,
 };
