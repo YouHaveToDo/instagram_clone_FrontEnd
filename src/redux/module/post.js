@@ -40,6 +40,7 @@ export const mainToDetail = createAction(MAIN_TO_DETAIL, (reload) => ({
 
 // ---- initialState ----
 const initalState = {
+  posts: [],
   // posts: [
   //   {
   //     _id: "61bbb9f9412e4a25ec272863",
@@ -81,6 +82,7 @@ const initalState = {
   //   },
   // ],
   // likes: [false, false],
+  likes: [],
   post: {},
 
   reloadState: false,
@@ -127,7 +129,6 @@ const getPostDB = () => {
       console.log("start getPostDB");
       const response = await apis.getPost();
       console.log(response);
-      console.log(response.posts);
 
       const post_info = response.data;
       console.log(post_info);

@@ -3,6 +3,8 @@ import { produce } from "immer";
 import { setToken } from "../../shared/token";
 import { apis } from "../../shared/apis";
 
+import axios from "axios";
+
 // actions
 const SET_USER = "SET_USER";
 
@@ -28,11 +30,12 @@ const loginDB = (email, pw) => {
     apis
       .login(userInfo)
       .then((response) => {
-        //console.log(response);
+        console.log(response);
         //console.log(response.headers);
         console.log(response.headers.authorization);
 
         const token = response.headers.authorization;
+        
         console.log(typeof token);
         setToken("login", token);
         console.log("토큰저장완료!");
@@ -65,6 +68,7 @@ const signupDB = (email, nickname, pw) => {
     apis
       .signup(userInfo)
       .then((response) => {
+        console.log(response);
         window.alert("회원가입 성공 🔥");
         history.push("/login");
       })
