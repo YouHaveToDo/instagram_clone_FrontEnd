@@ -4,15 +4,19 @@ import Header from "../components/Header";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
 import { Grid } from "../elements/Index";
-
+import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 
 const Main = (props) => {
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   dispatch();
-  // }, []);
+  React.useEffect(() => {
+    const localData = localStorage.getItem("MY_LOCAL");
+    if (!localData) {
+      window.alert("로그인이 필요합니다");
+      history.push("/");
+    }
+  }, []);
 
   console.log(props);
   const post_list = useSelector((state) => state.post.posts);

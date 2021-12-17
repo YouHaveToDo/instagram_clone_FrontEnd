@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { Button, Grid, Image, Text, Input } from "../elements/Index";
 import { useRef } from "react";
 import PostModal from "./PostModal";
+import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
+import { actionCreators as postActions } from "../redux/module/post";
 //-- icon --
 import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";

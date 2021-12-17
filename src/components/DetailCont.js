@@ -4,18 +4,26 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, Text, Input, Button } from "../elements/Index";
 import { actionCreators as postActions } from "../redux/module/post";
+import icon02 from "../images/icons/icon_02.png";
+import icon05 from "../images/icons/icon_05.png";
+import icon06 from "../images/icons/icon_06.png";
+import icon07 from "../images/icons/icon_07.png";
+
 const DetailCont = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const post_id = params.post_id;
+
   // delete 버튼 만들어서 onclick으로 넣으면 됨 12/16 *종찬
   const DeletePost = () => {
     dispatch(postActions.deletePostDB(post_id));
   };
   // 게시글 상세 조회
-  // React.useEffect(() => {
-  //   dispatch();
-  // }, []);
+
+  React.useEffect(() => {
+    // dispatch();
+  }, []);
+
 
   return (
     <Grid width="40%" borderL="1px solid #d9d9d9">
@@ -44,7 +52,7 @@ const DetailCont = (props) => {
             </Text>
           </Grid>
         </Grid>
-        <Grid padding="30px 15px">
+        <Grid padding="30px 15px" height="560px" borderB="1px solid #d9d9d9">
           <Grid flex>
             <Grid width="15%">
               <Logo></Logo>
@@ -69,8 +77,46 @@ const DetailCont = (props) => {
             <Text>1시간</Text>
           </Grid>
         </Grid>
-        <Grid></Grid>
-        <Grid></Grid>
+        <Grid>
+          <Grid padding="10px 16px">
+            {/* <img src={icon01} alt="headerIcon_01" /> */}
+            <Icon src={icon05} alt="headerIcon_05" />
+            <Icon src={icon06} alt="icon06" />
+            <Icon src={icon02} alt="headerIcon_02" />
+          </Grid>
+          <Grid padding="10px 16px">
+            <Text weight="900">좋아요 373개</Text>
+          </Grid>
+          <Grid padding="3px 16px">
+            <Text size="10px">11시간 전</Text>
+          </Grid>
+        </Grid>
+        <Grid>
+          <CommentBox>
+            <img
+              src={icon07}
+              alt="이모지"
+              style={{ padding: "8px 16px 8px 0" }}
+            />
+            <Grid flex justify="space-between">
+              <Input
+                type="text"
+                width="80%"
+                size="24"
+                border="none"
+                background="none"
+                placeholder="댓글달기..."
+                color="#8e8e8e"
+              />
+              <Button
+                text="게시"
+                background="none"
+                border="none"
+                color="#cde6fd"
+              ></Button>
+            </Grid>
+          </CommentBox>
+        </Grid>
       </Grid>
     </Grid>
   );
@@ -87,5 +133,15 @@ const Span = styled.span`
   font-weight: 900;
   font-size: 14px;
 `;
-
+const Icon = styled.img`
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+`;
+const CommentBox = styled.div`
+  padding: 0 8px;
+  display: flex;
+  flex: 1, 1, 0;
+  border-top: 1px solid #efefef;
+`;
 export default DetailCont;

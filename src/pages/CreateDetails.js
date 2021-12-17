@@ -103,7 +103,9 @@ const CreateDetails = (props) => {
           </Grid>
           <Grid flex>
             {/* 왼쪽 - 이미지 */}
-            <Grid width="695px">
+
+            <Grid width="695px" height="523px" flex>
+
               {fileType.includes("image/") ? (
                 <Image shape="rectangle" src={preview} />
               ) : (
@@ -113,12 +115,15 @@ const CreateDetails = (props) => {
                   autautoplay="autoplay"
                   src={videourl}
                   type="video/*"
+                  muted
                 ></video>
               )}
             </Grid>
 
             {/* 오른쪽 - 텍스트 입력창 */}
-            <Grid width="340px">
+
+            <Grid width="340px" height="523px">
+
               <Grid flex alignItems="center " padding="25px 16px">
                 <Image
                   shape="circle"

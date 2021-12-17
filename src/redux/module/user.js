@@ -68,7 +68,6 @@ const signupDB = (email, nickname, pw) => {
       })
       .catch((err) => {
         console.log(err);
-        console.dir(err.response.data.errorMessage);
       });
   };
 };

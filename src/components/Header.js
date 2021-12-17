@@ -7,8 +7,9 @@ import icon02 from "../images/icons/icon_02.png";
 import icon03 from "../images/icons/icon_03.png";
 import icon04 from "../images/icons/icon_04.png";
 import icon05 from "../images/icons/icon_05.png";
-
+import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
+import { actionCreators as postActions } from "../redux/module/post";
 
 // overflow-y: hidden;
 // overflow-y: scroll;
@@ -25,6 +26,15 @@ const Header = (props) => {
   //     document.body.classList.remove("overflowScroll");
   //   };
   // }, []);
+  const dispatch = useDispatch();
+  const [reload, setReload] = React.useState(false);
+
+  const mainToDetail = () => {
+    setReload(!reload);
+    console.log(reload);
+    dispatch(postActions.mainToDetail(reload));
+    history.push(`/main/create/select`);
+  };
 
   return (
     <Nav>
@@ -37,13 +47,7 @@ const Header = (props) => {
           <Grid flex justify="end">
             <Icon src={icon01}></Icon>
             <Icon src={icon02}></Icon>
-            <Icon
-              src={icon03}
-              onClick={() => {
-                // setOverflow(true);
-                history.push(`/main/create/select`);
-              }}
-            ></Icon>
+            <Icon src={icon03} onClick={mainToDetail}></Icon>
             <Icon src={icon04}></Icon>
             <Icon src={icon05}></Icon>
             <Image shape="circle" size="24" paddingLeft="20px"></Image>
