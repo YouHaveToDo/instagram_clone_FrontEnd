@@ -16,7 +16,6 @@ const DETAIL_GET_POST = "DETAIL_GET_POST";
 
 const MAIN_TO_DETAIL = "MAIN_TO_DETAIL";
 
-
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
   post_list,
@@ -43,44 +42,41 @@ export const mainToDetail = createAction(MAIN_TO_DETAIL, (reload) => ({
 const initalState = {
   posts: [
     {
-      Id: 0,
-      nickname: "suin",
-      content:
-        "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요",
-      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
-      type: "",
-      createAt: "2020-22-22",
-      updatedAt: "22",
+      _id: "61bbb9f9412e4a25ec272863",
+      userId: "61bbb956412e4a25ec272853",
+      content: "testetst",
+      upload: [
+        {
+          path: "img/미들웨어1639692793592.jpg",
+          mimetype: "image/jpeg",
+        },
+      ],
+      comments: [],
+      createdAt: 1639691983658,
+      __v: 0,
+      updatedAt: "2021-12-16T22:14:49.080Z",
+      likes: 1,
     },
     {
-      Id: 1,
-      nickname: "suin2",
-      content: "안녕하세요하하하",
-      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
-      type: "",
-      createAt: "2020-22-22",
-    },
-    {
-      Id: 2,
-      nickname: "suin2",
-      content: "안녕하세요하하하",
-      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
-      type: "",
-      createAt: "2020-22-22",
-    },
-    {
-      Id: 3,
-      nickname: "suin2",
-      content: "안녕하세요하하하",
-      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
-      type: "",
-      createAt: "2020-22-22",
+      _id: "61bc11d4412e4a25ec272880",
+      userId: "61bc1041412e4a25ec27287b",
+      content: "우오ㅓㅏ아ㅓ안",
+      upload: [
+        {
+          path: "img/KakaoTalk_Photo_2021-12-15-01-12-071639715284986.jpeg",
+          mimetype: "image/jpeg",
+        },
+      ],
+      comments: [],
+      createdAt: 1639691983658,
+      __v: 0,
+      likes: 0,
     },
   ],
+  likes: [false, false],
   post: {},
 
   reloadState: false,
-
 };
 
 //-- addPostDB (post 추가하기) --
@@ -186,7 +182,6 @@ export default handleActions(
     [MAIN_TO_DETAIL]: (state, action) =>
       produce(state, (draft) => {
         draft.reloadState = action.payload.reload;
-
       }),
   },
   initalState
@@ -201,6 +196,5 @@ const actionCreators = {
   detailGetPostDB,
   mainToDetail,
   addPost,
-
 };
 export { actionCreators };
