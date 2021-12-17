@@ -5,6 +5,7 @@ import { connectRouter } from "connected-react-router";
 import User from "./module/user";
 import Post from "./module/post";
 import Image from "./module/image";
+import Comment from "./module/comment";
 // import User from "./modules/user";
 // import Comment from "./modules/comment";
 
@@ -14,7 +15,7 @@ const rootReducer = combineReducers({
   user: User,
   post: Post,
   image: Image,
-  // comment: Comment,
+  comment: Comment,
   router: connectRouter(history),
 });
 

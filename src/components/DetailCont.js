@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, Text, Input, Button } from "../elements/Index";
 import { actionCreators as postActions } from "../redux/module/post";
+import { commentActions } from "../redux/module/comment";
 import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";
 import icon06 from "../images/icons/icon_06.png";
@@ -13,17 +14,34 @@ const DetailCont = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const post_id = params.post_id;
+  const comment = React.useRef();
+  // 상세페이지 포스트 요청
+  const posts_info = useSelector((state) => {
+    console.log(state);
+    return state.post.posts;
+  });
+
+  // 댓글 게시 추가 기능
+  const addComment = () => {
+    console.log("add comment");
+    dispatch(commentActions.addCommentDB(post_id, comment.current.value));
+  };
 
   // delete 버튼 만들어서 onclick으로 넣으면 됨 12/16 *종찬
   const DeletePost = () => {
     dispatch(postActions.deletePostDB(post_id));
   };
-  // 게시글 상세 조회
-
+  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
   React.useEffect(() => {
-    // dispatch();
+    // dispatch(postActions.detailGetPostDB(post_id));
   }, []);
-
+  // 댓글 삭제 기능 : 삭제 버튼 만들어서 onClick으로 넘어주세요.
+  // e.target.comment_id 는 변경 가능, comment_id를 어떤 속성으로 가져올 것 인지 이야기 필요.
+  // 댓글 뿌릴 때 map의 인덱스를 댓글에 속성으로 같이 뿌려주면 될 듯
+  const deleteComment = (e) => {
+    const comment_id = e.target.comment_id;
+    dispatch(postActions.deleteCommentDB(post_id, comment_id));
+  };
 
   return (
     <Grid width="40%" borderL="1px solid #d9d9d9">
@@ -107,12 +125,14 @@ const DetailCont = (props) => {
                 background="none"
                 placeholder="댓글달기..."
                 color="#8e8e8e"
+                ref={comment}
               />
               <Button
                 text="게시"
                 background="none"
                 border="none"
                 color="#cde6fd"
+                _onClick={addComment}
               ></Button>
             </Grid>
           </CommentBox>

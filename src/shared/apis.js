@@ -37,9 +37,10 @@ export const apis = {
 
   //---- 댓글 ----
   getComment: (article_id) => instance.get(`/api/${article_id}/comment`), // 댓글 조회
-  addComment: (article_id, comment_info) =>
-    instance.post(`/api/comment/${article_id}`, comment_info), // 댓글 작성
-  deleteComment: (comment_id) => instance.delete(`/api/comment/${comment_id}`), // 댓글 삭제
+  addComment: (post_id, comment) =>
+    instance.post(`/api/posts/${post_id}/comments`, comment), // 댓글 작성
+  deleteComment: (post_id, comment_id) =>
+    instance.post(`/api/posts/${post_id}/comments/${comment_id}/`), // 댓글 삭제
 
   
 };
