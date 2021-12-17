@@ -18,6 +18,7 @@ const initialState = {
 };
 
 // middleware actions
+//-- 로그인 --
 const loginDB = (email, pw) => {
   return function (dispatch, getState, { history }) {
     const userInfo = {
@@ -49,6 +50,7 @@ const loginDB = (email, pw) => {
   };
 };
 
+// -- 회원가입 --
 const signupDB = (email, nickname, pw) => {
   return function (dispatch, getState, { history }) {
     const userInfo = {
