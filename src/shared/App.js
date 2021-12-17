@@ -7,6 +7,7 @@ import Detail from "../pages/Detail";
 import Main from "../pages/Main";
 import CreateSelect from "../pages/CreateSelect";
 import CreateDetails from "../pages/CreateDetails";
+import Maintest from "../pages/Maintest";
 
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/main" component={Main} />
         <Route path="/main/create/select" component={CreateSelect} />
         <Route path="/main/create/details" component={CreateDetails} />
+        <Route path="/test" component={Maintest} />
       </ConnectedRouter>
     </React.Fragment>
   );

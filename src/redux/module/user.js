@@ -59,17 +59,17 @@ const signupDB = (email, nickname, pw) => {
     };
     console.log(userInfo);
     // 일시적으로 확인하기 위해 history 추가 api 연결되면 아래줄 지워야함.
-    history.push("/");
-    // apis
-    //   .signup(userInfo)
-    //   .then((response) => {
-    //     window.alert("회원가입 성공 🔥");
-    //     history.push("/login");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     console.dir(err.response.data.errorMessage);
-    //   });
+    // history.push("/");
+    apis
+      .signup(userInfo)
+      .then((response) => {
+        window.alert("회원가입 성공 🔥");
+        history.push("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+        console.dir(err.response.data.errorMessage);
+      });
   };
 };
 

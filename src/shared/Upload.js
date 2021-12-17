@@ -40,7 +40,7 @@ const Upload = (props) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
-    //createObjectURL 비오 url
+    //createObjectURL 비디오 url
     const videourl = URL.createObjectURL(file);
     setFileVideo(videourl);
 

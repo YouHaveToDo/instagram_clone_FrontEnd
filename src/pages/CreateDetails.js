@@ -25,6 +25,7 @@ const CreateDetails = (props) => {
 
   //body 스크롤 멈추기
   React.useEffect(() => {
+
     document.body.classList.add("overflowHidden");
     window.scrollTo(0, 0);
     return () => {
@@ -102,7 +103,7 @@ const CreateDetails = (props) => {
           </Grid>
           <Grid flex>
             {/* 왼쪽 - 이미지 */}
-            <Grid width="695px" height="695px">
+            <Grid width="695px">
               {fileType.includes("image/") ? (
                 <Image shape="rectangle" src={preview} />
               ) : (
@@ -117,7 +118,7 @@ const CreateDetails = (props) => {
             </Grid>
 
             {/* 오른쪽 - 텍스트 입력창 */}
-            <Grid width="340px" height="695px">
+            <Grid width="340px">
               <Grid flex alignItems="center " padding="25px 16px">
                 <Image
                   shape="circle"

@@ -13,9 +13,9 @@ const DetailCont = (props) => {
     dispatch(postActions.deletePostDB(post_id));
   };
   // 게시글 상세 조회
-  React.useEffect(() => {
-    dispatch();
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch();
+  // }, []);
 
   return (
     <Grid width="40%" borderL="1px solid #d9d9d9">
