@@ -34,9 +34,10 @@ const loginDB = (email, pw) => {
         dispatch(checkUserDB());
         console.log(response);
         //console.log(response.headers);
-        console.log(response.data.token);
-
+        // console.log(response.headers.authorization);
+        dispatch(checkUserDB());
         const token = response.data.token;
+        // dispatch(checkUserDB());
 
         console.log(typeof token);
         setToken("login", token);
@@ -85,6 +86,7 @@ const checkUserDB = () => {
       .then((response) => {
         console.log(response);
         const user = response.data.nickname;
+
         console.log(user);
         localStorage.setItem("MY_LOCAL", `${user}`);
         history.push(`/main`);
