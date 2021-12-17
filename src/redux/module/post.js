@@ -25,8 +25,9 @@ const addPost = createAction(ADD_POST, (contents, formData) => ({
   contents,
   formData,
 }));
-const getPost = createAction(GET_POST, (post_info) => ({
-  post_info,
+const getPost = createAction(GET_POST, (posts, likes) => ({
+  posts,
+  likes,
 }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({
   post_id,
@@ -105,7 +106,7 @@ export const addPostDB =
 
       await axios({
         method: "post",
-        url: "http:///api/posts",
+        url: "http://api/posts",
         data: body,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -132,12 +133,13 @@ const getPostDB = () => {
     try {
       console.log("start getPostDB");
       const response = await apis.getPost();
-      console.log(response);
+      console.log(response.data);
 
-      const post_info = response.data;
-      console.log(post_info);
+      const posts = response.data.posts;
+      const likes = response.data.likes;
+      console.log(posts, likes);
 
-      dispatch(getPost(post_info));
+      dispatch(getPost(posts, likes));
     } catch (error) {
       console.log(error);
     }
@@ -194,7 +196,8 @@ export default handleActions(
     [SET_POST]: (state, action) => produce(state, (draft) => {}),
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.posts = action.payload.post_info;
+        draft.posts = action.payload.posts;
+        draft.likes = action.payload.likes;
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
@@ -204,7 +207,8 @@ export default handleActions(
       }),
     [DETAIL_GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.post = action.payload.post_info;
+        draft.post = action.payload.post_info.posts;
+        draft.lisks = action.payload.post_info.likes;
       }),
 
     [MAIN_TO_DETAIL]: (state, action) =>

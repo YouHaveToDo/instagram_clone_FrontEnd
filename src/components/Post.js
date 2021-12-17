@@ -18,7 +18,7 @@ import { returnGapDate } from "../shared/date";
 
 const Post = (props) => {
   // const post_list = useSelector((state) => state.post.posts);
-  const localData = localStorage.getItem("username");
+  const localData = localStorage.getItem("MY_LOCAL");
   console.log(localData);
 
   console.log(props);
@@ -58,10 +58,10 @@ const Post = (props) => {
         </Userinfo>
 
         <More>
-          {props.nicname === localData.nicname ? (
-            <PostModal is_me />
+          {props.nickname === localData ? (
+            <PostModal is_me={true} />
           ) : (
-            <PostModal />
+            <PostModal is_me={false} />
           )}
         </More>
       </UserBox>

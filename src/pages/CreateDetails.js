@@ -20,12 +20,11 @@ const CreateDetails = (props) => {
   const videourl = useSelector((state) => state.image.fileVideo);
   console.log(videourl);
   const formData = useSelector((state) => state.image.formData);
-  // console.log(formData);
+  console.log(formData);
   const [contents, setContents] = React.useState();
 
   //body 스크롤 멈추기
   React.useEffect(() => {
-
     document.body.classList.add("overflowHidden");
     window.scrollTo(0, 0);
     return () => {
@@ -105,7 +104,6 @@ const CreateDetails = (props) => {
             {/* 왼쪽 - 이미지 */}
 
             <Grid width="695px" height="523px" flex>
-
               {fileType.includes("image/") ? (
                 <Image shape="rectangle" src={preview} />
               ) : (
@@ -123,7 +121,6 @@ const CreateDetails = (props) => {
             {/* 오른쪽 - 텍스트 입력창 */}
 
             <Grid width="340px" height="523px">
-
               <Grid flex alignItems="center " padding="25px 16px">
                 <Image
                   shape="circle"
