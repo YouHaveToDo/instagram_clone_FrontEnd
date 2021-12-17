@@ -29,6 +29,7 @@ const Main = (props) => {
   console.log(props);
   const post_list = useSelector((state) => state.post.posts);
   console.log(post_list);
+  const test = [1, 2, 3, 4];
   return (
     <MainBox>
       <Header />
