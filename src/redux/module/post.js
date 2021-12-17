@@ -89,7 +89,10 @@ const initalState = {
   // ],
   // likes: [false, false],
   likes: [],
-  post: {},
+  post: {
+    likes: null,
+    result: {},
+  },
   reloadState: false,
 };
 
@@ -165,7 +168,9 @@ const detailGetPostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
       console.log("start detailGetPostDB");
+      console.log(post_id);
       const response = await apis.detailGetPost(post_id);
+      console.log(response);
       const post_info = response.data;
       console.log(post_info);
 
@@ -207,8 +212,7 @@ export default handleActions(
       }),
     [DETAIL_GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.post = action.payload.post_info.posts;
-        draft.lisks = action.payload.post_info.likes;
+        draft.post = action.payload.post_info;
       }),
 
     [MAIN_TO_DETAIL]: (state, action) =>

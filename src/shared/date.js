@@ -29,41 +29,41 @@ export const returnGapDate = (newDate, date) => {
   console.log(newDate, date);
   const nowDate = new Date(newDate);
   console.log(nowDate);
-  const postedDate = new Date(date);
+  const postedDate = new Date(Number(date));
   console.log(postedDate);
   let gapDate = nowDate - postedDate;
   gapDate = gapDateSecond(gapDate);
   console.log(gapDate);
   //초
   if (gapDate < 60) {
-    return `${gapDate}초 전`;
+    return `${gapDate}초 `;
   }
   //분
   gapDate = gapDateMinute(gapDate);
   if (gapDate < 60) {
-    return `${gapDate}분 전`;
+    return `${gapDate}분 `;
   }
   //시간
   gapDate = gapDateHour(gapDate);
   if (gapDate < 24) {
-    return `${gapDate}시간 전`;
+    return `${gapDate}시간 `;
   }
   //일
   gapDate = gapDateDay(gapDate);
   if (gapDate < 7) {
-    return `${gapDate}일 전`;
+    return `${gapDate}일 `;
   }
   //주
   gapDate = gapDateWeek(gapDate);
   if (gapDate < 5) {
-    return `${gapDate}주 전`;
+    return `${gapDate}주 `;
   }
   //달
   gapDate = gapDateMonth(gapDate);
   if (gapDate < 12) {
-    return `${gapDate}달 전`;
+    return `${gapDate}달 `;
   }
   //년
   gapDate = gapDateYear(gapDate);
-  return `${gapDate}년 전`;
+  return `${gapDate}년 `;
 };

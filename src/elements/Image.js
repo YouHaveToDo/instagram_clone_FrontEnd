@@ -47,7 +47,7 @@ const AspectOutter = styled.div`
 const AspectInner = styled.img`
   position: relative;
   overflow: hidden;
-  background-image: url("${(props) => props.src}");
+  /* background-image: url("${(props) => props.src}"); */
   /* src: "http://3.36.74.204/${(props) => props.src}" */
   background-size: contain;
   ${(props) => (props.width ? `width: ${props.width};` : "")}
@@ -56,7 +56,7 @@ const AspectInner = styled.img`
   padding-top: 75%; // 이미지가 가로넓이의 4:3비율을 맞추기위해 75% 적용
   overflow: hidden;
   background-repeat: no-repeat;
-  background-color: red;
+  /* background-color: red; */
   background-position: center;
 `;
 //프로필 이미지
