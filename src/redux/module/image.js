@@ -5,14 +5,11 @@ import { apis } from "../../shared/apis";
 const SET_PREVIEW = "SET_PREVIEW";
 const SET_PREVIEW_VIDEO = "SET_PREVIEW_VIDEO";
 
-const setPreview = createAction(
-  SET_PREVIEW,
-  (fileType, preview, videourl, formData) => ({
-    fileType,
-    preview,
-    formData,
-  })
-);
+const setPreview = createAction(SET_PREVIEW, (fileType, preview, formData) => ({
+  fileType,
+  preview,
+  formData,
+}));
 const setPreviewVideo = createAction(SET_PREVIEW_VIDEO, (fileVideo) => ({
   fileVideo,
 }));
@@ -22,7 +19,7 @@ const initialState = {
   preview: null,
   fileType: "",
   fileVideo: "",
-  formData: "",
+  formData: null,
   videourl: "",
 };
 

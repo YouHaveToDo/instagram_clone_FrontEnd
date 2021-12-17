@@ -21,7 +21,7 @@ const Main = (props) => {
       history.push("/");
     }
     //포스트 요청
-    // dispatch(postActions.getPostDB());
+    dispatch(postActions.getPostDB());
   }, []);
 
   //첫 실행시 포스트 요청
