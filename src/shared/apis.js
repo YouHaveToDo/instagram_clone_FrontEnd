@@ -3,7 +3,7 @@ import { getToken } from "./token";
 
 const instance = axios.create({
   baseURL:
-    "http://3.36.74.204" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
+    "http://13.209.4.79" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
   // headers: { 'content-type': 'multipart/form-data' }, // content-type이 멀티파트/폼데이터 일 때 이렇게 적어서 사용하자
   //withCredentials: true,//자격요건: 쿠키
 });
@@ -25,14 +25,14 @@ export const apis = {
   login: (userInfo) => instance.post("/api/auth/login", userInfo), //로그인
   signup: (userInfo) => instance.post("/api/auth/register", userInfo), //회원가입
 
-  //---- 게시글 ---- 
+  //---- 게시글 ----
   getPost: () => instance.get("/api/posts"), //게시글 조회
   // addPost: (article_info) => instance.post(`/api/article`, article_info), //게시글 작성
-//  // --
-//   updatePost: (article_id, article_infos) =>
-//     instance.put(`/api/article/${article_id}`, article_infos), //게시글 수정
+  //  // --
+  //   updatePost: (article_id, article_infos) =>
+  //     instance.put(`/api/article/${article_id}`, article_infos), //게시글 수정
 
-  detailGetPost: (post_id) => instance.get(`api/posts/${post_id}`),  //상세페이지 조회 
+  detailGetPost: (post_id) => instance.get(`api/posts/${post_id}`), //상세페이지 조회
   deletePost: (post_id) => instance.delete(`/api/posts/${post_id}`), // 게시글 삭제
 
   //---- 댓글 ----
@@ -42,7 +42,8 @@ export const apis = {
   deleteComment: (post_id, comment_id) =>
     instance.post(`/api/posts/${post_id}/comments/${comment_id}/`), // 댓글 삭제
 
-  
+  //---- 좋아요 ----
+  lickPost: (post_id) => instance.post(`/api/${post_id}/like`),
 };
 
 export default apis;
