@@ -45,7 +45,7 @@ const Post = (props) => {
       <Grid>
         <Image
           shape="rectangle"
-          src={props.uploadUrl}
+          src={props.upload.path}
           size="100%"
           width="100%"
         />
@@ -65,7 +65,7 @@ const Post = (props) => {
       </Grid>
       {/* 4번  - 아이콘 */}
       <Grid padding="8px 16px">
-        <Text fontWeight="bold"> 좋아요 0개</Text>
+        <Text fontWeight="bold"> 좋아요 {props.likes}개</Text>
       </Grid>
       {/* 5번 */}
       <Grid padding="0 16px" flex alignItems="center">
