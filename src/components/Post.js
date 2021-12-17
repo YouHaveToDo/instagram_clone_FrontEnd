@@ -16,13 +16,10 @@ import icon07 from "../images/icons/icon_07.png";
 //date
 import { returnGapDate } from "../shared/date";
 
-
-
 const Post = (props) => {
   // const post_list = useSelector((state) => state.post.posts);
-  const localData = localStorage.getItem("MY_LOCAL");
-
-
+  const localData = localStorage.getItem("username");
+  console.log(localData);
 
   console.log(props);
   console.log(props.nickname);
@@ -45,7 +42,6 @@ const Post = (props) => {
   };
 
   return (
-    
     <Grid
       border="1px solid #dedede"
       radius="3px"
@@ -62,7 +58,11 @@ const Post = (props) => {
         </Userinfo>
 
         <More>
-          <PostModal />
+          {props.nicname === localData.nicname ? (
+            <PostModal is_me />
+          ) : (
+            <PostModal />
+          )}
         </More>
       </UserBox>
       {/* 2번  */}
@@ -78,8 +78,11 @@ const Post = (props) => {
 
       {/* 3번 */}
       <Grid padding="10px 16px">
-        {/* <img src={icon01} alt="headerIcon_01" /> */}
-        <Icon src={icon05} alt="headerIcon_05" />
+        <Icon
+          src={icon05}
+          alt="headerIcon_05"
+          // onClick={postLike}
+        />
         <Icon
           src={icon06}
           alt="icon06"
@@ -101,11 +104,8 @@ const Post = (props) => {
           </Text>
           {props.content}
         </Ellipsis>
-        {/* { props.nicname === localData.nicname   */}
-        { props.nicname === localData.nicname  
-          ? <EButton onClick={moreClick} is_me >더보기</EButton> 
-          : <EButton onClick={moreClick}>더보기</EButton>
-        }
+
+        <EButton onClick={moreClick}>더보기</EButton>
       </Grid>
       {/* 6번 */}
       <Grid padding=" 8px 16px">

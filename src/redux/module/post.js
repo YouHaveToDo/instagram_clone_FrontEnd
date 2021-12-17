@@ -45,49 +45,50 @@ const deleteComment = createAction(DELETE_COMMENT, (post_id, comment_id) => ({
 
 // ---- initialState ----
 const initalState = {
-  posts: [
-    {
-      _id: "61bbb9f9412e4a25ec272863",
-      userId: "61bbb956412e4a25ec272853",
-      nickname: "suin",
-      content: "testetsttestetsttestetsttestetsttestetst",
-      upload: [
-        {
-          path: "img/미들웨어1639692793592.jpg",
-          mimetype: "image/jpeg",
-        },
-      ],
-      comments: [
-        {
-          testcomments: "test",
-        },
-      ],
-      createdAt: 1639691983658,
-      __v: 0,
-      updatedAt: "2021-12-16T22:14:49.080Z",
-      likes: 1,
-    },
-    {
-      _id: "61bc11d4412e4a25ec272880",
-      userId: "61bc1041412e4a25ec27287b",
-      nickname: "suin2",
-      content:
-        "우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안",
-      upload: [
-        {
-          path: "img/KakaoTalk_Photo_2021-12-15-01-12-071639715284986.jpeg",
-          mimetype: "image/jpeg",
-        },
-      ],
-      comments: [],
-      createdAt: 1639691983658,
-      __v: 0,
-      likes: 0,
-    },
-  ],
-  likes: [false, false],
+  posts: [],
+  // posts: [
+  //   {
+  //     _id: "61bbb9f9412e4a25ec272863",
+  //     userId: "61bbb956412e4a25ec272853",
+  //     nickname: "suin",
+  //     content: "testetsttestetsttestetsttestetsttestetst",
+  //     upload: [
+  //       {
+  //         path: "img/미들웨어1639692793592.jpg",
+  //         mimetype: "image/jpeg",
+  //       },
+  //     ],
+  //     comments: [
+  //       {
+  //         testcomments: "test",
+  //       },
+  //     ],
+  //     createdAt: 1639691983658,
+  //     __v: 0,
+  //     updatedAt: "2021-12-16T22:14:49.080Z",
+  //     likes: 1,
+  //   },
+  //   {
+  //     _id: "61bc11d4412e4a25ec272880",
+  //     userId: "61bc1041412e4a25ec27287b",
+  //     nickname: "suin2",
+  //     content:
+  //       "우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안",
+  //     upload: [
+  //       {
+  //         path: "img/KakaoTalk_Photo_2021-12-15-01-12-071639715284986.jpeg",
+  //         mimetype: "image/jpeg",
+  //       },
+  //     ],
+  //     comments: [],
+  //     createdAt: 1639691983658,
+  //     __v: 0,
+  //     likes: 0,
+  //   },
+  // ],
+  // likes: [false, false],
+  likes: [],
   post: {},
-
   reloadState: false,
 };
 
