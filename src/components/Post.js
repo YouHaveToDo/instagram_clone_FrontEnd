@@ -6,13 +6,36 @@ import PostModal from "./PostModal";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 import { actionCreators as postActions } from "../redux/module/post";
+import DetailImg from "./DetailImage";
 //-- icon --
 import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";
 import icon06 from "../images/icons/icon_06.png";
 import icon07 from "../images/icons/icon_07.png";
 
+//date
+import { returnGapDate } from "../shared/date";
+
+
+
 const Post = (props) => {
+  // const post_list = useSelector((state) => state.post.posts);
+  const localData = localStorage.getItem("MY_LOCAL");
+
+
+
+  console.log(props);
+  console.log(props.nickname);
+  console.log(props.upload);
+  console.log(props.upload[0].mimetype);
+  console.log(props.upload[0].path);
+  console.log(props.upload.mimetype);
+  console.log(props.comments.length);
+
+  // console.log(props.createdAt);
+  const createdAt = props.createdAt;
+  const date = returnGapDate(new Date(), createdAt);
+  console.log(date);
   //글자수 제한
 
   const contentRef = useRef(null);
@@ -22,6 +45,7 @@ const Post = (props) => {
   };
 
   return (
+    
     <Grid
       border="1px solid #dedede"
       radius="3px"
@@ -45,11 +69,13 @@ const Post = (props) => {
       <Grid>
         <Image
           shape="rectangle"
-          src={props.upload.path}
+          src={props.upload[0].path}
           size="100%"
           width="100%"
         />
       </Grid>
+      {/* <DetailImg backgroundImg={props.upload[0].path} /> */}
+
       {/* 3번 */}
       <Grid padding="10px 16px">
         {/* <img src={icon01} alt="headerIcon_01" /> */}
@@ -69,22 +95,30 @@ const Post = (props) => {
       </Grid>
       {/* 5번 */}
       <Grid padding="0 16px" flex alignItems="center">
-        <Text fontWeight="bold" float="left" padding="0 5px 0 0">
-          {props.nickname}
-        </Text>
-        <Ellipsis ref={contentRef}>{props.content}</Ellipsis>
-        <EButton onClick={moreClick}>더보기</EButton>
+        <Ellipsis ref={contentRef}>
+          <Text fontWeight="bold" float="left" padding="0 5px 0 0">
+            {props.nickname}
+          </Text>
+          {props.content}
+        </Ellipsis>
+        {/* { props.nicname === localData.nicname   */}
+        { props.nicname === localData.nicname  
+          ? <EButton onClick={moreClick} is_me >더보기</EButton> 
+          : <EButton onClick={moreClick}>더보기</EButton>
+        }
       </Grid>
       {/* 6번 */}
       <Grid padding=" 8px 16px">
         <Text color="#8e8e8e" fontWeight="600">
-          댓글 0개 모두보기
+          {props.comments.length > 0
+            ? `댓글 ${props.comments.length}개 모두보기`
+            : ""}
         </Text>
       </Grid>
       {/* 7번 */}
       <Grid padding="5px 16px 16px 16px">
         <Text color="#8e8e8e" size="10px">
-          4시간 전
+          {date}
         </Text>
       </Grid>
       {/* 8번 - 댓글 작성*/}
@@ -143,27 +177,27 @@ const Icon = styled.img`
 `;
 
 Post.defaultProps = {
-  posts: {
-    id: 0,
-    content: "dkfjdkfjkdjf",
-    uploadUrl: "",
-    type: "",
-    createAt: "",
-    user_profile: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-    user_name: "mean0",
-  },
-  image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-  contents: "고양이네요!",
-  comment_cnt: 10,
-  insert_dt: "2021-02-27 10:00:00",
-  is_me: false,
+  // posts: {
+  //   id: 0,
+  //   content: "dkfjdkfjkdjf",
+  //   uploadUrl: "",
+  //   type: "",
+  //   createAt: "",
+  //   user_profile: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
+  //   user_name: "mean0",
+  // },
+  // image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
+  // contents: "고양이네요!",
+  // comment_cnt: 10,
+  // insert_dt: "2021-02-27 10:00:00",
+  // is_me: false,
 };
 const Ellipsis = styled.div`
   position: relative;
   display: -webkit-box;
   max-height: 6rem;
   line-height: 2rem;
-  width: 200px;
+  width: 280px;
   /* display: -webkit-box;  */
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
