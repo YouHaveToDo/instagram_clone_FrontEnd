@@ -12,6 +12,7 @@ import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";
 import icon06 from "../images/icons/icon_06.png";
 import icon07 from "../images/icons/icon_07.png";
+import icon08 from "../images/icons/icon_08.png";
 
 //date
 import { returnGapDate } from "../shared/date";

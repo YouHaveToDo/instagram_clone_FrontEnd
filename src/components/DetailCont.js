@@ -9,17 +9,26 @@ import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";
 import icon06 from "../images/icons/icon_06.png";
 import icon07 from "../images/icons/icon_07.png";
+import icon08 from "../images/icons/icon_08.png";
+import { returnGapDate } from "../shared/date";
 
 const DetailCont = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const post_id = params.post_id;
   const comment = React.useRef();
+
   // 상세페이지 포스트 요청
   const posts_info = useSelector((state) => {
     console.log(state);
-    return state.post.posts;
+    return state.post.post;
   });
+  console.log(posts_info);
+
+  // 시간
+  const createdAt = posts_info.result.createdAt;
+  const date = returnGapDate(new Date(), createdAt);
+  console.log(date);
 
   // 댓글 게시 추가 기능
   const addComment = () => {
@@ -33,7 +42,7 @@ const DetailCont = (props) => {
   };
   // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
   React.useEffect(() => {
-    // dispatch(postActions.detailGetPostDB(post_id));
+    dispatch(postActions.detailGetPostDB(post_id));
   }, []);
   // 댓글 삭제 기능 : 삭제 버튼 만들어서 onClick으로 넘어주세요.
   // e.target.comment_id 는 변경 가능, comment_id를 어떤 속성으로 가져올 것 인지 이야기 필요.
@@ -59,10 +68,11 @@ const DetailCont = (props) => {
           </Grid>
           <Grid flex direction="column" width="75%">
             <Text size="14px" weight="900">
-              사용자 이름<Span> • </Span>
+              {posts_info.result.nickname}
+              <Span> • </Span>
               <Span>팔로잉</Span>
             </Text>
-            <Text margin="5px 0 0 0">장소</Text>
+            {/* <Text margin="5px 0 0 0">장소</Text> */}
           </Grid>
           <Grid width="10%">
             <Text size="10px" weight="900">
@@ -78,11 +88,11 @@ const DetailCont = (props) => {
             <Grid flex width="75%" items="center">
               <Grid flex width="auto">
                 <Text size="14px" weight="900">
-                  사용자 이름
+                  {posts_info.result.nickname}
                 </Text>
               </Grid>
               <Text margin="0 0 0 5px" width="auto%">
-                배고프다 밥먹을까?
+                {posts_info.result.content}
               </Text>
             </Grid>
             {/* <Grid width="10%" items="center">
@@ -92,21 +102,25 @@ const DetailCont = (props) => {
           </Grid> */}
           </Grid>
           <Grid width="100%" margin="0 0 0 59px">
-            <Text>1시간</Text>
+            <Text>{`${date}전`}</Text>
           </Grid>
         </Grid>
         <Grid>
           <Grid padding="10px 16px">
             {/* <img src={icon01} alt="headerIcon_01" /> */}
-            <Icon src={icon05} alt="headerIcon_05" />
+            {posts_info.likes ? (
+              <Icon src={icon08} alt="headerIcon_05" />
+            ) : (
+              <Icon src={icon05} alt="headerIcon_05" />
+            )}
             <Icon src={icon06} alt="icon06" />
             <Icon src={icon02} alt="headerIcon_02" />
           </Grid>
           <Grid padding="10px 16px">
-            <Text weight="900">좋아요 373개</Text>
+            <Text weight="900">좋아요 {posts_info.result.likes}개</Text>
           </Grid>
           <Grid padding="3px 16px">
-            <Text size="10px">11시간 전</Text>
+            <Text size="10px">{`${date}전`}</Text>
           </Grid>
         </Grid>
         <Grid>
