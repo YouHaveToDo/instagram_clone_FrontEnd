@@ -12,6 +12,7 @@ const ADD_POST = "ADD_POST";
 const GET_POST = "GET_POST";
 const DELETE_POST = "DEPETE_POST";
 const DETAIL_GET_POST = "DETAIL_GET_POST";
+const CUT_POST = "CUT_POST";
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
@@ -30,6 +31,9 @@ const deletePost = createAction(DELETE_POST, (post_id) => ({
 }));
 const detailGetPost = createAction(DETAIL_GET_POST, (post_info) => ({
   post_info,
+}));
+const cutpost = createAction(CUT_POST, (partialData) => ({
+  partialData,
 }));
 
 // ---- initialState ----
@@ -53,8 +57,25 @@ const initalState = {
       type: "",
       createAt: "2020-22-22",
     },
+    {
+      Id: 2,
+      nickname: "suin2",
+      content: "안녕하세요하하하",
+      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
+      type: "",
+      createAt: "2020-22-22",
+    },
+    {
+      Id: 3,
+      nickname: "suin2",
+      content: "안녕하세요하하하",
+      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
+      type: "",
+      createAt: "2020-22-22",
+    },
   ],
   post: {},
+  partialArticles: [],
 };
 
 //-- addPostDB (post 추가하기) --
@@ -69,7 +90,6 @@ export const addPostDB =
       const accessToken = document.cookie.split("=")[1];
 
       await axios({
-
         method: "post",
         url: "http:///api/posts",
         data: body,
@@ -117,7 +137,6 @@ const deletePostDB = (post_id) => {
       console.log("start deletePOstDB");
       const response = await apis.deletePost(post_id);
       console.log(response.data);
-
       dispatch(deletePost(post_id));
     } catch (error) {
       console.log(error);
@@ -158,6 +177,12 @@ export default handleActions(
       produce(state, (draft) => {
         draft.post = action.payload.post_info;
       }),
+      // 무한스크롤 페이지 자르기 
+    [CUT_POST]: (state, action) =>
+      produce(state, (draft) => {
+        // draft.partialArticles = action.payload.partialData;
+        draft.partialArticles.push(...action.payload.partialData);
+      }),
   },
   initalState
 );
@@ -169,5 +194,7 @@ const actionCreators = {
   addPostDB,
   deletePostDB,
   detailGetPostDB,
+  cutpost,
+  addPost,
 };
 export { actionCreators };
