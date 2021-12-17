@@ -21,13 +21,13 @@ const Maintest = (props) => {
   console.log(post_list);
   console.log(post_cut);
 
-  //스크롤시 추가적인 데이터 받아오기
-  const fetchMoreData = async () => {
-    setIsLoding(true);
-    setResult(result.concat(item.slice(0, 20))); //20개씩 컷팅
-    setItem(item.slice(20)); //원본데이터도 잘라주므로 데이터양을 최소화
-    setIsLoding(false);
-  };
+  // //스크롤시 추가적인 데이터 받아오기
+  // const fetchMoreData = async () => {
+  //   setIsLoding(true);
+  //   setResult(result.concat(item.slice(0, 20))); //20개씩 컷팅
+  //   setItem(item.slice(20)); //원본데이터도 잘라주므로 데이터양을 최소화
+  //   setIsLoding(false);
+  // };
 
   // const _infiniteScroll = useCallback(() => {
   //   //clientHeight = 사용자가 지금 보는 높이
