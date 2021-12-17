@@ -4,6 +4,7 @@ import { setToken } from "../../shared/token";
 import { apis } from "../../shared/apis";
 
 import axios from "axios";
+import { ContactsOutlined } from "@material-ui/icons";
 
 // actions
 const SET_USER = "SET_USER";
@@ -30,12 +31,14 @@ const loginDB = (email, pw) => {
     await apis
       .login(userInfo)
       .then((response) => {
+        dispatch(checkUserDB());
         console.log(response);
         //console.log(response.headers);
         // console.log(response.headers.authorization);
         dispatch(checkUserDB());
         const token = response.data.token;
         // dispatch(checkUserDB());
+
         console.log(typeof token);
         setToken("login", token);
         console.log("토큰저장완료!");
@@ -83,9 +86,9 @@ const checkUserDB = () => {
       .then((response) => {
         console.log(response);
         const user = response.data.nickname;
-        // localStorage.setItem("MY_LOCAL", `${user}`);
-        localStorage.setItem("MY_LOCAL", response.data.nickname);
 
+        console.log(user);
+        localStorage.setItem("MY_LOCAL", `${user}`);
         history.push(`/main`);
       })
       .catch((err) => {
