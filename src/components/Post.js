@@ -54,7 +54,13 @@ const Post = (props) => {
       <Grid padding="10px 16px">
         {/* <img src={icon01} alt="headerIcon_01" /> */}
         <Icon src={icon05} alt="headerIcon_05" />
-        <Icon src={icon06} alt="icon06" />
+        <Icon
+          src={icon06}
+          alt="icon06"
+          onClick={() => {
+            history.push(`/main/Detail/${props.Id}`);
+          }}
+        />
         <Icon src={icon02} alt="headerIcon_02" />
       </Grid>
       {/* 4번  - 아이콘 */}

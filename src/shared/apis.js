@@ -47,9 +47,6 @@ export const apis = {
   //라이트
   greenLight: (article_id) => instance.post(`/api/article/${article_id}/green`), // 그린라이트
   redLight: (article_id) => instance.post(`/api/article/${article_id}/red`), // 레드라이트
-  //-------- 새로작업함 (수인)-------
-  //업로드
-  // upload: (data) => instance.post(`api/image`, { file: data }),
 };
 
 export default apis;

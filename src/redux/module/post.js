@@ -13,7 +13,9 @@ const ADD_POST = "ADD_POST";
 const GET_POST = "GET_POST";
 const DELETE_POST = "DEPETE_POST";
 const DETAIL_GET_POST = "DETAIL_GET_POST";
+
 const MAIN_TO_DETAIL = "MAIN_TO_DETAIL";
+
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
@@ -58,9 +60,27 @@ const initalState = {
       type: "",
       createAt: "2020-22-22",
     },
+    {
+      Id: 2,
+      nickname: "suin2",
+      content: "안녕하세요하하하",
+      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
+      type: "",
+      createAt: "2020-22-22",
+    },
+    {
+      Id: 3,
+      nickname: "suin2",
+      content: "안녕하세요하하하",
+      uploadUrl: "https://t1.daumcdn.net/cfile/tistory/9918834E5BD95A0A08",
+      type: "",
+      createAt: "2020-22-22",
+    },
   ],
   post: {},
+
   reloadState: false,
+
 };
 
 //-- addPostDB (post 추가하기) --
@@ -122,7 +142,6 @@ const deletePostDB = (post_id) => {
       console.log("start deletePOstDB");
       const response = await apis.deletePost(post_id);
       console.log(response.data);
-
       dispatch(deletePost(post_id));
     } catch (error) {
       console.log(error);
@@ -163,9 +182,11 @@ export default handleActions(
       produce(state, (draft) => {
         draft.post = action.payload.post_info;
       }),
+
     [MAIN_TO_DETAIL]: (state, action) =>
       produce(state, (draft) => {
         draft.reloadState = action.payload.reload;
+
       }),
   },
   initalState
@@ -179,5 +200,7 @@ const actionCreators = {
   deletePostDB,
   detailGetPostDB,
   mainToDetail,
+  addPost,
+
 };
 export { actionCreators };
