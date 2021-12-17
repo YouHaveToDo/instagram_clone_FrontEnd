@@ -21,9 +21,8 @@ const setPost = createAction(SET_POST, (post_list, paging) => ({
   post_list,
   paging,
 }));
-const addPost = createAction(ADD_POST, (contents, formData) => ({
-  contents,
-  formData,
+const addPost = createAction(ADD_POST, (content) => ({
+  content,
 }));
 const getPost = createAction(GET_POST, (posts, likes) => ({
   posts,
@@ -94,23 +93,33 @@ const initalState = {
     result: {},
   },
   reloadState: false,
+  test: false,
 };
 
 //-- addPostDB (post 추가하기) --
 export const addPostDB =
-  (contents, formData) =>
+  (content, file) =>
   async (dispatch, getState, { history }) => {
+    //FormData 객체 생성
+
     try {
+      console.log(file);
+      const formData = new FormData();
+      formData.append("content", content);
+      formData.append("file", file);
+      console.log(formData);
+
+      console.log(file);
       const body = {
-        content: contents,
-        file: formData,
+        content,
+        formData,
       };
       const accessToken = document.cookie.split("=")[1];
 
       await axios({
         method: "post",
-        url: "http://api/posts",
-        data: body,
+        url: "http://13.209.4.79/api/posts",
+        data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
           authorization: ` ${accessToken}`,
@@ -118,7 +127,7 @@ export const addPostDB =
       })
         .then((res) => {
           console.log(res);
-          // dispatch(addPost(res.data));
+          dispatch(addPost(content));
           history.replace("/main");
         })
         .catch((err) => {
@@ -153,10 +162,11 @@ const getPostDB = () => {
 const deletePostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start deletePOstDB");
+      console.log("start deletePostDB");
       const response = await apis.deletePost(post_id);
       console.log(response.data);
       dispatch(deletePost(post_id));
+      history.replace("/login");
     } catch (error) {
       console.log(error);
     }
@@ -188,7 +198,6 @@ const deleteCommentDB = (post_id, comment_id) => {
       const reponse = await apis.deleteComment(post_id, comment_id);
       const comment_info = reponse.data;
       console.log(comment_info);
-
       dispatch(deleteComment(post_id, comment_id));
     } catch (err) {
       console.log(err);
@@ -199,6 +208,10 @@ const deleteCommentDB = (post_id, comment_id) => {
 export default handleActions(
   {
     [SET_POST]: (state, action) => produce(state, (draft) => {}),
+    [ADD_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.test = true;
+      }),
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.posts = action.payload.posts;

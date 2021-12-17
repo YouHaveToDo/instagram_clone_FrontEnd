@@ -36,34 +36,46 @@ export const returnGapDate = (newDate, date) => {
   console.log(gapDate);
   //초
   if (gapDate < 60) {
-    return `${gapDate}초 `;
+
+    return `${gapDate}초`;
+
   }
   //분
   gapDate = gapDateMinute(gapDate);
   if (gapDate < 60) {
-    return `${gapDate}분 `;
+
+    return `${gapDate}분`;
+
   }
   //시간
   gapDate = gapDateHour(gapDate);
   if (gapDate < 24) {
-    return `${gapDate}시간 `;
+
+    return `${gapDate}시간`;
+
   }
   //일
   gapDate = gapDateDay(gapDate);
   if (gapDate < 7) {
-    return `${gapDate}일 `;
+
+    return `${gapDate}일`;
+
   }
   //주
   gapDate = gapDateWeek(gapDate);
   if (gapDate < 5) {
-    return `${gapDate}주 `;
+
+    return `${gapDate}주`;
+
   }
   //달
   gapDate = gapDateMonth(gapDate);
   if (gapDate < 12) {
-    return `${gapDate}달 `;
+
+    return `${gapDate}달`;
   }
   //년
   gapDate = gapDateYear(gapDate);
-  return `${gapDate}년 `;
+  return `${gapDate}년`;
+
 };

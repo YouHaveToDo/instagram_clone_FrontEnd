@@ -11,7 +11,18 @@ import { actionCreators as postActions } from "../redux/module/post";
 
 const Main = (props) => {
   const dispatch = useDispatch();
+  const [state, setState] = React.useState(false);
 
+  const test = useSelector((state) => state.post.test);
+  // setState(test);
+  // React.useEffect(() => {
+
+  //   setState(!state);
+  //   if(){
+  //     dispatch(postActions.getPostDB());
+  //   }
+
+  // }, []);
   // -- 로그인 유저 확인 및 데이터 요청 --
   React.useEffect(() => {
     const localData = localStorage.getItem("MY_LOCAL");
@@ -20,8 +31,12 @@ const Main = (props) => {
       window.alert("로그인이 필요합니다");
       history.push("/");
     }
+  }, []);
+  React.useEffect(() => {
+    // if (post_list.length === 0) {
     //포스트 요청
     dispatch(postActions.getPostDB());
+    // }
   }, []);
 
   //첫 실행시 포스트 요청
@@ -29,7 +44,6 @@ const Main = (props) => {
   // console.log(props);
   const post_list = useSelector((state) => state.post.posts);
   console.log(post_list);
-  const test = [1, 2, 3, 4];
   return (
     <MainBox>
       <Header />

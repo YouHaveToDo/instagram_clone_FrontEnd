@@ -4,9 +4,15 @@ import { useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import styled from "styled-components";
 import { Button, Grid, Image, Text, Input } from "../elements/Index";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as postActions } from "../redux/module/post";
+import { history } from "../redux/configureStore";
 
 const PostModal = (props) => {
+  const dispatch = useDispatch();
   console.log(props);
+  console.log(props.post_id);
+  const post_id = props.post_id;
   console.log(props.is_me);
   console.log("ddd");
 
@@ -154,6 +160,10 @@ const PostModal = (props) => {
             border="none"
             borderBottom="1px solid #ddd"
             text="삭제"
+            _onClick={() => {
+              dispatch(postActions.deletePostDB(post_id));
+              history.push("/main");
+            }}
           ></Button>
           <Button
             size="14px"

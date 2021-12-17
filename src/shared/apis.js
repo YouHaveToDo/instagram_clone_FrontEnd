@@ -4,6 +4,7 @@ import { getToken } from "./token";
 const instance = axios.create({
   baseURL:
     "http://13.209.4.79" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
+  // "http://3.36.74.204" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
   // headers: { 'content-type': 'multipart/form-data' }, // content-type이 멀티파트/폼데이터 일 때 이렇게 적어서 사용하자
   //withCredentials: true,//자격요건: 쿠키
 });
@@ -29,7 +30,7 @@ export const apis = {
   //---- 게시글 ----
   getPost: () => instance.get("/api/posts"), //게시글 조회
   detailGetPost: (post_id) => instance.get(`api/posts/${post_id}`), //상세페이지 조회
-  deletePost: (post_id) => instance.delete(`/api/posts/${post_id}`), // 게시글 삭제
+  deletePost: (post_id) => instance.post(`/api/posts/${post_id}`), // 게시글 삭제
 
   //---- 댓글 ----
   getComment: (article_id) => instance.get(`/api/${article_id}/comment`), // 댓글 조회
