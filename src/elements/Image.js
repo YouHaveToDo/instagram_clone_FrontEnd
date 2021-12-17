@@ -44,10 +44,11 @@ Image.defaultProps = {
 const AspectOutter = styled.div`
   width: 100%;
 `;
-const AspectInner = styled.div`
+const AspectInner = styled.img`
   position: relative;
   overflow: hidden;
   background-image: url("${(props) => props.src}");
+  /* src: "http://3.36.74.204/${(props) => props.src}" */
   background-size: contain;
   ${(props) => (props.width ? `width: ${props.width};` : "")}
   height: var(--size);
