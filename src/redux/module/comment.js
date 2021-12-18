@@ -29,12 +29,13 @@ const addCommentDB = (post_id, comment) => {
       const comment_info = {
         comment,
       };
-      // console.log(JSON.parse(comment));
+
       const response = await apis.addComment(post_id, comment_info);
+
       const comments = response.data;
 
       dispatch(addComment(post_id, comment));
-      history.push(`/main/detail/${post_id}`);
+      // history.push(`/main/detail/${post_id}`);
     } catch (error) {
       console.log(error);
     }
@@ -44,27 +45,21 @@ const addCommentDB = (post_id, comment) => {
 const deleteCommentDB = (comment_id) => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log("deleteCommentDB try 시작!");
       const response = await apis.deleteComment(comment_id);
-      console.log(response);
+
       const comments = response.data;
-      console.log(comments);
     } catch (error) {
-      console.dir(error);
       console.log(error);
     }
   };
 };
 
 const getCommentDB = (post_id) => {
-  console.log("start getCommentDB");
   return async (dispatch, getState, { history }) => {
     try {
-      console.log("겟코멘트 디비");
       const response = await apis.getComment(post_id);
-      console.log(response);
+
       const comment = response.data.comments;
-      console.log(comment);
 
       dispatch(getComment(comment));
     } catch (err) {

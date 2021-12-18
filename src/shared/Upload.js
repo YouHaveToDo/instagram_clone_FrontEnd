@@ -17,6 +17,7 @@ const Upload = (props) => {
     if (!fileVideos) {
       return;
     }
+
     dispatch(imageActions.setPreviewVideo(fileVideos));
   }, [fileVideos]);
 
@@ -29,6 +30,7 @@ const Upload = (props) => {
     const fileType = file.type;
 
 
+
     //FileReader 객체 생성
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -38,7 +40,6 @@ const Upload = (props) => {
     setFileVideo(videourl);
 
     if (fileType.includes("video/")) {
-      console.log(typeof videourl);
     }
 
     //파일 로드 완료시

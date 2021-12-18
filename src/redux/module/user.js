@@ -52,7 +52,7 @@ const signupDB = (email, nickname, pw) => {
       nickname,
       pw,
     };
-    console.log(userInfo);
+
     // 일시적으로 확인하기 위해 history 추가 api 연결되면 아래줄 지워야함.
     // history.push("/");
     await apis
@@ -88,8 +88,6 @@ export default handleActions(
   {
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log("확인");
-        console.log(action.payload.userInfo);
         draft.userInfo = action.payload.userInfo;
         draft.is_login = true;
       }),

@@ -9,11 +9,8 @@ import { actionCreators as postActions } from "../redux/module/post";
 
 const PostModal = (props) => {
   const dispatch = useDispatch();
-  console.log(props);
-  console.log(props.post_id);
+
   const post_id = props.post_id;
-  console.log(props.is_me);
-  console.log("ddd");
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   return (

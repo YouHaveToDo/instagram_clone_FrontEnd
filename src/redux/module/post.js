@@ -13,6 +13,7 @@ const DELETE_POST = "DEPETE_POST";
 const DETAIL_GET_POST = "DETAIL_GET_POST";
 const MAIN_TO_DETAIL = "MAIN_TO_DETAIL";
 const DELETE_COMMENT = "DELETE_COMMENT";
+const LIKE = "LIKE";
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
@@ -40,6 +41,9 @@ const deleteComment = createAction(DELETE_COMMENT, (post_id, comment_id) => ({
   post_id,
   comment_id,
 }));
+const like = createAction(LIKE, (like) => ({
+  like,
+}));
 
 // ---- initialState ----
 const initalState = {
@@ -51,6 +55,7 @@ const initalState = {
   },
   reloadState: false,
   test: false,
+  like: false,
 };
 
 //-- addPostDB (post 추가하기) --
@@ -63,6 +68,12 @@ export const addPostDB =
       const formData = new FormData();
       formData.append("content", content);
       formData.append("file", file);
+
+
+      const body = {
+        content,
+        formData,
+      };
 
       const accessToken = document.cookie.split("=")[1];
 
@@ -81,7 +92,6 @@ export const addPostDB =
         })
         .catch((err) => {
           window.alert("게시물 업로드 실패");
-          console.log(err);
         });
     } catch (err) {
       console.log("게시물 요청 문제 발생", err);
@@ -93,6 +103,7 @@ const getPostDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
       const response = await apis.getPost();
+
       const posts = response.data.posts;
       const likes = response.data.likes;
 
@@ -108,6 +119,7 @@ const deletePostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
       const response = await apis.deletePost(post_id);
+
       dispatch(deletePost(post_id));
     } catch (error) {
       console.log(error);
@@ -120,7 +132,11 @@ const detailGetPostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
       const response = await apis.detailGetPost(post_id);
+
+
       const post_info = response.data;
+
+
       dispatch(detailGetPost(post_info));
     } catch (error) {
       console.log(error);
@@ -133,6 +149,7 @@ const deleteCommentDB = (post_id, comment_id) => {
     try {
       const reponse = await apis.deleteComment(post_id, comment_id);
       const comment_info = reponse.data;
+
       dispatch(deleteComment(post_id, comment_id));
     } catch (err) {
       console.log(err);
@@ -144,6 +161,7 @@ const likePostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
       const reponse = await apis.likePost(post_id);
+
     } catch (err) {
       console.error("Error response:");
     }
@@ -186,6 +204,10 @@ export default handleActions(
           return parseInt(action.payload.comment_id) !== idx;
         });
       }),
+    [LIKE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.like = action.payload.like;
+      }),
   },
   initalState
 );
@@ -201,5 +223,6 @@ const actionCreators = {
   addPost,
   deleteCommentDB,
   likePostDB,
+  like,
 };
 export { actionCreators };

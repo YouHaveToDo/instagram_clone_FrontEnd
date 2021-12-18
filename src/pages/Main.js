@@ -10,7 +10,7 @@ import { actionCreators as postActions } from "../redux/module/post";
 
 const Main = (props) => {
   const post_list = useSelector((state) => state.post.posts);
-  console.log(post_list);
+
   const dispatch = useDispatch();
 
   // -- 로그인 유저 확인 및 데이터 요청 --

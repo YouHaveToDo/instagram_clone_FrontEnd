@@ -20,7 +20,8 @@ import { returnGapDate } from "../shared/date";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const [like, setLike] = React.useState(false); // 좋아요
+  const like_state = useSelector((state) => state.post.like);
+  const [like, setLike] = React.useState(like_state); // 좋아요
   const like_list = useSelector((state) => state.post.likes);
 
   const plz = async () => {
@@ -47,6 +48,7 @@ const Post = (props) => {
   const toggleLike = () => {
     dispatch(postActions.likePostDB(props._id));
     setLike(!like);
+    dispatch(postActions.like(like));
   };
   React.useEffect(() => {
     if (like_list[props.idx] === true) {
@@ -102,7 +104,7 @@ const Post = (props) => {
       {/* 3번 */}
       <Grid padding="10px 16px">
         <Icon
-          src={like ? icon08 : icon05}
+          src={!like ? icon08 : icon05}
           alt="headerIcon_05"
           like={like}
           onClick={toggleLike}
