@@ -43,8 +43,13 @@
 ## 🚀 Tech Stack
 
 - **Front-end Tech Stack**
-
-- **Front-end Library**
+  - Javascript ES6+
+  - Html, CSS
+  - Styled component
+  - React
+  - React hook
+  - Redux
+  - Axios
   
 - **Back-end Tech Stack**
   - Node.js
