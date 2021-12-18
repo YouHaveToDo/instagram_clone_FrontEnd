@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import { Button, Grid, Image, Text, Input } from "../elements/Index";
+import { Button, Grid, Image, Text } from "../elements/Index";
+import { useDispatch } from "react-redux";
+import { delToken } from "../shared/token";
+import { history } from "../redux/configureStore";
 
 const Aside = (props) => {
+  const dispatch = useDispatch();
   const localData = localStorage.getItem("MY_LOCAL");
 
   const [name, setName] = useState([
@@ -15,6 +19,11 @@ const Aside = (props) => {
     "최수인",
   ]);
 
+  const logout = () => {
+    localStorage.removeItem("MY_LOCAL");
+    delToken("login");
+    history.replace("/");
+  };
   return (
     <React.Fragment>
       <UserBox width="100%">
@@ -26,10 +35,11 @@ const Aside = (props) => {
             </Text>
             <Button
               bold
-              text="로그아웃 버튼ㅇㄴㅇㄴㅇㄴㅇㄴㄴㄴㄴ "
+              text="로그아웃"
               background="none"
               border="none"
-              color="#0095f6"
+              color="red"
+              _onClick={logout}
             ></Button>
           </Grid>
         </Userinfo>

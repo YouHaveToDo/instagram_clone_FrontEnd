@@ -32,19 +32,9 @@ const loginDB = (email, pw) => {
       .login(userInfo)
       .then((response) => {
         dispatch(checkUserDB());
-        console.log(response);
-        //console.log(response.headers);
-        // console.log(response.headers.authorization);
-        dispatch(checkUserDB());
         const token = response.data.token;
-        // dispatch(checkUserDB());
-
-        console.log(typeof token);
         setToken("login", token);
-        console.log("토큰저장완료!");
         window.alert("로그인 성공 🔥");
-
-        console.log(userInfo.email);
         dispatch(setUser(userInfo));
       })
       .catch((err) => {
@@ -68,7 +58,6 @@ const signupDB = (email, nickname, pw) => {
     await apis
       .signup(userInfo)
       .then((response) => {
-        console.log(response);
         window.alert("회원가입 성공 🔥");
         history.push("/login");
       })
@@ -84,10 +73,7 @@ const checkUserDB = () => {
     await apis
       .checkUser()
       .then((response) => {
-        console.log(response);
         const user = response.data.nickname;
-
-        console.log(user);
         localStorage.setItem("MY_LOCAL", `${user}`);
         history.push(`/main`);
       })

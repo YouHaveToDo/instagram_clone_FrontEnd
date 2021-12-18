@@ -45,6 +45,7 @@ Button.defaultProps = {
 };
 
 const ElButton = styled.button`
+  cursor: pointer;
   ${(props) => (props.width ? `width: ${props.width};` : "null")}/
   ${(props) => (props.bold ? `font-weight: bold;` : "")};
   ${(props) => (props.color ? `color: ${props.color};` : "")};

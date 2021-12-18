@@ -5,8 +5,6 @@ import apis from "../../shared/apis";
 import moment from "moment";
 import { history } from "../configureStore";
 
-// import { actionCreators as imageActions } from "./image";
-
 // ---- actions type ----
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
@@ -46,47 +44,6 @@ const deleteComment = createAction(DELETE_COMMENT, (post_id, comment_id) => ({
 // ---- initialState ----
 const initalState = {
   posts: [],
-  // posts: [
-  //   {
-  //     _id: "61bbb9f9412e4a25ec272863",
-  //     userId: "61bbb956412e4a25ec272853",
-  //     nickname: "suin",
-  //     content: "testetsttestetsttestetsttestetsttestetst",
-  //     upload: [
-  //       {
-  //         path: "img/미들웨어1639692793592.jpg",
-  //         mimetype: "image/jpeg",
-  //       },
-  //     ],
-  //     comments: [
-  //       {
-  //         testcomments: "test",
-  //       },
-  //     ],
-  //     createdAt: 1639691983658,
-  //     __v: 0,
-  //     updatedAt: "2021-12-16T22:14:49.080Z",
-  //     likes: 1,
-  //   },
-  //   {
-  //     _id: "61bc11d4412e4a25ec272880",
-  //     userId: "61bc1041412e4a25ec27287b",
-  //     nickname: "suin2",
-  //     content:
-  //       "우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안우오ㅓㅏ아ㅓ안",
-  //     upload: [
-  //       {
-  //         path: "img/KakaoTalk_Photo_2021-12-15-01-12-071639715284986.jpeg",
-  //         mimetype: "image/jpeg",
-  //       },
-  //     ],
-  //     comments: [],
-  //     createdAt: 1639691983658,
-  //     __v: 0,
-  //     likes: 0,
-  //   },
-  // ],
-  // likes: [false, false],
   likes: [],
   post: {
     likes: null,
@@ -103,17 +60,10 @@ export const addPostDB =
     //FormData 객체 생성
 
     try {
-      console.log(file);
       const formData = new FormData();
       formData.append("content", content);
       formData.append("file", file);
-      console.log(formData);
 
-      console.log(file);
-      const body = {
-        content,
-        formData,
-      };
       const accessToken = document.cookie.split("=")[1];
 
       await axios({
@@ -126,7 +76,6 @@ export const addPostDB =
         },
       })
         .then((res) => {
-          console.log(res);
           dispatch(getPostDB());
           history.replace("/main");
         })
@@ -135,7 +84,7 @@ export const addPostDB =
           console.log(err);
         });
     } catch (err) {
-      console.error("게시물 요청 문제 발생", err);
+      console.log("게시물 요청 문제 발생", err);
     }
   };
 
@@ -143,13 +92,9 @@ export const addPostDB =
 const getPostDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log("start getPostDB");
       const response = await apis.getPost();
-      console.log(response.data);
-
       const posts = response.data.posts;
       const likes = response.data.likes;
-      console.log(posts, likes);
 
       dispatch(getPost(posts, likes));
     } catch (error) {
@@ -162,9 +107,7 @@ const getPostDB = () => {
 const deletePostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start deletePostDB");
       const response = await apis.deletePost(post_id);
-      console.log(response.data);
       dispatch(deletePost(post_id));
     } catch (error) {
       console.log(error);
@@ -176,13 +119,8 @@ const deletePostDB = (post_id) => {
 const detailGetPostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start detailGetPostDB");
-      console.log(post_id);
       const response = await apis.detailGetPost(post_id);
-      console.log(response);
       const post_info = response.data;
-      console.log(post_info);
-
       dispatch(detailGetPost(post_info));
     } catch (error) {
       console.log(error);
@@ -193,10 +131,8 @@ const detailGetPostDB = (post_id) => {
 const deleteCommentDB = (post_id, comment_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start deleteComment");
       const reponse = await apis.deleteComment(post_id, comment_id);
       const comment_info = reponse.data;
-      console.log(comment_info);
       dispatch(deleteComment(post_id, comment_id));
     } catch (err) {
       console.log(err);
@@ -207,16 +143,9 @@ const deleteCommentDB = (post_id, comment_id) => {
 const likePostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start like ");
-      console.log(post_id);
       const reponse = await apis.likePost(post_id);
-      console.log(reponse);
-      // dispatch(deleteComment(post_id, comment_id));
     } catch (err) {
       console.error("Error response:");
-      console.error(err.response.data); // ***
-      console.error(err.response.status); // ***
-      console.error(err.response.headers); // ***
     }
   };
 };

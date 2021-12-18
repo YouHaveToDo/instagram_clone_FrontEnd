@@ -19,6 +19,7 @@ const Text = (props) => {
     position,
     top,
     right,
+    cursor,
   } = props;
   const styles = {
     weight,
@@ -36,6 +37,7 @@ const Text = (props) => {
     position,
     top,
     right,
+    cursor,
   };
   return <P {...styles}>{children}</P>;
 };
@@ -57,11 +59,13 @@ Text.defaultProps = {
   position: false,
   top: false,
   right: false,
+  cursor: false,
 };
 
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
   ${(props) => (props.lineH ? `line-height: ${props.lineH};` : "")};
   ${(props) => (props.border ? `border-bottom: ${props.border};` : "")};
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};

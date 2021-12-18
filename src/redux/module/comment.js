@@ -26,16 +26,12 @@ const getComment = createAction(GET_COMMENT, (comment) => ({
 const addCommentDB = (post_id, comment) => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log("addCommentDB try 시작!");
-      console.log(post_id, comment);
       const comment_info = {
         comment,
       };
       // console.log(JSON.parse(comment));
       const response = await apis.addComment(post_id, comment_info);
-      console.log(response);
       const comments = response.data;
-      console.log(comments);
 
       dispatch(addComment(post_id, comment));
       history.push(`/main/detail/${post_id}`);
@@ -46,7 +42,6 @@ const addCommentDB = (post_id, comment) => {
 };
 
 const deleteCommentDB = (comment_id) => {
-  console.log("미들웨어");
   return async (dispatch, getState, { history }) => {
     try {
       console.log("deleteCommentDB try 시작!");
