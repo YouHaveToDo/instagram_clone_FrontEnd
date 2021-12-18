@@ -42,7 +42,7 @@ export const apis = {
     instance.post(`/api/posts/${post_id}/comments/${comment_id}/`), // 댓글 삭제
 
   //---- 좋아요 ----
-  likePost: (post_id) => instance.post(`/api/${post_id}/like`),
+  likePost: (post_id) => instance.post(`/api/posts/${post_id}/like`),
 };
 
 export default apis;

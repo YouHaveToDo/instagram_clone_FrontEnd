@@ -18,6 +18,11 @@ const DetailCont = (props) => {
   const params = useParams();
   const post_id = params.post_id;
   const comment = React.useRef();
+
+  console.log(post_id);
+
+  // 상세페이지 포스트 요청
+
   const posts_info = useSelector((state) => {
     console.log(state);
     return state.post.post;

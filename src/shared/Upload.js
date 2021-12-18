@@ -88,8 +88,8 @@ const Label = styled.label`
 `;
 const File = styled.input`
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 0px;
+  height: 0px;
   overflow: hidden;
   z-index: 1;
 `;

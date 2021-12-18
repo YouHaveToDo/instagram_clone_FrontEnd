@@ -52,7 +52,7 @@ const PostModal = (props) => {
               outline: "none",
               padding: "0px",
               zIndex: "11",
-            },
+            },Modal
           }}
           isOpen={modalIsOpen}
           onRequestClose={() => setModalIsOpen(false)}
@@ -162,7 +162,7 @@ const PostModal = (props) => {
             text="삭제"
             _onClick={() => {
               dispatch(postActions.deletePostDB(post_id));
-              history.push("/main");
+              setModalIsOpen(false);
             }}
           ></Button>
           <Button
