@@ -1,15 +1,24 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Grid, Text, Input, Button } from "../elements/Index";
+import { useParams } from "react-router-dom";
 import DetailImage from "../components/DetailImage";
 import DetailCont from "../components/DetailCont";
 import DImg from "../images/DImg.png";
 import { history } from "../redux/configureStore";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as postActions } from "../redux/module/post";
+import { commentActions } from "../redux/module/comment";
 
 const Detail = () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const post_id = params.post_id;
   //body 스크롤 멈추기
   React.useEffect(() => {
+    dispatch(commentActions.getCommentDB(post_id));
+    dispatch(postActions.detailGetPostDB(post_id));
     document.body.classList.add("overflowHidden");
     window.scrollTo(0, 0);
     return () => {

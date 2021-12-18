@@ -23,6 +23,12 @@ const DetailCont = (props) => {
 
   // 상세페이지 포스트 요청
 
+  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
+  React.useEffect(() => {
+    //  dispatch(commentActions.getCommentDB(post_id));
+    //  dispatch(postActions.detailGetPostDB(post_id));
+  }, []);
+
   const posts_info = useSelector((state) => {
     console.log(state);
     return state.post.post;
@@ -31,12 +37,6 @@ const DetailCont = (props) => {
     console.log(state);
     return state.post.post.result.comments;
   });
-
-  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
-  React.useEffect(() => {
-    dispatch(commentActions.getCommentDB(post_id));
-    dispatch(postActions.detailGetPostDB(post_id));
-  }, []);
 
   // 시간
   const createdAt = posts_info.result.createdAt;
@@ -114,7 +114,7 @@ const DetailCont = (props) => {
           <Grid width="100%" margin="0 0 0 59px">
             <Text>{`${date}전`}</Text>
           </Grid>
-          {/* {comment_info.map((l, idx) => {
+          {comment_info.map((l, idx) => {
             const createdAt = comment_info[idx].createdAt;
             const today = returnGapDate(new Date(), createdAt);
             return (
@@ -139,7 +139,7 @@ const DetailCont = (props) => {
                 </Grid>
               </div>
             );
-          })} */}
+          })}
         </Grid>
         <Grid>
           <Grid padding="10px 16px">

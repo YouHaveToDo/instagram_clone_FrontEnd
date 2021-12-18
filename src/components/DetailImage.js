@@ -4,24 +4,20 @@ import { Grid, Text, Input, Button, Image } from "../elements/Index";
 import { useDispatch, useSelector } from "react-redux";
 
 const DetailImage = (props) => {
-  // const fileType = posts_info.result.upload[0].mimetype;
-
   const posts_info = useSelector((state) => {
     // console.log(state);
     return state.post.post;
   });
+  const fileType = posts_info.result.upload[0].mimetype;
   // console.log(posts_info);
   // console.log(posts_info.result);
   // console.log(posts_info.result.upload[0]);
   // console.log(posts_info.result.upload[0].path);
 
-  // console.log(posts_info.result);
-  // console.log(posts_info.result.upload[0].path);
-
   return (
     <Grid width="60%">
       <Grid>
-        {/* {fileType.includes("image/") ? (
+        {fileType.includes("image/") ? (
           <Image
             shape="rectangle"
             src={posts_info.result.upload[0].path}
@@ -37,7 +33,7 @@ const DetailImage = (props) => {
             type="video/*"
             muted
           ></video>
-        )} */}
+        )}
       </Grid>
     </Grid>
   );

@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { Button, Grid, Image, Text, Input } from "../elements/Index";
 import { useRef } from "react";
 import PostModal from "./PostModal";
-import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
+import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postActions } from "../redux/module/post";
+import { commentActions } from "../redux/module/comment";
+
 import DetailImg from "./DetailImage";
 //-- icon --
 import icon02 from "../images/icons/icon_02.png";
@@ -23,6 +25,12 @@ const Post = (props) => {
   const like_list = useSelector((state) => state.post.likes);
   console.log(like_list);
   console.log(props.idx); // 포스트 인덱스 번쨰 숫자
+
+  const plz = async () => {
+    await dispatch(commentActions.getCommentDB(props.post_id));
+    await dispatch(postActions.detailGetPostDB(props.post_id));
+    history.push(`/main/Detail/${props.post_id}`);
+  };
 
   // const post_list = useSelector((state) => state.post.posts);
   const localData = localStorage.getItem("MY_LOCAL");
@@ -166,9 +174,7 @@ const Post = (props) => {
             background="none"
             text="댓글달기..."
             color="#8e8e8e"
-            _onClick={() => {
-              history.push(`/main/Detail/${props._id}`);
-            }}
+            _onClick={plz}
           />
           <Button
             text="게시"
@@ -260,5 +266,4 @@ const EButton = styled.button`
     display: none;
   }
 `;
-
 export default Post;
