@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Grid, Image, Text, Input } from "../elements/Index";
+import { Button, Grid, Image, Text } from "../elements/Index";
 import { useRef } from "react";
 import PostModal from "./PostModal";
 import { history } from "../redux/configureStore";
@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postActions } from "../redux/module/post";
 import { commentActions } from "../redux/module/comment";
 
-import DetailImg from "./DetailImage";
 //-- icon --
 import icon02 from "../images/icons/icon_02.png";
 import icon05 from "../images/icons/icon_05.png";
@@ -30,8 +29,6 @@ const Post = (props) => {
     await dispatch(postActions.detailGetPostDB(props.post_id));
     history.push(`/main/Detail/${props.post_id}`);
   };
-
-  // const post_list = useSelector((state) => state.post.posts);
   const localData = localStorage.getItem("MY_LOCAL");
 
   const fileType = props.upload[0].mimetype;
@@ -112,16 +109,10 @@ const Post = (props) => {
           like={like}
           onClick={toggleLike}
         />
-        <Icon
-          src={icon06}
-          alt="icon06"
-          onClick={() => {
-            history.push(`/main/Detail/${props.Id}`);
-          }}
-        />
+        <Icon src={icon06} alt="icon06" onClick={plz} />
         <Icon src={icon02} alt="headerIcon_02" />
       </Grid>
-      {/* 4번  - 아이콘 */}
+      {/* 4번   */}
       <Grid padding="8px 16px">
         <Text fontWeight="bold"> 좋아요 {props.likes}개</Text>
       </Grid>
@@ -138,11 +129,18 @@ const Post = (props) => {
       </Grid>
       {/* 6번 */}
       <Grid padding=" 8px 16px">
-        <Text color="#8e8e8e" fontWeight="600">
+        <Button
+          color="#8e8e8e"
+          fontWeight="600"
+          cursor="pointer"
+          _onClick={plz}
+          border="none"
+          background="none"
+        >
           {props.comments.length > 0
             ? `댓글 ${props.comments.length}개 모두보기`
             : ""}
-        </Text>
+        </Button>
       </Grid>
       {/* 7번 */}
       <Grid padding="5px 16px 16px 16px">
@@ -201,55 +199,38 @@ const Icon = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 20px;
+  cursor: pointer;
 `;
 
-Post.defaultProps = {
-  // posts: {
-  //   id: 0,
-  //   content: "dkfjdkfjkdjf",
-  //   uploadUrl: "",
-  //   type: "",
-  //   createAt: "",
-  //   user_profile: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-  //   user_name: "mean0",
-  // },
-  // image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-  // contents: "고양이네요!",
-  // comment_cnt: 10,
-  // insert_dt: "2021-02-27 10:00:00",
-  // is_me: false,
-};
+Post.defaultProps = {};
 const Ellipsis = styled.div`
   position: relative;
   display: -webkit-box;
   max-height: 6rem;
   line-height: 2rem;
-  width: 280px;
-  /* display: -webkit-box;  */
+  width: 220px;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
   float: left;
-  /* -webkit-line-clamp: 3; */
   &.show {
     display: block;
     max-height: none;
     width: 93%;
     line-height: 1.8;
-    /* overflow: auto; */
     -webkit-line-clamp: unset;
   }
 `;
 const EButton = styled.button`
   max-height: 2rem;
-  /* line-height: 2rem; */
   padding-left: 20px;
   background: none;
   border: none;
   color: #8f8f8f;
   font-size: 14px;
+  cursor: pointer;
   &.hide {
     display: none;
   }

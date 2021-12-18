@@ -3,10 +3,9 @@ import Modal from "react-modal";
 import { useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import styled from "styled-components";
-import { Button, Grid, Image, Text, Input } from "../elements/Index";
-import { useSelector, useDispatch } from "react-redux";
+import { Button } from "../elements/Index";
+import { useDispatch } from "react-redux";
 import { actionCreators as postActions } from "../redux/module/post";
-import { history } from "../redux/configureStore";
 
 const PostModal = (props) => {
   const dispatch = useDispatch();
@@ -38,12 +37,10 @@ const PostModal = (props) => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              // right: "40px",
               transform: "translate(-50%,-50%)",
               bottom: "40px",
               border: "1px solid #ccc",
               background: "#fff",
-              // overflow: "auto",
               WebkitOverflowScrolling: "touch",
               borderRadius: "10px",
               outline: "none",
@@ -134,12 +131,10 @@ const PostModal = (props) => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              // right: "40px",
               transform: "translate(-50%,-50%)",
               bottom: "40px",
               border: "1px solid #ccc",
               background: "#fff",
-              // overflow: "auto",
               WebkitOverflowScrolling: "touch",
               borderRadius: "10px",
               outline: "none",
@@ -229,21 +224,11 @@ const ModalBox = styled.div`
     border: none;
     background: none;
     cursor: pointer;
-    /* z-index: 1; */
   }
   & MoreHorizIcon {
     position: absolute;
     z-index: 1;
     cursor: pointer;
   }
-`;
-const ButtonList = styled.button`
-  width: 100%;
-  height: 48px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  background-color: none;
-  text-align: center;
-  line-height: 40px;
 `;
 export default PostModal;

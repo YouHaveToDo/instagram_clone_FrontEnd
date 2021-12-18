@@ -29,11 +29,7 @@ const Upload = (props) => {
     //파일타입
     const fileType = file.type;
 
-    //FormData 객체 생성
-    // const formData = new FormData();
-    // formData.append("file", file);
-    // formData.append('content', posts.content)
-    // formData.append("file", postlist.image)
+
 
     //FileReader 객체 생성
     const reader = new FileReader();

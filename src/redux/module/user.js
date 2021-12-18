@@ -32,15 +32,9 @@ const loginDB = (email, pw) => {
       .login(userInfo)
       .then((response) => {
         dispatch(checkUserDB());
-
-        dispatch(checkUserDB());
         const token = response.data.token;
-        // dispatch(checkUserDB());
-
         setToken("login", token);
-
         window.alert("로그인 성공 🔥");
-
         dispatch(setUser(userInfo));
       })
       .catch((err) => {
@@ -80,7 +74,6 @@ const checkUserDB = () => {
       .checkUser()
       .then((response) => {
         const user = response.data.nickname;
-
         localStorage.setItem("MY_LOCAL", `${user}`);
         history.push(`/main`);
       })

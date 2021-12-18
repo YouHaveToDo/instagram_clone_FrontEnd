@@ -22,6 +22,7 @@ const DetailCont = (props) => {
   const [like, setLike] = React.useState(like_state); // 좋아요
   const like_list = useSelector((state) => state.post.likes);
 
+
   const toggleLike = () => {
     dispatch(postActions.likePostDB(post_id));
     setLike(!like);
@@ -33,12 +34,9 @@ const DetailCont = (props) => {
     }
   }, []);
 
-  // 상세페이지 포스트 요청
 
-  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
+  // 게시글 상세 조회 
   React.useEffect(() => {
-    //  dispatch(commentActions.getCommentDB(post_id));
-    //  dispatch(postActions.detailGetPostDB(post_id));
   }, []);
 
   const posts_info = useSelector((state) => {

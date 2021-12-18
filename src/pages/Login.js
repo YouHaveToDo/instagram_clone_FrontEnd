@@ -17,23 +17,12 @@ import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 
 const Login = (props) => {
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 300,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
   const dispatch = useDispatch();
   const emailRef = React.useRef("");
   const pwRef = React.useRef("");
 
   const login = () => {
     dispatch(userActions.loginDB(emailRef.current.value, pwRef.current.value));
-
-    // 서버 연결되면 미들웨어쪽으로 이동하기
-    // dispatch(userActions.checkUserDB());
-    // localStorage.setItem("MY_LOCAL", "here");
   };
 
   return (

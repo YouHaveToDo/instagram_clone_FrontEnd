@@ -14,13 +14,9 @@ const CreateDetails = (props) => {
 
   //upload 데이터 가져오기
   const fileType = useSelector((state) => state.image.fileType);
-  console.log(fileType);
   const preview = useSelector((state) => state.image.preview);
-  console.log(preview);
   const videourl = useSelector((state) => state.image.fileVideo);
-  console.log(videourl);
   const file = useSelector((state) => state.image.file);
-  console.log(file);
   const [contents, setContents] = React.useState();
 
   //body 스크롤 멈추기
@@ -34,9 +30,7 @@ const CreateDetails = (props) => {
 
   //---- 게시글 추가 ----
   const addPost = () => {
-    console.log(contents, file);
     dispatch(postAction.addPostDB(contents, file));
-    // console.log(setContents);
   };
   return (
     <>
@@ -120,7 +114,7 @@ const CreateDetails = (props) => {
 
             {/* 오른쪽 - 텍스트 입력창 */}
 
-            <Grid width="340px" height="523px">
+            <Grid width="340px" height="523px" borderL="1px solid #dbdbdb">
               <Grid flex alignItems="center " padding="25px 16px">
                 <Image
                   shape="circle"
