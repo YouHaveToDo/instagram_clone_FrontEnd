@@ -54,6 +54,8 @@ const DetailCont = (props) => {
     dispatch(postActions.deletePostDB(post_id));
   };
 
+
+
   // 댓글 삭제 기능 : 삭제 버튼 만들어서 onClick으로 넘어주세요.
   // e.target.comment_id 는 변경 가능, comment_id를 어떤 속성으로 가져올 것 인지 이야기 필요.
   // 댓글 뿌릴 때 map의 인덱스를 댓글에 속성으로 같이 뿌려주면 될 듯

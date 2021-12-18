@@ -11,10 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/module/post";
 import { commentActions } from "../redux/module/comment";
 
+
+
 const Detail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const post_id = params.post_id;
+
   //body 스크롤 멈추기
   React.useEffect(() => {
     dispatch(commentActions.getCommentDB(post_id));

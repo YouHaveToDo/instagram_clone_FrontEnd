@@ -44,5 +44,6 @@ export const apis = {
   //---- 좋아요 ----
   likePost: (post_id) => instance.post(`/api/posts/${post_id}/like`),
 };
+//  왜 안되는거야
 
 export default apis;
