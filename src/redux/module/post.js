@@ -127,7 +127,7 @@ export const addPostDB =
       })
         .then((res) => {
           console.log(res);
-          dispatch(addPost(content));
+          dispatch(getPostDB());
           history.replace("/main");
         })
         .catch((err) => {
@@ -166,7 +166,6 @@ const deletePostDB = (post_id) => {
       const response = await apis.deletePost(post_id);
       console.log(response.data);
       dispatch(deletePost(post_id));
-      history.replace("/login");
     } catch (error) {
       console.log(error);
     }
@@ -204,6 +203,24 @@ const deleteCommentDB = (post_id, comment_id) => {
     }
   };
 };
+//게시물 좋아요
+const likePostDB = (post_id) => {
+  return async (dispatch, getstate, { history }) => {
+    try {
+      console.log("start like ");
+      console.log(post_id);
+      const reponse = await apis.likePost(post_id);
+      console.log(reponse);
+      // dispatch(deleteComment(post_id, comment_id));
+    } catch (err) {
+      console.error("Error response:");
+      console.error(err.response.data); // ***
+      console.error(err.response.status); // ***
+      console.error(err.response.headers); // ***
+    }
+  };
+};
+
 //---- reducer ----
 export default handleActions(
   {
@@ -220,7 +237,7 @@ export default handleActions(
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.posts = state.posts.filter((l, idx) => {
-          return parseInt(action.payload.post_id) !== idx;
+          return action.payload.post_id !== l._id;
         });
       }),
     [DETAIL_GET_POST]: (state, action) =>
@@ -254,5 +271,6 @@ const actionCreators = {
   mainToDetail,
   addPost,
   deleteCommentDB,
+  likePostDB,
 };
 export { actionCreators };

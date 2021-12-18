@@ -10,10 +10,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postActions } from "../redux/module/post";
 
 const Main = (props) => {
+  const post_list = useSelector((state) => state.post.posts);
+  console.log(post_list);
   const dispatch = useDispatch();
   const [state, setState] = React.useState(false);
 
   const test = useSelector((state) => state.post.test);
+  // const [post, setpost] = React.useState(post_list ? post_list : null);
   // setState(test);
   // React.useEffect(() => {
 
@@ -33,8 +36,8 @@ const Main = (props) => {
     }
   }, []);
   React.useEffect(() => {
-    // if (post_list.length === 0) {
-    //포스트 요청
+    // if (!post_list) {
+    // 포스트 요청
     dispatch(postActions.getPostDB());
     // }
   }, []);
@@ -42,8 +45,7 @@ const Main = (props) => {
   //첫 실행시 포스트 요청
 
   // console.log(props);
-  const post_list = useSelector((state) => state.post.posts);
-  console.log(post_list);
+
   return (
     <MainBox>
       <Header />
@@ -53,7 +55,7 @@ const Main = (props) => {
           {post_list.map((p, idx) => {
             return (
               <div key={idx}>
-                <Post post={post_list} {...p} />
+                <Post post={post_list} {...p} idx={idx} />
               </div>
             );
           })}
