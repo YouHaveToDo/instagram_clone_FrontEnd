@@ -10,6 +10,7 @@ import icon05 from "../images/icons/icon_05.png";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 import { actionCreators as postActions } from "../redux/module/post";
+import Modal from "react-modal";
 
 // overflow-y: hidden;
 // overflow-y: scroll;
@@ -27,12 +28,12 @@ const Header = (props) => {
   //   };
   // }, []);
   const dispatch = useDispatch();
-  const [reload, setReload] = React.useState(false);
+  // const [reload, setReload] = React.useState(false);
 
   const mainToDetail = () => {
-    setReload(!reload);
-    console.log(reload);
-    dispatch(postActions.mainToDetail(reload));
+    // setReload(!reload);
+    // console.log(reload);
+    // dispatch(postActions.mainToDetail(reload));
     history.push(`/main/create/select`);
   };
 
@@ -49,7 +50,7 @@ const Header = (props) => {
             <Icon src={icon02}></Icon>
             <Icon src={icon03} onClick={mainToDetail}></Icon>
             <Icon src={icon04}></Icon>
-            <Icon src={icon05}></Icon>
+            <Icon src={icon05} style={{ position: "relative" }}></Icon>
             <Image shape="circle" size="24" paddingLeft="20px"></Image>
           </Grid>
         </Grid>
@@ -75,4 +76,5 @@ const Icon = styled.img`
   margin-right: 20px;
   cursor: pointer;
 `;
+
 export default Header;

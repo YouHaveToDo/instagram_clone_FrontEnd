@@ -18,11 +18,18 @@ import icon08 from "../images/icons/icon_08.png";
 import { returnGapDate } from "../shared/date";
 
 const Post = (props) => {
+  const dispatch = useDispatch();
+  const [like, setLike] = React.useState(false); // 좋아요
+  const like_list = useSelector((state) => state.post.likes);
+  console.log(like_list);
+  console.log(props.idx); // 포스트 인덱스 번쨰 숫자
+
   // const post_list = useSelector((state) => state.post.posts);
   const localData = localStorage.getItem("MY_LOCAL");
   console.log(localData);
 
   console.log(props);
+  console.log(props._id);
   console.log(props.nickname);
   console.log(props.upload);
   console.log(props.upload[0].mimetype);
@@ -44,6 +51,17 @@ const Post = (props) => {
     contentRef.current.classList.add("show");
     e.currentTarget.classList.add("hide");
   };
+
+  //좋아요
+  const toggleLike = () => {
+    dispatch(postActions.likePostDB(props._id));
+    setLike(!like);
+  };
+  React.useEffect(() => {
+    if (like_list[props.idx] === true) {
+      setLike(true);
+    }
+  }, []);
 
   return (
     <Grid
@@ -75,7 +93,7 @@ const Post = (props) => {
           <Image
             shape="rectangle"
             src={props.upload[0].path}
-            size="100%"
+            // size="100%"
             width="100%"
           />
         ) : (
@@ -89,14 +107,14 @@ const Post = (props) => {
           ></video>
         )}
       </Grid>
-      {/* <DetailImg backgroundImg={props.upload[0].path} /> */}
 
       {/* 3번 */}
       <Grid padding="10px 16px">
         <Icon
-          src={icon05}
+          src={like ? icon08 : icon05}
           alt="headerIcon_05"
-          // onClick={postLike}
+          like={like}
+          onClick={toggleLike}
         />
         <Icon
           src={icon06}

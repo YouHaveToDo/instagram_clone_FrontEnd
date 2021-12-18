@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Button, Grid, Image, Text, Input } from "../elements/Index";
 
 const Aside = (props) => {
+  const localData = localStorage.getItem("MY_LOCAL");
+
   const [name, setName] = useState([
     "길재원",
     "김금동",
@@ -20,11 +22,11 @@ const Aside = (props) => {
           <Image shape="circle" src={props.src} size="56" />
           <Grid flex justify="space-between">
             <Text bold padding="0 0 0 10px" fontWeight="bold">
-              3조
+              {localData}
             </Text>
             <Button
               bold
-              text="팔로우"
+              text="전환"
               background="none"
               border="none"
               color="#0095f6"
