@@ -55,7 +55,7 @@ const Main = (props) => {
           {post_list.map((p, idx) => {
             return (
               <div key={idx}>
-                <Post post={post_list} {...p} idx={idx} />
+                <Post post={post_list} {...p} idx={idx} post_id={p._id} />
               </div>
             );
           })}

@@ -23,6 +23,12 @@ const DetailCont = (props) => {
 
   // 상세페이지 포스트 요청
 
+  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
+  React.useEffect(() => {
+    //  dispatch(commentActions.getCommentDB(post_id));
+    //  dispatch(postActions.detailGetPostDB(post_id));
+  }, []);
+
   const posts_info = useSelector((state) => {
     console.log(state);
     return state.post.post;
@@ -31,12 +37,6 @@ const DetailCont = (props) => {
     console.log(state);
     return state.post.post.result.comments;
   });
-
-  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
-  React.useEffect(() => {
-    dispatch(commentActions.getCommentDB(post_id));
-    dispatch(postActions.detailGetPostDB(post_id));
-  }, []);
 
   // 시간
   const createdAt = posts_info.result.createdAt;
@@ -53,6 +53,8 @@ const DetailCont = (props) => {
   const DeletePost = () => {
     dispatch(postActions.deletePostDB(post_id));
   };
+
+
 
   // 댓글 삭제 기능 : 삭제 버튼 만들어서 onClick으로 넘어주세요.
   // e.target.comment_id 는 변경 가능, comment_id를 어떤 속성으로 가져올 것 인지 이야기 필요.
@@ -114,7 +116,7 @@ const DetailCont = (props) => {
           <Grid width="100%" margin="0 0 0 59px">
             <Text>{`${date}전`}</Text>
           </Grid>
-          {/* {comment_info.map((l, idx) => {
+          {comment_info.map((l, idx) => {
             const createdAt = comment_info[idx].createdAt;
             const today = returnGapDate(new Date(), createdAt);
             return (
@@ -139,7 +141,7 @@ const DetailCont = (props) => {
                 </Grid>
               </div>
             );
-          })} */}
+          })}
         </Grid>
         <Grid>
           <Grid padding="10px 16px">

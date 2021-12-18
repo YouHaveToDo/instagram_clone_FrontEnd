@@ -8,16 +8,14 @@ const DetailImage = (props) => {
     // console.log(state);
     return state.post.post;
   });
-  // const fileType = posts_info.result.upload[0].mimetype;
 
-  console.log(posts_info);
-  console.log(posts_info.result.upload[0].mimetype);
+
+  const fileType = posts_info.result.upload[0].mimetype;
+  // console.log(posts_info);
   // console.log(posts_info.result);
   // console.log(posts_info.result.upload[0]);
   // console.log(posts_info.result.upload[0].path);
 
-  // console.log(posts_info.result);
-  // console.log(posts_info.result.upload[0].path);
 
   return (
     <Grid width="60%">
