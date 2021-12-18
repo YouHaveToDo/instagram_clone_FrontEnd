@@ -15,9 +15,9 @@ const CreateSelect = (props) => {
 
   //body 스크롤 멈추기
   React.useEffect(() => {
-    if (!reloadState) {
-      history.push("/main");
-    }
+    // if (!reloadState) {
+    // history.push("/main");
+    // }
     document.body.classList.add("overflowHidden");
     window.scrollTo(0, 0);
     return () => {

@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { Button, Grid, Image, Text, Input } from "../elements/Index";
 import { useRef } from "react";
 import PostModal from "./PostModal";
-import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
+import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postActions } from "../redux/module/post";
+import { commentActions } from "../redux/module/comment";
+
 import DetailImg from "./DetailImage";
 //-- icon --
 import icon02 from "../images/icons/icon_02.png";
@@ -18,11 +20,24 @@ import icon08 from "../images/icons/icon_08.png";
 import { returnGapDate } from "../shared/date";
 
 const Post = (props) => {
+  const dispatch = useDispatch();
+  const [like, setLike] = React.useState(false); // 좋아요
+  const like_list = useSelector((state) => state.post.likes);
+  console.log(like_list);
+  console.log(props.idx); // 포스트 인덱스 번쨰 숫자
+
+  const plz = async () => {
+    await dispatch(commentActions.getCommentDB(props.post_id));
+    await dispatch(postActions.detailGetPostDB(props.post_id));
+    history.push(`/main/Detail/${props.post_id}`);
+  };
+
   // const post_list = useSelector((state) => state.post.posts);
   const localData = localStorage.getItem("MY_LOCAL");
   console.log(localData);
 
   console.log(props);
+  console.log(props._id);
   console.log(props.nickname);
   console.log(props.upload);
   console.log(props.upload[0].mimetype);
@@ -44,6 +59,17 @@ const Post = (props) => {
     contentRef.current.classList.add("show");
     e.currentTarget.classList.add("hide");
   };
+
+  //좋아요
+  const toggleLike = () => {
+    dispatch(postActions.likePostDB(props._id));
+    setLike(!like);
+  };
+  React.useEffect(() => {
+    if (like_list[props.idx] === true) {
+      setLike(true);
+    }
+  }, []);
 
   return (
     <Grid
@@ -75,7 +101,7 @@ const Post = (props) => {
           <Image
             shape="rectangle"
             src={props.upload[0].path}
-            size="100%"
+            // size="100%"
             width="100%"
           />
         ) : (
@@ -89,14 +115,14 @@ const Post = (props) => {
           ></video>
         )}
       </Grid>
-      {/* <DetailImg backgroundImg={props.upload[0].path} /> */}
 
       {/* 3번 */}
       <Grid padding="10px 16px">
         <Icon
-          src={icon05}
+          src={like ? icon08 : icon05}
           alt="headerIcon_05"
-          // onClick={postLike}
+          like={like}
+          onClick={toggleLike}
         />
         <Icon
           src={icon06}
@@ -148,9 +174,7 @@ const Post = (props) => {
             background="none"
             text="댓글달기..."
             color="#8e8e8e"
-            _onClick={() => {
-              history.push(`/main/Detail/${props._id}`);
-            }}
+            _onClick={plz}
           />
           <Button
             text="게시"
@@ -242,5 +266,4 @@ const EButton = styled.button`
     display: none;
   }
 `;
-
 export default Post;

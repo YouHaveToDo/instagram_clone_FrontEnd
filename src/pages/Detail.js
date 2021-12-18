@@ -10,22 +10,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as postActions } from "../redux/module/post";
 import { commentActions } from "../redux/module/comment";
-import { ContactSupportOutlined } from "@material-ui/icons";
+
+
 
 const Detail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const post_id = params.post_id;
 
-  const posts_info = useSelector((state) => {
-    console.log(state);
-    return state.post.post;
-  });
-  const comment_info = useSelector((state) => {
-    console.log(state);
-    return state;
-  });
-  console.log(comment_info);
   //body 스크롤 멈추기
   React.useEffect(() => {
     dispatch(commentActions.getCommentDB(post_id));

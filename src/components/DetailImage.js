@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 const DetailImage = (props) => {
   const posts_info = useSelector((state) => {
-    console.log(state);
+    // console.log(state);
     return state.post.post;
   });
-  console.log(posts_info);
+
+  const fileType = posts_info.result.upload[0].mimetype;
+  // console.log(posts_info);
+  // console.log(posts_info.result);
+  // console.log(posts_info.result.upload[0]);
   // console.log(posts_info.result.upload[0].path);
-  // const fileType = posts_info.result.upload[0].mimetype;
+
 
   return (
     <Grid width="60%">
