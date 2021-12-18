@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# <img src="http://www.brandbrief.co.kr/news/photo/202002/2973_5331_5938.png" width="3%" height="3%"/> Instagram-Clone 3조
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**인스타그램 클론 코딩입니다.**
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+## 제작 기간 및 팀원 소개
+2021-12-13 ~ 2021-12-18
 
-### `yarn start`
+## 깃허브 주소
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Front-End](https://github.com/youHaveToDo/instagram_clone_FrontEnd.git)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[Back-End](https://github.com/kiljw316/instagram_clone_BackEnd/tree/main)
 
-### `yarn test`
+## 🥇 Developers
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`FrontEnd`
+* 정종찬
+* 최수인
 
-### `yarn build`
+`BackEnd`
+* 길재원
+* 김금동
+* 이성진
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ▶️ List
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 📆 [Schedule](#-Schedule)
+- 🚀 [Tech Stack](#-Tech-Stack)
+- 💬 [Front-end](#-Front-end)
+- 💬 [Back-end](#-Back-end)
 
-### `yarn eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 📆 Schedule
+[스케쥴 노션 링크 바로가기](https://www.notion.so/99-3-8694a6aa2799484ca10b52f8ecf9689a)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🚀 Tech Stack
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Front-end Tech Stack**
 
-## Learn More
+- **Front-end Library**
+  
+- **Back-end Tech Stack**
+  - Node.js
+  - Express
+  - MongoDB & Mongoose
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Back-end Library**
+  - JWT
+  - bcrypt
+  - multer
+  - dotenv
+  - cors
+  - passport(local, jwt)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Deploy**
+  - AWS EC2 (Ubuntu 18.04 LTS)
+  - S3
 
-### Code Splitting
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**❓ Why? MVC 패턴**
 
-### Analyzing the Bundle Size
+이번 미니프로젝트 주차에는 기획부터 개발, 배포까지 6일안에 완성해야 했습니다. 하루동안 아무리 촘촘하게 따져가면서 기획을 한다해도 어쩔수없이 놓치는 부분이 생길 것 같았기 때문에 개발 시작 단계에서부터 *기능의 확장성*을 생각해 데이터와 사용자 인터페이스, 기능들이 분리된 *MVC패턴*을 사용했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**❓ Why? express-validator (Controller 단계에서의 유효성검사)**
 
-### Making a Progressive Web App
+View 단계에서는 개발자도구를 통한 HTML조작 유효성검사를 비정상적으로 패스할 가능성이 있어 _Controller 단계에 유효성검사_ Middleware를 추가했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**❓ Why? multer**
 
-### Advanced Configuration
+이미지 파일이 multipart/form-data 형태로 넘어오기 때문에 이를 다루기 위해서 multer를 사용했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**❓ Why? dotenv**
 
-### Deployment
+노출되면 보안에 위협적인 환경변수들을 한곳에 모아 관리했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**❓ Why? mongoDB Attribute Pattern**
 
-### `yarn build` fails to minify
+우리 조의 인스타그램은 보통 총 게시글의 80%는 유저의 20%가 작성한다고 합니다. 따라서  
+MongoDB로 컬렉션 설계 시 데이터 생성/수정/삭제 보다 조회에 이점이 있는 Attribute Pattern을 선택하게 되었습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**❓ Why? NGINX**
+
+cors 라이브러리를 사용할 필요 없이 안전하게 통신을 하기 위해서 사용했습니다.
+
+
+
