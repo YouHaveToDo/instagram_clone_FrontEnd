@@ -27,7 +27,6 @@ const DetailCont = (props) => {
     return state.post.post.result.comments;
   });
 
-  );
   // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
   React.useEffect(() => {
     dispatch(commentActions.getCommentDB(post_id));
