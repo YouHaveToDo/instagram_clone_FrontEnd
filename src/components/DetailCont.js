@@ -27,31 +27,12 @@ const DetailCont = (props) => {
     return state.post.post.result.comments;
   });
 
-  const [post, setPost] = React.useState(posts_info ? posts_info : null);
-  const [comments, setComment] = React.useState(
-    comment_info ? comment_info : null
   );
   // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
   React.useEffect(() => {
-    if (post && comments) {
-      return;
-    }
     dispatch(commentActions.getCommentDB(post_id));
     dispatch(postActions.detailGetPostDB(post_id));
   }, []);
-  // const [postInfo, setPostInfo] = React.useState();
-  // 상세페이지 포스트 요청
-  // const posts_info = useSelector((state) => {
-  //   console.log(state);
-  //   return state.post.post;
-  // });
-  // console.log(posts_info);
-
-  // const comment_info = useSelector((state) => {
-  //   console.log(state);
-  //   return state.post.post.result.comments;
-  // });
-  // console.log(comment_info);
 
   // 시간
   const createdAt = posts_info.result.createdAt;
