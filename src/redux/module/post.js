@@ -15,6 +15,7 @@ const DELETE_POST = "DEPETE_POST";
 const DETAIL_GET_POST = "DETAIL_GET_POST";
 const MAIN_TO_DETAIL = "MAIN_TO_DETAIL";
 const DELETE_COMMENT = "DELETE_COMMENT";
+const LIKE = "LIKE";
 
 // ---- action creators ----
 const setPost = createAction(SET_POST, (post_list, paging) => ({
@@ -41,6 +42,9 @@ export const mainToDetail = createAction(MAIN_TO_DETAIL, (reload) => ({
 const deleteComment = createAction(DELETE_COMMENT, (post_id, comment_id) => ({
   post_id,
   comment_id,
+}));
+const like = createAction(LIKE, (like) => ({
+  like,
 }));
 
 // ---- initialState ----
@@ -94,6 +98,7 @@ const initalState = {
   },
   reloadState: false,
   test: false,
+  like: false,
 };
 
 //-- addPostDB (post 추가하기) --
@@ -103,13 +108,10 @@ export const addPostDB =
     //FormData 객체 생성
 
     try {
-      console.log(file);
       const formData = new FormData();
       formData.append("content", content);
       formData.append("file", file);
-      console.log(formData);
 
-      console.log(file);
       const body = {
         content,
         formData,
@@ -126,16 +128,14 @@ export const addPostDB =
         },
       })
         .then((res) => {
-          console.log(res);
           dispatch(getPostDB());
           history.replace("/main");
         })
         .catch((err) => {
           window.alert("게시물 업로드 실패");
-          console.log(err);
         });
     } catch (err) {
-      console.error("게시물 요청 문제 발생", err);
+      console.log("게시물 요청 문제 발생", err);
     }
   };
 
@@ -143,13 +143,10 @@ export const addPostDB =
 const getPostDB = () => {
   return async (dispatch, getState, { history }) => {
     try {
-      console.log("start getPostDB");
       const response = await apis.getPost();
-      console.log(response.data);
 
       const posts = response.data.posts;
       const likes = response.data.likes;
-      console.log(posts, likes);
 
       dispatch(getPost(posts, likes));
     } catch (error) {
@@ -162,9 +159,8 @@ const getPostDB = () => {
 const deletePostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start deletePostDB");
       const response = await apis.deletePost(post_id);
-      console.log(response.data);
+
       dispatch(deletePost(post_id));
     } catch (error) {
       console.log(error);
@@ -176,12 +172,9 @@ const deletePostDB = (post_id) => {
 const detailGetPostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start detailGetPostDB");
-      console.log(post_id);
       const response = await apis.detailGetPost(post_id);
-      console.log(response);
+
       const post_info = response.data;
-      console.log(post_info);
 
       dispatch(detailGetPost(post_info));
     } catch (error) {
@@ -193,10 +186,9 @@ const detailGetPostDB = (post_id) => {
 const deleteCommentDB = (post_id, comment_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start deleteComment");
       const reponse = await apis.deleteComment(post_id, comment_id);
       const comment_info = reponse.data;
-      console.log(comment_info);
+
       dispatch(deleteComment(post_id, comment_id));
     } catch (err) {
       console.log(err);
@@ -207,10 +199,8 @@ const deleteCommentDB = (post_id, comment_id) => {
 const likePostDB = (post_id) => {
   return async (dispatch, getstate, { history }) => {
     try {
-      console.log("start like ");
-      console.log(post_id);
       const reponse = await apis.likePost(post_id);
-      console.log(reponse);
+
       // dispatch(deleteComment(post_id, comment_id));
     } catch (err) {
       console.error("Error response:");
@@ -257,6 +247,10 @@ export default handleActions(
           return parseInt(action.payload.comment_id) !== idx;
         });
       }),
+    [LIKE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.like = action.payload.like;
+      }),
   },
   initalState
 );
@@ -272,5 +266,6 @@ const actionCreators = {
   addPost,
   deleteCommentDB,
   likePostDB,
+  like,
 };
 export { actionCreators };

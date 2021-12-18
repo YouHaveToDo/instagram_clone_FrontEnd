@@ -32,7 +32,7 @@ const Header = (props) => {
 
   const mainToDetail = () => {
     // setReload(!reload);
-    // console.log(reload);
+
     // dispatch(postActions.mainToDetail(reload));
     history.push(`/main/create/select`);
   };

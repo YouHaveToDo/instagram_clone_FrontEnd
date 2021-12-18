@@ -21,10 +21,9 @@ import { returnGapDate } from "../shared/date";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const [like, setLike] = React.useState(false); // 좋아요
+  const like_state = useSelector((state) => state.post.like);
+  const [like, setLike] = React.useState(like_state); // 좋아요
   const like_list = useSelector((state) => state.post.likes);
-  console.log(like_list);
-  console.log(props.idx); // 포스트 인덱스 번쨰 숫자
 
   const plz = async () => {
     await dispatch(commentActions.getCommentDB(props.post_id));
@@ -34,24 +33,12 @@ const Post = (props) => {
 
   // const post_list = useSelector((state) => state.post.posts);
   const localData = localStorage.getItem("MY_LOCAL");
-  console.log(localData);
 
-  console.log(props);
-  console.log(props._id);
-  console.log(props.nickname);
-  console.log(props.upload);
-  console.log(props.upload[0].mimetype);
   const fileType = props.upload[0].mimetype;
 
-  console.log(props.upload[0].path);
-  console.log(props.upload.mimetype);
-  console.log(props.comments.length);
-
-  // console.log(props.createdAt);
   //-- 시간 --
   const createdAt = props.createdAt;
   const date = returnGapDate(new Date(), createdAt);
-  console.log(date);
 
   //글자수 제한
   const contentRef = useRef(null);
@@ -64,6 +51,7 @@ const Post = (props) => {
   const toggleLike = () => {
     dispatch(postActions.likePostDB(props._id));
     setLike(!like);
+    dispatch(postActions.like(like));
   };
   React.useEffect(() => {
     if (like_list[props.idx] === true) {
@@ -119,7 +107,7 @@ const Post = (props) => {
       {/* 3번 */}
       <Grid padding="10px 16px">
         <Icon
-          src={like ? icon08 : icon05}
+          src={!like ? icon08 : icon05}
           alt="headerIcon_05"
           like={like}
           onClick={toggleLike}

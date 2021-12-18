@@ -11,7 +11,7 @@ import { actionCreators as postActions } from "../redux/module/post";
 
 const Main = (props) => {
   const post_list = useSelector((state) => state.post.posts);
-  console.log(post_list);
+
   const dispatch = useDispatch();
   const [state, setState] = React.useState(false);
 
@@ -43,8 +43,6 @@ const Main = (props) => {
   }, []);
 
   //첫 실행시 포스트 요청
-
-  // console.log(props);
 
   return (
     <MainBox>

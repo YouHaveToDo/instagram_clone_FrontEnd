@@ -10,11 +10,8 @@ import { history } from "../redux/configureStore";
 
 const PostModal = (props) => {
   const dispatch = useDispatch();
-  console.log(props);
-  console.log(props.post_id);
+
   const post_id = props.post_id;
-  console.log(props.is_me);
-  console.log("ddd");
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   return (
@@ -52,7 +49,8 @@ const PostModal = (props) => {
               outline: "none",
               padding: "0px",
               zIndex: "11",
-            },Modal
+            },
+            Modal,
           }}
           isOpen={modalIsOpen}
           onRequestClose={() => setModalIsOpen(false)}

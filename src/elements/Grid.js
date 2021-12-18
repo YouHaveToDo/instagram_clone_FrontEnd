@@ -32,6 +32,7 @@ const Grid = (props) => {
     boxSizing,
     //
     zIndex,
+    overflow,
   } = props;
 
   const styles = {
@@ -59,6 +60,7 @@ const Grid = (props) => {
     borderT,
     borderL,
     zIndex,
+    overflow,
   };
   return (
     <React.Fragment>
@@ -125,6 +127,7 @@ const GridBox = styled.div`
   
     /*  */
     ${(props) => (props.zIndex ? `z-index: ${props.zIndex};` : "")}
+    ${(props) => (props.overflow ? `overflow: scroll;` : "")}
 `;
 
 export default Grid;

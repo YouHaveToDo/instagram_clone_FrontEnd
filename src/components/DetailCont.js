@@ -18,8 +18,20 @@ const DetailCont = (props) => {
   const params = useParams();
   const post_id = params.post_id;
   const comment = React.useRef();
+  const like_state = useSelector((state) => state.post.like);
+  const [like, setLike] = React.useState(like_state); // 좋아요
+  const like_list = useSelector((state) => state.post.likes);
 
-  console.log(post_id);
+  const toggleLike = () => {
+    dispatch(postActions.likePostDB(post_id));
+    setLike(!like);
+    dispatch(postActions.like(like));
+  };
+  React.useEffect(() => {
+    if (like_list[post_id] === true) {
+      setLike(true);
+    }
+  }, []);
 
   // 상세페이지 포스트 요청
 
@@ -30,22 +42,18 @@ const DetailCont = (props) => {
   }, []);
 
   const posts_info = useSelector((state) => {
-    console.log(state);
     return state.post.post;
   });
   const comment_info = useSelector((state) => {
-    console.log(state);
     return state.post.post.result.comments;
   });
 
   // 시간
   const createdAt = posts_info.result.createdAt;
   const date = returnGapDate(new Date(), createdAt);
-  console.log(date);
 
   // 댓글 게시 추가 기능
   const addComment = () => {
-    console.log("add comment");
     dispatch(commentActions.addCommentDB(post_id, comment.current.value));
   };
 
@@ -53,8 +61,6 @@ const DetailCont = (props) => {
   const DeletePost = () => {
     dispatch(postActions.deletePostDB(post_id));
   };
-
-
 
   // 댓글 삭제 기능 : 삭제 버튼 만들어서 onClick으로 넘어주세요.
   // e.target.comment_id 는 변경 가능, comment_id를 어떤 속성으로 가져올 것 인지 이야기 필요.
@@ -146,10 +152,10 @@ const DetailCont = (props) => {
         <Grid>
           <Grid padding="10px 16px">
             {/* <img src={icon01} alt="headerIcon_01" /> */}
-            {posts_info.likes ? (
-              <Icon src={icon08} alt="headerIcon_05" />
+            {!like ? (
+              <Icon src={icon08} alt="headerIcon_08" onClick={toggleLike} />
             ) : (
-              <Icon src={icon05} alt="headerIcon_05" />
+              <Icon src={icon05} alt="headerIcon_05" onClick={toggleLike} />
             )}
             <Icon src={icon06} alt="icon06" />
             <Icon src={icon02} alt="headerIcon_02" />
