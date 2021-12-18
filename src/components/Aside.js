@@ -26,7 +26,7 @@ const Aside = (props) => {
             </Text>
             <Button
               bold
-              text="전환"
+              text="로그아웃 버튼 "
               background="none"
               border="none"
               color="#0095f6"
