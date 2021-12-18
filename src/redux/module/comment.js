@@ -6,6 +6,7 @@ import { ContactSupportOutlined } from "@material-ui/icons";
 // action type
 const ADD_COMMENT = "ADD_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
+const GET_COMMENT = "GET_COMMENT";
 
 // action creator
 const addComment = createAction(ADD_COMMENT, (post_id, comment) => ({
@@ -16,6 +17,9 @@ const addComment = createAction(ADD_COMMENT, (post_id, comment) => ({
 //   comment_id,
 //   mode,
 // }));
+const getComment = createAction(GET_COMMENT, (comment) => ({
+  comment,
+}));
 
 // middleware
 
@@ -24,7 +28,11 @@ const addCommentDB = (post_id, comment) => {
     try {
       console.log("addCommentDB try 시작!");
       console.log(post_id, comment);
-      const response = await apis.addComment(post_id, comment);
+      const comment_info = {
+        comment,
+      };
+      // console.log(JSON.parse(comment));
+      const response = await apis.addComment(post_id, comment_info);
       console.log(response);
       const comments = response.data;
       console.log(comments);
@@ -47,7 +55,25 @@ const deleteCommentDB = (comment_id) => {
       const comments = response.data;
       console.log(comments);
     } catch (error) {
+      console.dir(error);
       console.log(error);
+    }
+  };
+};
+
+const getCommentDB = (post_id) => {
+  console.log("start getCommentDB");
+  return async (dispatch, getState, { history }) => {
+    try {
+      console.log("겟코멘트 디비");
+      const response = await apis.getComment(post_id);
+      console.log(response);
+      const comment = response.data.comments;
+      console.log(comment);
+
+      dispatch(getComment(comment));
+    } catch (err) {
+      console.log(err);
     }
   };
 };
@@ -57,6 +83,7 @@ const initialState = {
   list: [],
 
   comments: [],
+  comment: [],
 };
 
 // reducer
@@ -67,6 +94,11 @@ export default handleActions(
         draft.comments = state.comments.push(action.payload.comment);
       });
     },
+    [GET_COMMENT]: (state, action) => {
+      produce(state, (draft) => {
+        draft.comment = action.payload.comment;
+      });
+    },
   },
   initialState
 );
@@ -74,4 +106,5 @@ export default handleActions(
 export const commentActions = {
   addCommentDB,
   deleteCommentDB,
+  getCommentDB,
 };

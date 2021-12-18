@@ -10,6 +10,7 @@ import icon05 from "../images/icons/icon_05.png";
 import icon06 from "../images/icons/icon_06.png";
 import icon07 from "../images/icons/icon_07.png";
 import icon08 from "../images/icons/icon_08.png";
+import icon09 from "../images/icons/icon_09.png";
 import { returnGapDate } from "../shared/date";
 
 const DetailCont = (props) => {
@@ -17,13 +18,40 @@ const DetailCont = (props) => {
   const params = useParams();
   const post_id = params.post_id;
   const comment = React.useRef();
-
-  // 상세페이지 포스트 요청
   const posts_info = useSelector((state) => {
     console.log(state);
     return state.post.post;
   });
-  console.log(posts_info);
+  const comment_info = useSelector((state) => {
+    console.log(state);
+    return state.post.post.result.comments;
+  });
+
+  const [post, setPost] = React.useState(posts_info ? posts_info : null);
+  const [comments, setComment] = React.useState(
+    comment_info ? comment_info : null
+  );
+  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
+  React.useEffect(() => {
+    if (post && comments) {
+      return;
+    }
+    dispatch(commentActions.getCommentDB(post_id));
+    dispatch(postActions.detailGetPostDB(post_id));
+  }, []);
+  // const [postInfo, setPostInfo] = React.useState();
+  // 상세페이지 포스트 요청
+  // const posts_info = useSelector((state) => {
+  //   console.log(state);
+  //   return state.post.post;
+  // });
+  // console.log(posts_info);
+
+  // const comment_info = useSelector((state) => {
+  //   console.log(state);
+  //   return state.post.post.result.comments;
+  // });
+  // console.log(comment_info);
 
   // 시간
   const createdAt = posts_info.result.createdAt;
@@ -40,10 +68,7 @@ const DetailCont = (props) => {
   const DeletePost = () => {
     dispatch(postActions.deletePostDB(post_id));
   };
-  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
-  React.useEffect(() => {
-    dispatch(postActions.detailGetPostDB(post_id));
-  }, []);
+
   // 댓글 삭제 기능 : 삭제 버튼 만들어서 onClick으로 넘어주세요.
   // e.target.comment_id 는 변경 가능, comment_id를 어떤 속성으로 가져올 것 인지 이야기 필요.
   // 댓글 뿌릴 때 map의 인덱스를 댓글에 속성으로 같이 뿌려주면 될 듯
@@ -64,7 +89,7 @@ const DetailCont = (props) => {
           padding="0 15px"
         >
           <Grid width="15%">
-            <Logo></Logo>
+            <Logo src={icon09}></Logo>
           </Grid>
           <Grid flex direction="column" width="75%">
             <Text size="14px" weight="900">
@@ -80,10 +105,15 @@ const DetailCont = (props) => {
             </Text>
           </Grid>
         </Grid>
-        <Grid padding="30px 15px" height="560px" borderB="1px solid #d9d9d9">
+        <Grid
+          padding="30px 15px"
+          height="560px"
+          borderB="1px solid #d9d9d9"
+          overflow
+        >
           <Grid flex>
             <Grid width="15%">
-              <Logo></Logo>
+              <Logo src={icon09}></Logo>
             </Grid>
             <Grid flex width="75%" items="center">
               <Grid flex width="auto">
@@ -95,15 +125,36 @@ const DetailCont = (props) => {
                 {posts_info.result.content}
               </Text>
             </Grid>
-            {/* <Grid width="10%" items="center">
-            <Text size="10px" weight="900">
-            •••
-            </Text>
-          </Grid> */}
           </Grid>
           <Grid width="100%" margin="0 0 0 59px">
             <Text>{`${date}전`}</Text>
           </Grid>
+          {/* {comment_info.map((l, idx) => {
+            const createdAt = comment_info[idx].createdAt;
+            const today = returnGapDate(new Date(), createdAt);
+            return (
+              <div key={idx}>
+                <Grid flex>
+                  <Grid width="15%">
+                    <Logo src={icon09}></Logo>
+                  </Grid>
+                  <Grid flex width="75%" items="center">
+                    <Grid flex width="auto">
+                      <Text size="14px" weight="900">
+                        {comment_info[idx].nickname}
+                      </Text>
+                    </Grid>
+                    <Text margin="0 0 0 5px" width="auto%">
+                      {comment_info[idx].comment}
+                    </Text>
+                  </Grid>
+                </Grid>
+                <Grid width="100%" margin="0 0 0 59px">
+                  <Text>{`${today}전`}</Text>
+                </Grid>
+              </div>
+            );
+          })} */}
         </Grid>
         <Grid>
           <Grid padding="10px 16px">
@@ -156,11 +207,10 @@ const DetailCont = (props) => {
   );
 };
 
-const Logo = styled.div`
+const Logo = styled.img`
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background-color: yellow;
 `;
 const Span = styled.span`
   color: #000;

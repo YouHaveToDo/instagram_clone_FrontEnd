@@ -1,9 +1,11 @@
 import axios from "axios";
 import { getToken } from "./token";
-
+const accessToken = document.cookie.split("=")[1];
 const instance = axios.create({
-  baseURL:
-    "http://13.209.4.79" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
+  baseURL: "http://13.209.4.79",
+  // headers: {
+  //   authorization: ` ${accessToken}`,
+  // },
   // "http://3.36.74.204" /*요청을 www.aa.com/user로 보낸다면, www.aa.com까지 기록*/,
   // headers: { 'content-type': 'multipart/form-data' }, // content-type이 멀티파트/폼데이터 일 때 이렇게 적어서 사용하자
   //withCredentials: true,//자격요건: 쿠키
@@ -33,9 +35,9 @@ export const apis = {
   deletePost: (post_id) => instance.post(`/api/posts/${post_id}`), // 게시글 삭제
 
   //---- 댓글 ----
-  getComment: (article_id) => instance.get(`/api/${article_id}/comment`), // 댓글 조회
-  addComment: (post_id, comment) =>
-    instance.post(`/api/posts/${post_id}/comments`, comment), // 댓글 작성
+  getComment: (post_id) => instance.get(`/api/posts/${post_id}/comments`), // 댓글 조회
+  addComment: (post_id, comment_info) =>
+    instance.post(`/api/posts/${post_id}/comments`, comment_info), // 댓글 작성
   deleteComment: (post_id, comment_id) =>
     instance.post(`/api/posts/${post_id}/comments/${comment_id}/`), // 댓글 삭제
 
