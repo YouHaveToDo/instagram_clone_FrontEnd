@@ -19,63 +19,46 @@ const getYearMonthDay = (date) => {
 
 // 형식 YYYY년 XX월 ZZ일
 export const returnFullDate = (date) => {
-  // console.log(date);
   const [year, month, day] = getYearMonthDay(date);
   return `${year}년 ${month}월 ${day}일`;
 };
 
 // 형식 ~초 전 or ~일 전
 export const returnGapDate = (newDate, date) => {
-  console.log(newDate, date);
   const nowDate = new Date(newDate);
-  console.log(nowDate);
   const postedDate = new Date(Number(date));
-  console.log(postedDate);
   let gapDate = nowDate - postedDate;
   gapDate = gapDateSecond(gapDate);
-  console.log(gapDate);
   //초
   if (gapDate < 60) {
-
     return `${gapDate}초`;
-
   }
   //분
   gapDate = gapDateMinute(gapDate);
   if (gapDate < 60) {
-
     return `${gapDate}분`;
-
   }
   //시간
   gapDate = gapDateHour(gapDate);
   if (gapDate < 24) {
-
     return `${gapDate}시간`;
-
   }
   //일
   gapDate = gapDateDay(gapDate);
   if (gapDate < 7) {
-
     return `${gapDate}일`;
-
   }
   //주
   gapDate = gapDateWeek(gapDate);
   if (gapDate < 5) {
-
     return `${gapDate}주`;
-
   }
   //달
   gapDate = gapDateMonth(gapDate);
   if (gapDate < 12) {
-
     return `${gapDate}달`;
   }
   //년
   gapDate = gapDateYear(gapDate);
   return `${gapDate}년`;
-
 };

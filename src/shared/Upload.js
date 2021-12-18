@@ -17,8 +17,6 @@ const Upload = (props) => {
     if (!fileVideos) {
       return;
     }
-    console.log("aaa");
-    console.log(fileVideos);
     dispatch(imageActions.setPreviewVideo(fileVideos));
   }, [fileVideos]);
 
@@ -26,18 +24,10 @@ const Upload = (props) => {
   const selectFile = (e) => {
     //선택된 파일
     const file = fileInput.current.files[0];
-    console.log(file);
 
     //파일타입
     const fileType = file.type;
-    console.log(fileType);
 
-    //FormData 객체 생성
-    // const formData = new FormData();
-    // formData.append("file", file);
-    // formData.append('content', posts.content)
-    // formData.append("file", postlist.image)
-    // console.log(formData);
 
     //FileReader 객체 생성
     const reader = new FileReader();
@@ -54,7 +44,7 @@ const Upload = (props) => {
     //파일 로드 완료시
     reader.onloadend = (e) => {
       const preview = reader.result;
-      // console.log(formData);
+
       //리덕스 저장
       dispatch(imageActions.setPreview(fileType, preview, file));
       history.push(`/main/create/details`);

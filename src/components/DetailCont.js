@@ -19,33 +19,24 @@ const DetailCont = (props) => {
   const post_id = params.post_id;
   const comment = React.useRef();
 
-  console.log(post_id);
 
-  // 상세페이지 포스트 요청
-
-  // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
+  // 게시글 상세 조회 
   React.useEffect(() => {
-    //  dispatch(commentActions.getCommentDB(post_id));
-    //  dispatch(postActions.detailGetPostDB(post_id));
   }, []);
 
   const posts_info = useSelector((state) => {
-    console.log(state);
     return state.post.post;
   });
   const comment_info = useSelector((state) => {
-    console.log(state);
     return state.post.post.result.comments;
   });
 
   // 시간
   const createdAt = posts_info.result.createdAt;
   const date = returnGapDate(new Date(), createdAt);
-  console.log(date);
 
   // 댓글 게시 추가 기능
   const addComment = () => {
-    console.log("add comment");
     dispatch(commentActions.addCommentDB(post_id, comment.current.value));
   };
 
