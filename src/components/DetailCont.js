@@ -42,6 +42,7 @@ const DetailCont = (props) => {
   };
   // 게시글 상세 조회 : 서버 연결되면 주석 풀어서 쓰세요
   React.useEffect(() => {
+    dispatch(commentActions.getCommentDB(post_id));
     dispatch(postActions.detailGetPostDB(post_id));
   }, []);
   // 댓글 삭제 기능 : 삭제 버튼 만들어서 onClick으로 넘어주세요.

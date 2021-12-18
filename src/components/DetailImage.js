@@ -9,13 +9,13 @@ const DetailImage = (props) => {
     return state.post.post;
   });
   console.log(posts_info);
-  console.log(posts_info.result.upload[0].path);
-  const fileType = posts_info.result.upload[0].mimetype;
+  // console.log(posts_info.result.upload[0].path);
+  // const fileType = posts_info.result.upload[0].mimetype;
 
   return (
     <Grid width="60%">
       <Grid>
-        {fileType.includes("image/") ? (
+        {/* {fileType.includes("image/") ? (
           <Image
             shape="rectangle"
             src={posts_info.result.upload[0].path}
@@ -31,7 +31,7 @@ const DetailImage = (props) => {
             type="video/*"
             muted
           ></video>
-        )}
+        )} */}
       </Grid>
     </Grid>
   );
