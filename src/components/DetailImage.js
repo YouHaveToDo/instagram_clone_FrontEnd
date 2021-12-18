@@ -9,6 +9,7 @@ const DetailImage = (props) => {
     return state.post.post;
   });
 
+
   const fileType = posts_info.result.upload[0].mimetype;
   // console.log(posts_info);
   // console.log(posts_info.result);
